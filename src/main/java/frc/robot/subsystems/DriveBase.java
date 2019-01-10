@@ -23,7 +23,7 @@ public class DriveBase extends Subsystem
         driveLR = new TalonSRX(RobotMap.driveLR);
         driveRF = new TalonSRX(RobotMap.driveRF);
         driveRR = new TalonSRX(RobotMap.driveRR);
-
+        
         SmartDashboard.putBoolean("DriveBase/Inited", true);
     }
 
