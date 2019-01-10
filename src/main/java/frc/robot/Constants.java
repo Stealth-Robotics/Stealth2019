@@ -3,6 +3,6 @@ package frc.robot;
 
 public class Constants
 {
-    public final int Joystick_Y = 1;
-    public final int Joystick_X = 2;
+    public static final int joystick_y = 1;
+    public static final int joystick_x = 2;
 }
