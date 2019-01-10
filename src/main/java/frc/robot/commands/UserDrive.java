@@ -23,7 +23,7 @@ public class UserDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveBase.drive(Robot.oi.driveJoystick);
+    Robot.driveBase.move(Robot.oi.driveJoystick);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.Constants;
 
+import java.lang.Math;
 
 public class DriveBase extends Subsystem
 {
@@ -36,17 +38,22 @@ public class DriveBase extends Subsystem
         //setDefaultCommand();
     }
 
-    public void drive(Joystick joystick)
+    public void move(Joystick joystick)
     {
         double speed = joystick.getMagnitude();
         double direction = joystick.getDirectionRadians();
-        double heading = joystick.getTwist();
 
-        drive(speed, direction, heading);
+        move(speed, direction);
     }
 
-    public void drive(double speed, double direction, double heading)
+    public void move(double speed, double direction)
     {
-        
+        double speed1 = Math.sqrt(2) * Math.sin(direction + Math.PI / 4) * speed;
+        double speed2 = Math.sqrt(2) * Math.sin(direction - Math.PI / 4) * speed;
+
+        driveLF.set(ControlMode.Velocity, speed1);
+        driveLR.set(ControlMode.Velocity, speed2);
+        driveRF.set(ControlMode.Velocity, speed1);
+        driveRR.set(ControlMode.Velocity, speed2);
     }
 }
