@@ -60,6 +60,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    System.out.printf("Disabled Init");
   }
 
   @Override
