@@ -38,8 +38,15 @@ public class DriveBase extends Subsystem
 
     public void drive(Joystick joystick)
     {
-        double y = joystick.getRawAxis(Constants.joystick_y);
-        double x = joystick.getRawAxis(Constants.joystick_x);
+        double speed = joystick.getMagnitude();
+        double direction = joystick.getDirectionRadians();
+        double heading = joystick.getTwist();
 
+        drive(speed, direction, heading);
+    }
+
+    public void drive(double speed, double direction, double heading)
+    {
+        
     }
 }
