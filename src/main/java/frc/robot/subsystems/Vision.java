@@ -26,7 +26,7 @@ public class Vision extends Subsystem {
       camera.setFPS(25);
     }).start();
 
-    SmartDashboard.putBoolean("Vision/Inited", true);
+    SmartDashboard.putBoolean("Vision/Initialized", true);
   }
 
 
