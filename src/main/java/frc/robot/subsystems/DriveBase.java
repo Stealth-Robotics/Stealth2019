@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+
 
 public class DriveBase extends Subsystem
 {
@@ -21,6 +23,8 @@ public class DriveBase extends Subsystem
         driveLR = new TalonSRX(RobotMap.driveLR);
         driveRF = new TalonSRX(RobotMap.driveRF);
         driveRR = new TalonSRX(RobotMap.driveRR);
+
+        SmartDashboard.putBoolean("DriveBase/Inited", true);
     }
 
     public void initDefaultCommand()
