@@ -24,10 +24,10 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  public static int driveLF = 1;
-  public static int driveLR = 2;
-  public static int driveRF = 3;
-  public static int driveRR = 4;
+  public static final int driveLF = 1;
+  public static final int driveLR = 2;
+  public static final int driveRF = 3;
+  public static final int driveRR = 4;
 
-  public static int pigeonIMU;
+  public static final int pigeonIMU = driveLF;
 }
