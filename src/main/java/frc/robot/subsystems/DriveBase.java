@@ -16,6 +16,8 @@ import java.lang.Math;
 public class DriveBase extends Subsystem
 {
 
+    private double currHeading;
+
     private TalonSRX driveLF;
     private TalonSRX driveLR;
     private TalonSRX driveRF;
@@ -24,6 +26,8 @@ public class DriveBase extends Subsystem
     public DriveBase()
     {
         super();
+
+        currHeading = 0;
 
         driveLF = new TalonSRX(RobotMap.driveLF);
         driveLR = new TalonSRX(RobotMap.driveLR);
@@ -57,13 +61,18 @@ public class DriveBase extends Subsystem
         driveRR.set(ControlMode.Velocity, speed2);
     }
 
-    public void setDirectionDegrees(double heading)
+    public void setHeading(Joystick joystick)
     {
-        setDirectionRadians(heading * Math.PI / 180);
+        setHeadingRadians(joystick.getTwist() * Constants.DRIVE_ROT_COEF + currHeading);
     }
 
-    public void setDirectionRadians(double heading)
+    public void setHeadingDegrees(double heading)
     {
+        setHeadingRadians(heading * Math.PI / 180);
+    }
 
+    public void setHeadingRadians(double heading)
+    {
+        currHeading = heading;
     }
 }
