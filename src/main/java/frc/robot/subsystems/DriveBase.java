@@ -56,4 +56,14 @@ public class DriveBase extends Subsystem
         driveRF.set(ControlMode.Velocity, speed1);
         driveRR.set(ControlMode.Velocity, speed2);
     }
+
+    public void setDirectionDegrees(double heading)
+    {
+        setDirectionRadians(heading * Math.PI / 180);
+    }
+
+    public void setDirectionRadians(double heading)
+    {
+
+    }
 }
