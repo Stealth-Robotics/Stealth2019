@@ -48,6 +48,8 @@ public class DriveBase extends Subsystem
         double direction = joystick.getDirectionRadians();
 
         move(speed, direction);
+
+        setHeading(joystick);
     }
 
     public void move(double speed, double direction)
