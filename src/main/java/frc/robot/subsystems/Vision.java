@@ -27,6 +27,8 @@ public class Vision extends Subsystem {
     }).start();
 
     SmartDashboard.putBoolean("Vision/Initialized", true);
+
+    SmartDashboard.putNumber("Vision/TestNum", 10.25);
   }
 
 
