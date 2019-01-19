@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
@@ -38,7 +39,9 @@ public class DriveBase extends Subsystem
         driveLF = new TalonSRX(RobotMap.driveLF);
         driveLR = new TalonSRX(RobotMap.driveLR);
         driveRF = new TalonSRX(RobotMap.driveRF);
+        driveRF.setInverted(true);
         driveRR = new TalonSRX(RobotMap.driveRR);
+        driveRR.setInverted(true);
 
         speedCoef = Constants.SPEED_NORMAL;
 
@@ -61,7 +64,8 @@ public class DriveBase extends Subsystem
     @Override
     public void periodic()
     {
-        if (getCurrentCommand().getName().equals("UserDrive"))
+        Command command = getCurrentCommand();
+        if (command != null && command.getName().equals("UserDrive"))
         {
             if (Robot.oi.slowButton.get())
             {
@@ -101,8 +105,8 @@ public class DriveBase extends Subsystem
      */
     public void move(double speed, double direction, double rotation)
     {
-        double speed1 = Math.sqrt(2) * Math.sin(direction - Math.PI / 4) * speed;
-        double speed2 = Math.sqrt(2) * Math.sin(direction + Math.PI / 4) * speed;
+        double speed1 = Math.sqrt(2) * Math.sin(-direction + 3 * Math.PI / 4) * speed;
+        double speed2 = Math.sqrt(2) * Math.sin(-direction + Math.PI / 4) * speed;
 
         double maxValue = Math.sqrt(2) * Math.abs(speed) + Math.abs(rotation);
 

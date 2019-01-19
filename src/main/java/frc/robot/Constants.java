@@ -13,12 +13,12 @@ public class Constants
 
     //the drive axes
     public static final int DRIVE_JOYSTICK_Y = 1;
-    public static final int DRIVE_JOYSTICK_X = 2;
+    public static final int DRIVE_JOYSTICK_X = 0;
 
     //twist axis
-    public static final int DRIVE_JOYSTICK_TWIST = 0;
+    public static final int DRIVE_JOYSTICK_TWIST = 2;
 
     //drive speed button
-    public static final int SLOW_BUTTON = 0;
-    public static final int FAST_BUTTON = 1;
+    public static final int SLOW_BUTTON = 1;
+    public static final int FAST_BUTTON = 2;
 }
