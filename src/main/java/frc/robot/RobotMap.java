@@ -29,5 +29,7 @@ public class RobotMap {
   public static final int driveRF = 3;
   public static final int driveRR = 4;
 
+  public static final int elevator = 5;
+
   public static final int pigeonIMU = driveLF;
 }
