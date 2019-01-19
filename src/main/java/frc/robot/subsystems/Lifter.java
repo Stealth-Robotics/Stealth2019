@@ -11,7 +11,7 @@ public class Lifter extends Subsystem
 {
     private static TalonSRX armL;
     private static TalonSRX armR;
-    private static TalonSRX extension;
+    private static TalonSRX armBack;
     private static TalonSRX wheelL;
     private static TalonSRX wheelR;
 
@@ -24,7 +24,7 @@ public class Lifter extends Subsystem
     {
         armL = new TalonSRX(RobotMap.armL);
         armR = new TalonSRX(RobotMap.armR);
-        extension = new TalonSRX(RobotMap.armBack);
+        armBack = new TalonSRX(RobotMap.armBack);
         wheelL = new TalonSRX(RobotMap.wheelL);
         wheelR = new TalonSRX(RobotMap.wheelR);
     }
@@ -33,5 +33,10 @@ public class Lifter extends Subsystem
     {
         wheelL.set(ControlMode.Velocity, L);
         wheelR.set(ControlMode.Velocity, R);
+    }
+
+    public void armBackSpeed(double speed)
+    {
+        armBack.set(ControlMode.Velocity, speed);
     }
 }

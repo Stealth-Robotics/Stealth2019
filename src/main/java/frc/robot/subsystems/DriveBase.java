@@ -61,7 +61,7 @@ public class DriveBase extends Subsystem
     @Override
     public void periodic()
     {
-        if (getCurrentCommand().equals(new UserDrive()))
+        if (getCurrentCommand().getName().equals("UserDrive"))
         {
             if (Robot.oi.slowButton.get())
             {

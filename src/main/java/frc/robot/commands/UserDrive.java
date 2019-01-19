@@ -12,6 +12,7 @@ public class UserDrive extends Command
 {
     public UserDrive() 
     {
+        super("UserDrive");
         // Use requires() here to declare subsystem dependencies
         requires(Robot.driveBase);
     }
