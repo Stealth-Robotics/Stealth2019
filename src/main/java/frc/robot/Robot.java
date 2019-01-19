@@ -59,7 +59,7 @@ public class Robot extends TimedRobot
     @Override
     public void robotPeriodic() 
     {
-        
+        putOiInfo();
     }
   
     /**
@@ -146,6 +146,15 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic() 
     {
-        
+
+    }
+
+    public void putOiInfo()
+    {
+        SmartDashboard.putNumber("X-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_X));
+        SmartDashboard.putNumber("Y-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_Y));
+        SmartDashboard.putNumber("Twist", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_TWIST));
+        SmartDashboard.putNumber("Magnitude", oi.driveJoystick.getMagnitude());
+        SmartDashboard.putNumber("Direction", oi.driveJoystick.getDirectionDegrees());
     }
 }
