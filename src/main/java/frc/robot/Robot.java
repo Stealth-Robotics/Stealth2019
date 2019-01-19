@@ -14,8 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.DriveBase;
-import frc.robot.subsystems.Vision;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +27,9 @@ public class Robot extends TimedRobot
 {
     public static Vision vision;
     public static DriveBase driveBase;
+    public static Elevator elevator;
+    public static Grabber grabber;
+    public static Lifter lifter;
     public static OI oi;
   
     Command m_autonomousCommand;
@@ -42,6 +44,9 @@ public class Robot extends TimedRobot
     {
         vision = new Vision();
         driveBase = new DriveBase();
+        elevator = new Elevator();
+        grabber = new Grabber();
+        lifter = new Lifter();
         oi = new OI();
         //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
         // chooser.addOption("My Auto", new MyAutoCommand());
