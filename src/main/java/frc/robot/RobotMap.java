@@ -25,12 +25,26 @@ public class RobotMap
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
   
+    //ports for drivebase talons
     public static final int driveLF = 1;
     public static final int driveLR = 2;
     public static final int driveRF = 3;
     public static final int driveRR = 4;
   
+    //ports for elevator talon
     public static final int elevator = 5;
+
+    //module for hatch picker solenoid
+    public static final int pickerModule = 16;
+    //channel for hatch picker solenoid
+    public static final int pickerChannel = 0;
+
+    //ports for lifter talons
+    public static final int armL = 6;
+    public static final int armR = 7;
+    public static final int extension = 8;
+    public static final int wheel = 9;
   
+    //Talon for the Pigeon IMU
     public static final int pigeonIMU = driveLF;
 }
