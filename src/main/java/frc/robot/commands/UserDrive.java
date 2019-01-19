@@ -28,7 +28,6 @@ public class UserDrive extends Command
     @Override
     protected void execute() 
     {
-        System.out.println("Running UserDrive!");
         Robot.driveBase.move(Robot.oi.driveJoystick);
     }
   
