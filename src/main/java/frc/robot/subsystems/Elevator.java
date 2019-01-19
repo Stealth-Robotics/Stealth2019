@@ -8,7 +8,7 @@ import frc.robot.RobotMap;
 
 public class Elevator extends Subsystem
 {
-    private TalonSRX elevator;
+    private static TalonSRX elevator;
 
     public Elevator()
     {

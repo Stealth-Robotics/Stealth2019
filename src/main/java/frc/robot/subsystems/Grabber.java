@@ -9,11 +9,11 @@ import frc.robot.RobotMap;
 
 public class Grabber extends Subsystem
 {
-    public Solenoid pistons;
+    public static Solenoid pistons;
     
-    public TalonSRX intakeL;
-    public TalonSRX intakeR;
-    public TalonSRX tilt;
+    public static TalonSRX intakeL;
+    public static TalonSRX intakeR;
+    public static TalonSRX tilt;
 
     public Grabber()
     {

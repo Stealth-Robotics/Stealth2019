@@ -23,10 +23,10 @@ import java.lang.Math;
 public class DriveBase extends Subsystem
 {
 
-    private TalonSRX driveLF;
-    private TalonSRX driveLR;
-    private TalonSRX driveRF;
-    private TalonSRX driveRR;
+    private static TalonSRX driveLF;
+    private static TalonSRX driveLR;
+    private static TalonSRX driveRF;
+    private static TalonSRX driveRR;
 
     public DriveBase()
     {

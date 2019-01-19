@@ -8,11 +8,11 @@ import frc.robot.RobotMap;
 
 public class Lifter extends Subsystem
 {
-    private TalonSRX armL;
-    private TalonSRX armR;
-    private TalonSRX extension;
-    private TalonSRX wheelL;
-    private TalonSRX wheelR;
+    private static TalonSRX armL;
+    private static TalonSRX armR;
+    private static TalonSRX extension;
+    private static TalonSRX wheelL;
+    private static TalonSRX wheelR;
 
     public Lifter()
     {
