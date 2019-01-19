@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -26,5 +27,11 @@ public class Lifter extends Subsystem
         extension = new TalonSRX(RobotMap.armBack);
         wheelL = new TalonSRX(RobotMap.wheelL);
         wheelR = new TalonSRX(RobotMap.wheelR);
+    }
+
+    public void runWheels(double L, double R)
+    {
+        wheelL.set(ControlMode.Velocity, L);
+        wheelR.set(ControlMode.Velocity, R);
     }
 }

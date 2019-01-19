@@ -7,7 +7,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
@@ -23,10 +24,12 @@ import java.lang.Math;
 public class DriveBase extends Subsystem
 {
 
-    private static TalonSRX driveLF;
-    private static TalonSRX driveLR;
-    private static TalonSRX driveRF;
+    private static TalonSRX driveLF; //Left front wheel
+    private static TalonSRX driveLR; //Right front wheel
+    private static TalonSRX driveRF; //
     private static TalonSRX driveRR;
+
+    private static double speedCoef;
 
     public DriveBase()
     {
@@ -36,6 +39,8 @@ public class DriveBase extends Subsystem
         driveLR = new TalonSRX(RobotMap.driveLR);
         driveRF = new TalonSRX(RobotMap.driveRF);
         driveRR = new TalonSRX(RobotMap.driveRR);
+
+        speedCoef = Constants.SPEED_NORMAL;
 
         SmartDashboard.putBoolean("DriveBase/Initialized", true);
     }
@@ -56,7 +61,21 @@ public class DriveBase extends Subsystem
     @Override
     public void periodic()
     {
-        //nothing yet
+        if (getCurrentCommand().equals(new UserDrive()))
+        {
+            if (Robot.oi.slowButton.get())
+            {
+                speedCoef = Constants.SPEED_SLOW;
+            }
+            else if (Robot.oi.fastButton.get())
+            {
+                speedCoef = Constants.SPEED_FAST;
+            }
+            else 
+            {
+                speedCoef = Constants.SPEED_NORMAL;
+            }
+        }
     }
 
     /**
@@ -66,7 +85,7 @@ public class DriveBase extends Subsystem
      */
     public void move(Joystick joystick)
     {
-        double speed = joystick.getMagnitude();
+        double speed = joystick.getMagnitude() * speedCoef;
         double direction = joystick.getDirectionRadians();
         double rotation = joystick.getTwist();
 
