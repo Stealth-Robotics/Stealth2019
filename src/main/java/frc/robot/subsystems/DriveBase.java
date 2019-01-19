@@ -25,11 +25,11 @@ public class DriveBase extends Subsystem
 {
 
     private static TalonSRX driveLF; //Left front wheel
-    private static TalonSRX driveLR; //Right front wheel
-    private static TalonSRX driveRF; //
-    private static TalonSRX driveRR;
+    private static TalonSRX driveLR; //Left rear wheel
+    private static TalonSRX driveRF; //Right front wheel
+    private static TalonSRX driveRR; //Right rear wheel
 
-    private static double speedCoef;
+    private static double speedCoef; //Is used by the joystick version of move to lower max speed
 
     public DriveBase()
     {
