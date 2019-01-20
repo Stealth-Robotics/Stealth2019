@@ -10,9 +10,9 @@ public class Constants
     public static final double DEADZONE = 0.07;
 
     //driving constants
-    public static final double SPEED_SLOW = 0.4;
+    public static final double SPEED_SLOW = 0.3;
     public static final double SPEED_FAST = 1;
-    public static final double SPEED_NORMAL = 0.7;
+    public static final double SPEED_NORMAL = 0.6;
 
     //the drive axes
     public static final int DRIVE_JOYSTICK_Y = 1;
