@@ -2,17 +2,17 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class Lifter extends Subsystem
 {
-    private static TalonSRX armL;
-    private static TalonSRX armR;
-    private static TalonSRX armBack;
-    private static TalonSRX wheel;
+    private static WPI_TalonSRX armL;
+    private static WPI_TalonSRX armR;
+    private static WPI_TalonSRX armBack;
+    private static WPI_TalonSRX wheel;
 
     public Lifter()
     {
@@ -21,19 +21,19 @@ public class Lifter extends Subsystem
 
     public void initDefaultCommand()
     {
-        armL = new TalonSRX(RobotMap.armL);
-        armR = new TalonSRX(RobotMap.armR);
-        armBack = new TalonSRX(RobotMap.armBack);
-        wheel = new TalonSRX(RobotMap.wheel);
+        armL = new WPI_TalonSRX(RobotMap.armL);
+        armR = new WPI_TalonSRX(RobotMap.armR);
+        armBack = new WPI_TalonSRX(RobotMap.armBack);
+        wheel = new WPI_TalonSRX(RobotMap.wheel);
     }
 
     public void runWheels(double speed)
     {
-        wheel.set(ControlMode.Velocity, speed);
+        wheel.set(speed);
     }
 
     public void armBackSpeed(double speed)
     {
-        armBack.set(ControlMode.Velocity, speed);
+        armBack.set(speed);
     }
 }

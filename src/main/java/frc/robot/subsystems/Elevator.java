@@ -1,18 +1,18 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class Elevator extends Subsystem
 {
-    private static TalonSRX elevator;
+    private static WPI_TalonSRX elevator;
 
     public Elevator()
     {
-        elevator = new TalonSRX(RobotMap.elevator);
+        elevator = new WPI_TalonSRX(RobotMap.elevator);
     }
 
     @Override
