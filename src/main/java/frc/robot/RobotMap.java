@@ -48,8 +48,7 @@ public class RobotMap
     public static final int armL = 6;
     public static final int armR = 7;
     public static final int armBack = 8;
-    public static final int wheelL = 9;
-    public static final int wheelR = 12;
+    public static final int wheel = 9;
   
     //talon for the pigeon IMU
     public static final int pigeonIMU = driveLF;
