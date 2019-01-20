@@ -156,10 +156,10 @@ public class Robot extends TimedRobot
 
     public void putOiInfo()
     {
-        SmartDashboard.putNumber("X-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_X));
-        SmartDashboard.putNumber("Y-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_Y));
-        SmartDashboard.putNumber("Twist", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_TWIST));
-        SmartDashboard.putNumber("Magnitude", oi.driveJoystick.getMagnitude());
-        SmartDashboard.putNumber("Direction", oi.driveJoystick.getDirectionDegrees());
+        SmartDashboard.putNumber("OI/X-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_X));
+        SmartDashboard.putNumber("OI/Y-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_Y));
+        SmartDashboard.putNumber("OI/Twist", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_TWIST));
+        SmartDashboard.putNumber("OI/Magnitude", oi.driveJoystick.getMagnitude());
+        SmartDashboard.putNumber("OI/Direction", oi.driveJoystick.getDirectionDegrees());
     }
 }

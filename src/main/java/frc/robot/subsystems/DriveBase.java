@@ -138,9 +138,9 @@ public class DriveBase extends Subsystem
      */
     public void rawMove(double LF, double LR, double RF, double RR)
     {
-        driveLF.set(ControlMode.Velocity, LF);
-        driveLR.set(ControlMode.Velocity, LR);
-        driveRF.set(ControlMode.Velocity, RF);
-        driveRR.set(ControlMode.Velocity, RR);
+        driveLF.set(LF);
+        driveLR.set(LR);
+        driveRF.set(RF);
+        driveRR.set(RR);
     }
 }
