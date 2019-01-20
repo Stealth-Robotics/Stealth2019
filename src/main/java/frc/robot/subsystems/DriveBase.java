@@ -80,6 +80,8 @@ public class DriveBase extends Subsystem
             {
                 speedCoef = Constants.SPEED_NORMAL;
             }
+
+            System.out.println(speedCoef);
         }
     }
 
@@ -91,9 +93,10 @@ public class DriveBase extends Subsystem
     public void move(Joystick joystick)
     {
         double speed = joystick.getMagnitude() * speedCoef;
-        speed = (speed > Constants.DEADZONE) ? speed : 0;
+        speed = (speed > Constants.DEADZONE_MOVE) ? speed : 0;
         double direction = joystick.getDirectionRadians();
-        double rotation = joystick.getTwist();
+        double rotation = joystick.getTwist() * speedCoef;
+        rotation = (Math.abs(rotation) > Constants.DEADZONE_TWIST) ? rotation : 0;
 
         move(speed, direction, rotation);
     }
