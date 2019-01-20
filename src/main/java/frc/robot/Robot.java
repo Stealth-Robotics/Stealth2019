@@ -151,7 +151,7 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic() 
     {
-        
+        driveBase.rawMove(0.5, 0.5, 0.5, 0.5);
     }
 
     public void putOiInfo()

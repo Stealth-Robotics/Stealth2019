@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,10 +26,10 @@ import java.lang.Math;
 public class DriveBase extends Subsystem
 {
 
-    private static TalonSRX driveLF; //Left front wheel
-    private static TalonSRX driveLR; //Left rear wheel
-    private static TalonSRX driveRF; //Right front wheel
-    private static TalonSRX driveRR; //Right rear wheel
+    private static WPI_TalonSRX driveLF; //Left front wheel
+    private static WPI_TalonSRX driveLR; //Left rear wheel
+    private static WPI_TalonSRX driveRF; //Right front wheel
+    private static WPI_TalonSRX driveRR; //Right rear wheel
 
     private static double speedCoef; //Is used by the joystick version of move to lower max speed
 
@@ -36,11 +37,11 @@ public class DriveBase extends Subsystem
     {
         super();
 
-        driveLF = new TalonSRX(RobotMap.driveLF);
-        driveLR = new TalonSRX(RobotMap.driveLR);
-        driveRF = new TalonSRX(RobotMap.driveRF);
+        driveLF = new WPI_TalonSRX(RobotMap.driveLF);
+        driveLR = new WPI_TalonSRX(RobotMap.driveLR);
+        driveRF = new WPI_TalonSRX(RobotMap.driveRF);
         driveRF.setInverted(true);
-        driveRR = new TalonSRX(RobotMap.driveRR);
+        driveRR = new WPI_TalonSRX(RobotMap.driveRR);
         driveRR.setInverted(true);
 
         speedCoef = Constants.SPEED_NORMAL;
