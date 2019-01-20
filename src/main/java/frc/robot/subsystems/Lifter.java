@@ -1,7 +1,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -35,5 +34,11 @@ public class Lifter extends Subsystem
     public void armBackSpeed(double speed)
     {
         armBack.set(speed);
+    }
+
+    public void armsFrontSpeed(double speed)
+    {
+        armL.set(speed);
+        armR.set(speed);
     }
 }

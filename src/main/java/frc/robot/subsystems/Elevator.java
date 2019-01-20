@@ -20,4 +20,9 @@ public class Elevator extends Subsystem
     {
         //setDefaultCommand(command);
     }
+
+    public void setSpeed(double speed)
+    {
+        elevator.set(speed);
+    }
 }
