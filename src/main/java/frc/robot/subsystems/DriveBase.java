@@ -91,7 +91,7 @@ public class DriveBase extends Subsystem
     public void move(Joystick joystick)
     {
         double speed = joystick.getMagnitude() * speedCoef;
-        speed = (speed > 0.07) ? speed : 0;
+        speed = (speed > Constants.DEADZONE) ? speed : 0;
         double direction = joystick.getDirectionRadians();
         double rotation = joystick.getTwist();
 

@@ -6,6 +6,9 @@ package frc.robot;
  */
 public class Constants
 {
+    //deadzone width
+    public static final double DEADZONE = 0.07;
+
     //driving constants
     public static final double SPEED_SLOW = 0.4;
     public static final double SPEED_FAST = 1;
