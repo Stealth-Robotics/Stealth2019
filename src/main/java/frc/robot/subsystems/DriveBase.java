@@ -19,7 +19,7 @@ import java.lang.Math;
  * 
  * <p> The drivebase is holonomic, with four mechanum wheels </p>
  * 
- * <p> All wheel are controlled with one motor, connected to a TalonSRX </p>
+ * <p> Each wheel is powered by one motor, connected to a TalonSRX </p>
  */
 public class DriveBase extends Subsystem
 {
