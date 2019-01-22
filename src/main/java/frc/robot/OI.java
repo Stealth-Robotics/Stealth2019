@@ -47,6 +47,8 @@ public class OI
   
     public Joystick driveJoystick;
 
+    public Joystick elevatorJoystick;
+
     public Button slowButton;
     public Button fastButton;
   
@@ -56,6 +58,8 @@ public class OI
 
         slowButton = new JoystickButton(driveJoystick, Constants.SLOW_BUTTON);
         fastButton = new JoystickButton(driveJoystick, Constants.FAST_BUTTON);
+
+        elevatorJoystick = driveJoystick;
     }
 
 

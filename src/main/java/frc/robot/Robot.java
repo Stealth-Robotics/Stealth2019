@@ -156,6 +156,9 @@ public class Robot extends TimedRobot
         driveBase.rawMove(0.5, 0.5, 0.5, 0.5);
     }
 
+    /**
+     * Pushes operation inferface information from joystick to network tables
+     */
     public void putOiInfo()
     {
         SmartDashboard.putNumber("OI/X-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_X));

@@ -59,7 +59,7 @@ public class DriveBase extends Subsystem
     /**
      * Called when the run method of the Scheduler is called 
      */
-    //TODO I'm guessing we want some soft of PID loop to keep the robot steady during auto.
+    //TODO I'm guessing we want some sort of PID loop to keep the robot steady during auto.
     @Override
     public void periodic()
     {
