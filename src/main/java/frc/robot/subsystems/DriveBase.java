@@ -78,8 +78,6 @@ public class DriveBase extends Subsystem
             {
                 speedCoef = Constants.SPEED_NORMAL;
             }
-
-            System.out.println(speedCoef);
         }
     }
 
