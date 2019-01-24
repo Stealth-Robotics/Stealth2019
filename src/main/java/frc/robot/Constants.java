@@ -15,6 +15,9 @@ public class Constants
     public static final double SPEED_FAST = 1;
     public static final double SPEED_NORMAL = 0.6;
 
+    //driving pid constants
+    public static final double Dkp = 0.01;
+
     //the drive axes
     public static final int DRIVE_JOYSTICK_Y = 1;
     public static final int DRIVE_JOYSTICK_X = 0;

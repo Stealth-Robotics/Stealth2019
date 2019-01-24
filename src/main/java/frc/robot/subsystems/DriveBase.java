@@ -2,6 +2,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -29,6 +30,8 @@ public class DriveBase extends Subsystem
     private static WPI_TalonSRX driveRF; //Right front wheel
     private static WPI_TalonSRX driveRR; //Right rear wheel
 
+    private static PigeonIMU imu;
+
     private static double speedCoef; //Is used by the joystick version of move to lower max speed
 
     public DriveBase()
@@ -41,6 +44,21 @@ public class DriveBase extends Subsystem
         driveRF.setInverted(true);
         driveRR = new WPI_TalonSRX(RobotMap.driveRR);
         driveRR.setInverted(true);
+
+        switch (RobotMap.pigeonIMU)
+        {
+        case RobotMap.driveLF:
+            imu = new PigeonIMU(driveLF);
+            break;
+        case RobotMap.driveLR:
+            imu = new PigeonIMU(driveLR);
+            break;
+        case RobotMap.driveRF:
+            imu = new PigeonIMU(driveRF);
+            break;
+        case RobotMap.driveRR:
+            imu = new PigeonIMU(driveRR);
+        }
 
         speedCoef = Constants.SPEED_NORMAL;
 
@@ -86,7 +104,7 @@ public class DriveBase extends Subsystem
      * 
      * @param joystick joystick used to control robot
      */
-    public void move(Joystick joystick)
+    public void moveWithoutIMU(Joystick joystick)
     {
         double speed = joystick.getMagnitude() * speedCoef;
         speed = (speed > Constants.DEADZONE_MOVE) ? speed : 0;
@@ -94,7 +112,7 @@ public class DriveBase extends Subsystem
         double rotation = joystick.getTwist() * speedCoef;
         rotation = (Math.abs(rotation) > Constants.DEADZONE_TWIST) ? rotation : 0;
 
-        move(speed, direction, rotation);
+        moveWithoutIMU(speed, direction, rotation);
     }
 
     /**
@@ -104,7 +122,7 @@ public class DriveBase extends Subsystem
      * @param direction target direction
      * @param rotation target rotation speed
      */
-    public void move(double speed, double direction, double rotation)
+    public void moveWithoutIMU(double speed, double direction, double rotation)
     {
         double speed1 = Math.sqrt(2) * Math.sin(-direction + 3 * Math.PI / 4) * speed;
         double speed2 = Math.sqrt(2) * Math.sin(-direction + Math.PI / 4) * speed;
@@ -141,5 +159,25 @@ public class DriveBase extends Subsystem
         driveLR.set(LR);
         driveRF.set(RF);
         driveRR.set(RR);
+    }
+
+    /**
+     * Sets the imu's heading
+     * 
+     * @param heading the heading to be set
+     */
+    public void setHeading(double heading)
+    {
+        imu.setFusedHeading(heading);
+    }
+
+    /**
+     * Accesses the imu heading
+     * 
+     * @return the imu's current heading
+     */
+    public double getHeading()
+    {
+        return imu.getFusedHeading();
     }
 }
