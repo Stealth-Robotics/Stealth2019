@@ -30,9 +30,11 @@ public class DriveBase extends Subsystem
     private static WPI_TalonSRX driveRF; //Right front wheel
     private static WPI_TalonSRX driveRR; //Right rear wheel
 
-    private static PigeonIMU imu;
+    private static PigeonIMU imu; //The IMU
 
     private static double speedCoef; //Is used by the joystick version of move to lower max speed
+
+    private static double targetHeading; //The heading the move functions attempt to maintain
 
     public DriveBase()
     {
@@ -61,6 +63,8 @@ public class DriveBase extends Subsystem
         }
 
         speedCoef = Constants.SPEED_NORMAL;
+
+        targetHeading = getHeading();
 
         SmartDashboard.putBoolean("DriveBase/Initialized", true);
     }
@@ -103,8 +107,10 @@ public class DriveBase extends Subsystem
      * Moves robot using joystick
      * 
      * @param joystick joystick used to control robot
+     * @param withIMU if true, IMU input will be used to correct heading
+     * @param headless if true, will interpret directions as relative to field
      */
-    public void moveWithoutIMU(Joystick joystick)
+    public void move(Joystick joystick, boolean withIMU, boolean headless)
     {
         double speed = joystick.getMagnitude() * speedCoef;
         speed = (speed > Constants.DEADZONE_MOVE) ? speed : 0;
@@ -112,11 +118,50 @@ public class DriveBase extends Subsystem
         double rotation = joystick.getTwist() * speedCoef;
         rotation = (Math.abs(rotation) > Constants.DEADZONE_TWIST) ? rotation : 0;
 
+        if (withIMU || headless)
+        {
+            move(speed, direction, rotation, withIMU, headless);
+        }
+        else
+        {
+            moveWithoutIMU(speed, direction, rotation);
+        }
+    }
+
+    /**
+     * Moves robot using movement values with IMU input
+     * 
+     * @param speed target speed
+     * @param direction target direction
+     * @param rotation target rotation speed
+     * @param withIMU if true, will use IMU input to correct heading
+     * @param headless if true, will interpret directions as relative to field
+     */
+    public void move(double speed, double direction, double rotation, boolean withIMU, boolean headless)
+    {
+        double currentHeading = getHeading();
+
+        if (headless)
+        {
+            direction -= currentHeading;
+        }
+
+        if (rotation == 0)
+        {
+            targetHeading = currentHeading;
+        }
+
+        if (withIMU)
+        {
+            double errorHeading = targetHeading - currentHeading;
+            rotation += Constants.Dkp * errorHeading;
+        }
+
         moveWithoutIMU(speed, direction, rotation);
     }
 
     /**
-     * Moves robot using movement values
+     * Moves robot using movement values without IMU input
      * 
      * @param speed target speed
      * @param direction target direction
@@ -124,6 +169,11 @@ public class DriveBase extends Subsystem
      */
     public void moveWithoutIMU(double speed, double direction, double rotation)
     {
+        if (rotation == 0)
+        {
+            targetHeading = getHeading();
+        }
+
         double speed1 = Math.sqrt(2) * Math.sin(-direction + 3 * Math.PI / 4) * speed;
         double speed2 = Math.sqrt(2) * Math.sin(-direction + Math.PI / 4) * speed;
 
@@ -169,6 +219,7 @@ public class DriveBase extends Subsystem
     public void setHeading(double heading)
     {
         imu.setFusedHeading(heading);
+        targetHeading = heading;
     }
 
     /**
