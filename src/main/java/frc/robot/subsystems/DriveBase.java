@@ -36,6 +36,9 @@ public class DriveBase extends Subsystem
 
     private static double targetHeading; //The heading the move functions attempt to maintain
 
+    private static double headingAccumError; //The accumated heading error for PID
+    private static double headingLastError; //The last heading error for PID TODO Finish this part of the PID
+
     public DriveBase()
     {
         super();
@@ -81,7 +84,6 @@ public class DriveBase extends Subsystem
     /**
      * Called when the run method of the Scheduler is called 
      */
-    //TODO I'm guessing we want some sort of PID loop to keep the robot steady during auto.
     @Override
     public void periodic()
     {
@@ -101,6 +103,8 @@ public class DriveBase extends Subsystem
                 speedCoef = Constants.SPEED_NORMAL;
             }
         }
+
+        headingAccumError += targetHeading - getHeading();
     }
 
     /**
@@ -154,7 +158,7 @@ public class DriveBase extends Subsystem
         if (withIMU)
         {
             double errorHeading = targetHeading - currentHeading;
-            rotation += Constants.Dkp * errorHeading;
+            rotation += Constants.DKP * errorHeading + Constants.DKI * headingAccumError;
         }
 
         moveWithoutIMU(speed, direction, rotation);
@@ -212,7 +216,7 @@ public class DriveBase extends Subsystem
     }
 
     /**
-     * Sets the imu's heading
+     * Sets the imu's current heading, as well as the target heading
      * 
      * @param heading the heading to be set
      */
@@ -230,5 +234,20 @@ public class DriveBase extends Subsystem
     public double getHeading()
     {
         return imu.getFusedHeading();
+    }
+
+    /**
+     * Sets the target heading
+     * 
+     * @param heading the new target heading
+     */
+    public void setTargetHeading(double heading)
+    {
+        targetHeading = heading;
+    }
+
+    public void resetHeadingAccumError()
+    {
+        headingAccumError = 0;
     }
 }
