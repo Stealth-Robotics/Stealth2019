@@ -274,4 +274,8 @@ public class DriveBase extends Subsystem
             headingAccumError = 0;
         }
     }
+
+    public PigeonIMU getPigeonIMU(){
+        return imu;
+    }
 }

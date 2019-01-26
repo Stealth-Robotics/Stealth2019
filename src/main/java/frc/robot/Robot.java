@@ -34,6 +34,8 @@ public class Robot extends TimedRobot
     public static Grabber grabber;
     public static Lifter lifter;
     public static OI oi;
+
+    private Logging loggingCommand;
   
     Command m_autonomousCommand;
     SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -51,7 +53,12 @@ public class Robot extends TimedRobot
         grabber = new Grabber();
         lifter = new Lifter();
         oi = new OI();
-        //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+
+        //start logging command
+        loggingCommand = new Logging();
+        loggingCommand.start();
+
+        m_chooser.setDefaultOption("Default Auto", new AutoDriveForward());
         // chooser.addOption("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", m_chooser);
     }
