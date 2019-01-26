@@ -71,8 +71,9 @@ public class DriveBase extends Subsystem
 
         speedCoef = Constants.SPEED_NORMAL; //Drive speed for UserDrive
 
-        targetHeading = getHeading();
+        targetHeading = getHeading(); //initial target heading
 
+        //sets up PID variables
         PIDon = false;
         headingAccumError = 0;
         headingLastErrors = new double[2];
@@ -96,23 +97,6 @@ public class DriveBase extends Subsystem
     @Override
     public void periodic()
     {
-        Command command = getCurrentCommand();
-        if (command != null && command.getName().equals("UserDrive"))
-        {
-            if (Robot.oi.slowButton.get())
-            {
-                speedCoef = Constants.SPEED_SLOW;
-            }
-            else if (Robot.oi.fastButton.get())
-            {
-                speedCoef = Constants.SPEED_FAST;
-            }
-            else 
-            {
-                speedCoef = Constants.SPEED_NORMAL;
-            }
-        }
-
         double currentHeading = getHeading();
         headingAccumError += targetHeading - currentHeading;
         headingLastErrors[1] = headingLastErrors[0];
@@ -129,12 +113,28 @@ public class DriveBase extends Subsystem
      */
     public void move(Joystick joystick, boolean withHeadingPID, boolean headless)
     {
+        //Adjusts robot speed for user control
+        if (Robot.oi.slowButton.get())
+        {
+            speedCoef = Constants.SPEED_SLOW;
+        }
+        else if (Robot.oi.fastButton.get())
+        {
+            speedCoef = Constants.SPEED_FAST;
+        }
+        else 
+        {
+            speedCoef = Constants.SPEED_NORMAL;
+        }
+
+        //gets control values from joystick
         double speed = joystick.getMagnitude() * speedCoef;
         speed = (speed > Constants.DEADZONE_MOVE) ? speed : 0;
         double direction = joystick.getDirectionRadians();
         double rotation = joystick.getTwist() * speedCoef;
         rotation = (Math.abs(rotation) > Constants.DEADZONE_TWIST) ? rotation : 0;
 
+        //checks if IMU input necessary, and sends to appropriate function
         if (withHeadingPID || headless)
         {
             move(speed, direction, rotation, withHeadingPID, headless);
@@ -158,16 +158,19 @@ public class DriveBase extends Subsystem
     {
         double currentHeading = getHeading();
 
+        //adjusts target direction to make directions field relative
         if (headless)
         {
             direction -= currentHeading;
         }
 
+        //uses a PID loop to keep robot facing same direction
         if (withHeadingPID)
         {
-            double errorHeading = targetHeading - currentHeading;
-            if (PIDon && rotation != 0)
+            //disables PID loop if rotating robot
+            if (PIDon && rotation == 0)
             {
+                double errorHeading = targetHeading - currentHeading;  
                 rotation += Constants.DKP * errorHeading + Constants.DKI * headingAccumError + Constants.DKD * headingCurrDeriv;       
             }
             else
@@ -176,6 +179,7 @@ public class DriveBase extends Subsystem
             }
         }
 
+        //proceeds to motor calculations after corrections
         moveWithoutIMU(speed, direction, rotation);
     }
 
@@ -188,16 +192,15 @@ public class DriveBase extends Subsystem
      */
     public void moveWithoutIMU(double speed, double direction, double rotation)
     {
-        if (rotation == 0)
-        {
-            targetHeading = getHeading();
-        }
-
+        //speed for LF and RR
         double speed1 = Math.sqrt(2) * Math.sin(-direction + 3 * Math.PI / 4) * speed;
+        //speed for RF and LR
         double speed2 = Math.sqrt(2) * Math.sin(-direction + Math.PI / 4) * speed;
 
+        //maximum possible power value
         double maxValue = Math.sqrt(2) * Math.abs(speed) + Math.abs(rotation);
 
+        //adjusts all power values to be less than one, if necessary, and sends to motor controllers
         if (maxValue > 1)
         {
             rawMove((speed1 + rotation) / maxValue,
