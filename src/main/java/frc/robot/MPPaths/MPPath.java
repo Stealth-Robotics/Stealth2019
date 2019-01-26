@@ -3,7 +3,7 @@ package frc.robot.MPPaths;
 
 public abstract class MPPath
 {
-    double kSpeed;
-    double kNumPoints;
-    double points[];
+    public double kSpeed;
+    public double points[];
+    public int kNumPoints;
 }

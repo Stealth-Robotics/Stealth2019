@@ -3,12 +3,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.MPPaths.MPPath;
 
 public class ExecuteMPPath extends Command
 {
-    public ExecuteMPPath()
+    private MPPath path;
+    private int pCount;
+
+    public ExecuteMPPath(MPPath path)
     {
         super();
+
+        this.path = path;
+        pCount = 0;
 
         requires(Robot.driveBase);
     }
@@ -25,13 +32,14 @@ public class ExecuteMPPath extends Command
     protected void execute()
     {
 
+        pCount++;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() 
     {
-        return false;
+        return pCount == path.kNumPoints;
     }
   
     // Called once after isFinished returns true
