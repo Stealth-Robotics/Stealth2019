@@ -36,13 +36,16 @@ public class DriveBase extends Subsystem
 
     private static double targetHeading; //The heading the move functions attempt to maintain
 
+    private static boolean PIDon;
     private static double headingAccumError; //The accumated heading error for PID
-    private static double headingLastError; //The last heading error for PID TODO Finish this part of the PID
+    private static double headingLastErrors[]; //The last heading error for PID
+    private static double headingCurrDeriv;
 
     public DriveBase()
     {
         super();
 
+        //Creates motor controllers as specified by the RobotMap
         driveLF = new WPI_TalonSRX(RobotMap.driveLF);
         driveLR = new WPI_TalonSRX(RobotMap.driveLR);
         driveRF = new WPI_TalonSRX(RobotMap.driveRF);
@@ -50,6 +53,7 @@ public class DriveBase extends Subsystem
         driveRR = new WPI_TalonSRX(RobotMap.driveRR);
         driveRR.setInverted(true);
 
+        //Creates IMU with motor controller using RobotMap
         switch (RobotMap.pigeonIMU)
         {
         case RobotMap.driveLF:
@@ -65,9 +69,14 @@ public class DriveBase extends Subsystem
             imu = new PigeonIMU(driveRR);
         }
 
-        speedCoef = Constants.SPEED_NORMAL;
+        speedCoef = Constants.SPEED_NORMAL; //Drive speed for UserDrive
 
         targetHeading = getHeading();
+
+        PIDon = false;
+        headingAccumError = 0;
+        headingLastErrors = new double[2];
+        headingCurrDeriv = 0;
 
         SmartDashboard.putBoolean("DriveBase/Initialized", true);
     }
@@ -104,17 +113,21 @@ public class DriveBase extends Subsystem
             }
         }
 
-        headingAccumError += targetHeading - getHeading();
+        double currentHeading = getHeading();
+        headingAccumError += targetHeading - currentHeading;
+        headingLastErrors[1] = headingLastErrors[0];
+        headingLastErrors[0] = currentHeading;
+        headingCurrDeriv = headingLastErrors[0] - headingLastErrors[1];
     }
 
     /**
      * Moves robot using joystick
      * 
      * @param joystick joystick used to control robot
-     * @param withIMU if true, IMU input will be used to correct heading
+     * @param withHeadingPID if true, IMU input will be used to correct heading
      * @param headless if true, will interpret directions as relative to field
      */
-    public void move(Joystick joystick, boolean withIMU, boolean headless)
+    public void move(Joystick joystick, boolean withHeadingPID, boolean headless)
     {
         double speed = joystick.getMagnitude() * speedCoef;
         speed = (speed > Constants.DEADZONE_MOVE) ? speed : 0;
@@ -122,9 +135,9 @@ public class DriveBase extends Subsystem
         double rotation = joystick.getTwist() * speedCoef;
         rotation = (Math.abs(rotation) > Constants.DEADZONE_TWIST) ? rotation : 0;
 
-        if (withIMU || headless)
+        if (withHeadingPID || headless)
         {
-            move(speed, direction, rotation, withIMU, headless);
+            move(speed, direction, rotation, withHeadingPID, headless);
         }
         else
         {
@@ -138,10 +151,10 @@ public class DriveBase extends Subsystem
      * @param speed target speed
      * @param direction target direction
      * @param rotation target rotation speed
-     * @param withIMU if true, will use IMU input to correct heading
+     * @param withHeadingPID if true, will use IMU input to correct heading
      * @param headless if true, will interpret directions as relative to field
      */
-    public void move(double speed, double direction, double rotation, boolean withIMU, boolean headless)
+    public void move(double speed, double direction, double rotation, boolean withHeadingPID, boolean headless)
     {
         double currentHeading = getHeading();
 
@@ -150,15 +163,17 @@ public class DriveBase extends Subsystem
             direction -= currentHeading;
         }
 
-        if (rotation == 0)
-        {
-            targetHeading = currentHeading;
-        }
-
-        if (withIMU)
+        if (withHeadingPID)
         {
             double errorHeading = targetHeading - currentHeading;
-            rotation += Constants.DKP * errorHeading + Constants.DKI * headingAccumError;
+            if (PIDon && rotation != 0)
+            {
+                rotation += Constants.DKP * errorHeading + Constants.DKI * headingAccumError + Constants.DKD * headingCurrDeriv;       
+            }
+            else
+            {
+                targetHeading = currentHeading;
+            }
         }
 
         moveWithoutIMU(speed, direction, rotation);
@@ -246,8 +261,15 @@ public class DriveBase extends Subsystem
         targetHeading = heading;
     }
 
-    public void resetHeadingAccumError()
+    /**
+     * Allows PID to be turned on or off
+     */
+    public void setPIDon(boolean isOn)
     {
-        headingAccumError = 0;
+        PIDon = isOn;
+        if (isOn)
+        {
+            headingAccumError = 0;
+        }
     }
 }
