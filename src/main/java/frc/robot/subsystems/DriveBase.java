@@ -275,6 +275,11 @@ public class DriveBase extends Subsystem
         }
     }
 
+    /**
+     * Returns the IMU
+     * 
+     * @return The Pigeon IMU Instance
+     */
     public PigeonIMU getPigeonIMU(){
         return imu;
     }
