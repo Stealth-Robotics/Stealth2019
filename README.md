@@ -1,8 +1,8 @@
-![](Images/FIRSTlaunch-logo-twitter-100.jpg)
+![](images/FIRSTlaunch-logo-twitter-100.jpg)
 # Stealth 2019
 Robot Code for the 2019 FRC season
 
-![](Images/frc20118_FullRobot_Starting_Position.JPG)
+![](images/frc20118_FullRobot_Starting_Position.JPG)
 
 ## Cool Features :
 ### Motion Paths for auto

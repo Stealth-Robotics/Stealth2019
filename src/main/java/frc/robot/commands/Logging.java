@@ -6,13 +6,15 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
 
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Date;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
+
+import frc.robot.Robot;
 
 /**
  * An example command.  You can replace me with your own command.
