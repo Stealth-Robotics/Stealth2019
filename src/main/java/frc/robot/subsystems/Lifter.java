@@ -17,10 +17,10 @@ import frc.robot.RobotMap;
  */
 public class Lifter extends Subsystem
 {
-    private static WPI_TalonSRX armL; //Left lift arm
-    private static WPI_TalonSRX armR; //Right lift arm
-    private static WPI_TalonSRX armBack; //Rear lift arm
-    private static WPI_TalonSRX wheel; //Wheel mounted on back arm
+    private static WPI_TalonSRX armL; // !< Left lift arm
+    private static WPI_TalonSRX armR; // !< Right lift arm
+    private static WPI_TalonSRX armBack; // !< Rear lift arm
+    private static WPI_TalonSRX wheel; // !< Wheel mounted on back arm
 
     public Lifter()
     {

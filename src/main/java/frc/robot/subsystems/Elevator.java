@@ -76,6 +76,9 @@ public class Elevator extends Subsystem
         elevator.set(speed);
     }
 
+    /**
+     * Resets the accumulated error for the PID loop
+     */
     public void resetAccumError()
     {
         accumError = 0;

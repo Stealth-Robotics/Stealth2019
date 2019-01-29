@@ -24,20 +24,19 @@ import java.lang.Math;
 public class DriveBase extends Subsystem
 {
 
-    private static WPI_TalonSRX driveLF; //Left front wheel
-    private static WPI_TalonSRX driveLR; //Left rear wheel
-    private static WPI_TalonSRX driveRF; //Right front wheel
-    private static WPI_TalonSRX driveRR; //Right rear wheel
+    private static WPI_TalonSRX driveLF; // !< Left front wheel
+    private static WPI_TalonSRX driveLR; // !< Left rear wheel
+    private static WPI_TalonSRX driveRF; // !< Right front wheel
+    private static WPI_TalonSRX driveRR; // !< Right rear wheel
 
-    private static PigeonIMU imu; //The IMU
+    private static PigeonIMU imu; // !< The IMU
 
-    private static double speedCoef; //Is used by the joystick version of move to lower max speed
+    private static double speedCoef; // !< Is used by the joystick version of move to lower max speed
 
-    private static double targetHeading; //The heading the move functions attempt to maintain
+    private static double targetHeading; // !< The heading the move functions attempt to maintain
 
-    private static boolean PIDon;
-    private static double headingAccumError; //The accumated heading error for PID
-    private static double headingLastErrors[]; //The last heading error for PID
+    private static double headingAccumError; // !< The accumated heading error for PID
+    private static double headingLastErrors[]; // !< The last heading error for PID
     private static double headingCurrDeriv;
 
     public DriveBase()
@@ -73,7 +72,6 @@ public class DriveBase extends Subsystem
         targetHeading = getHeading(); //initial target heading
 
         //sets up PID variables
-        PIDon = false;
         headingAccumError = 0;
         headingLastErrors = new double[2];
         headingCurrDeriv = 0;
@@ -167,7 +165,7 @@ public class DriveBase extends Subsystem
         if (withHeadingPID)
         {
             //disables PID loop if rotating robot
-            if (PIDon && rotation == 0)
+            if (rotation == 0)
             {
                 double errorHeading = targetHeading - currentHeading;  
                 rotation += Constants.DKP * errorHeading + Constants.DKI * headingAccumError + Constants.DKD * headingCurrDeriv;       
