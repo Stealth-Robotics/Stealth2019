@@ -26,10 +26,10 @@ public class RobotMap
     // public static int rangefinderModule = 1;
   
     //ports for drivebase talons
-    public static final int driveLF = 3;
-    public static final int driveLR = 1;
-    public static final int driveRF = 4;
-    public static final int driveRR = 2;
+    public static final int driveLF = 8;
+    public static final int driveLR = 2;
+    public static final int driveRF = 7;
+    public static final int driveRR = 1;
   
     //ports for elevator talon
     public static final int elevator = 5;
