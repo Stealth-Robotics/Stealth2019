@@ -21,7 +21,7 @@ public class UserDrive extends Command
     @Override
     protected void initialize() 
     {
-        Robot.driveBase.setPIDon(true);
+        Robot.driveBase.resetHeadingAccumError();
     }
   
     // Called repeatedly when this Command is scheduled to run

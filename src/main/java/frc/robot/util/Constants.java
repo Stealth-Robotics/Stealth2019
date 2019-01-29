@@ -22,6 +22,7 @@ public class Constants
 
     //elvator pid constants
     public static final double EKP = 0.01;
+    public static final double EKI = 0.005;
 
     //the drive axes
     public static final int DRIVE_JOYSTICK_Y = 1;

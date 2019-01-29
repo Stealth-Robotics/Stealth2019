@@ -266,13 +266,9 @@ public class DriveBase extends Subsystem
     /**
      * Allows PID to be turned on or off
      */
-    public void setPIDon(boolean isOn)
+    public void resetHeadingAccumError()
     {
-        PIDon = isOn;
-        if (isOn)
-        {
-            headingAccumError = 0;
-        }
+        headingAccumError = 0;
     }
 
     /**

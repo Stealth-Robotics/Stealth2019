@@ -4,7 +4,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
 import frc.robot.RobotMap;
+import frc.robot.util.Constants;
 
 /**
  * This subsystem defines the elevator that lifts the Grabber subsystem
@@ -13,13 +15,22 @@ import frc.robot.RobotMap;
  */
 public class Elevator extends Subsystem
 {
-    private static int targetPos; //The target position
+    private static int targetPos; // !< The target position
 
-    private static WPI_TalonSRX elevator; //The elevator motor controller
+    private static WPI_TalonSRX elevator; // !< The elevator motor controller
+
+    private static double accumError;
 
     public Elevator()
     {
         elevator = new WPI_TalonSRX(RobotMap.elevator);
+        accumError = 0;
+    }
+
+    @Override
+    public void periodic()
+    {
+        accumError += getError();
     }
 
     /**
@@ -29,6 +40,12 @@ public class Elevator extends Subsystem
     public void initDefaultCommand()
     {
         //setDefaultCommand(command);
+    }
+
+    public void move()
+    {
+        double error = getError();
+        setSpeed(error * Constants.EKP + accumError * Constants.EKI);
     }
 
     /**
@@ -57,5 +74,10 @@ public class Elevator extends Subsystem
     public void setSpeed(double speed)
     {
         elevator.set(speed);
+    }
+
+    public void resetAccumError()
+    {
+        accumError = 0;
     }
 }
