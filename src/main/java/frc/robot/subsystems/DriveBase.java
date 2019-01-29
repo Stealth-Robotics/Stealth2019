@@ -15,7 +15,7 @@ import frc.robot.util.*;
 import java.lang.Math;
 
 /**
- * This subsystem defines the drivebase subsystem of the robot
+ * This subsystem defines the drivebase of the robot
  * 
  * <p> The drivebase is holonomic, with four mechanum wheels </p>
  * 

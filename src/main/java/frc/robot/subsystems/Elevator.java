@@ -6,11 +6,16 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
+/**
+ * This subsystem defines the elevator that lifts the Grabber subsystem
+ * 
+ * <p> It contains a single motor that drives it </p>
+ */
 public class Elevator extends Subsystem
 {
-    private static int targetPos;
+    private static int targetPos; //The target position
 
-    private static WPI_TalonSRX elevator;
+    private static WPI_TalonSRX elevator; //The elevator motor controller
 
     public Elevator()
     {
@@ -46,6 +51,8 @@ public class Elevator extends Subsystem
 
     /**
      * Directly sets the elevator motor's speed
+     * 
+     * @param speed the target speed
      */
     public void setSpeed(double speed)
     {
