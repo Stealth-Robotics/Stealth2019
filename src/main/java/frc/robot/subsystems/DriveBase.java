@@ -65,6 +65,9 @@ public class DriveBase extends Subsystem
             break;
         case RobotMap.driveRR:
             imu = new PigeonIMU(driveRR);
+            break;
+        default:
+            imu = new PigeonIMU(RobotMap.pigeonIMU);
         }
 
         speedCoef = Constants.SPEED_NORMAL; //Drive speed for UserDrive
