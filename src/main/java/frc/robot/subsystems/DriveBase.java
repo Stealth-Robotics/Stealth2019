@@ -45,7 +45,9 @@ public class DriveBase extends Subsystem
 
         //Creates motor controllers as specified by the RobotMap
         driveLF = new WPI_TalonSRX(RobotMap.driveLF);
+        // driveLF.setInverted(true);
         driveLR = new WPI_TalonSRX(RobotMap.driveLR);
+        // driveLR.setInverted(true);
         driveRF = new WPI_TalonSRX(RobotMap.driveRF);
         driveRF.setInverted(true);
         driveRR = new WPI_TalonSRX(RobotMap.driveRR);
@@ -67,8 +69,10 @@ public class DriveBase extends Subsystem
             imu = new PigeonIMU(driveRR);
             break;
         default:
-            imu = new PigeonIMU(RobotMap.pigeonIMU);
+            imu = new PigeonIMU(new WPI_TalonSRX(RobotMap.pigeonIMU));
         }
+
+        setHeading(0);
 
         speedCoef = Constants.SPEED_NORMAL; //Drive speed for UserDrive
 
@@ -98,7 +102,7 @@ public class DriveBase extends Subsystem
     public void periodic()
     {
         double currentHeading = getHeading();
-        headingAccumError += targetHeading - currentHeading;
+        headingAccumError += currentHeading - targetHeading; //just reversed intended direction
         headingLastErrors[1] = headingLastErrors[0];
         headingLastErrors[0] = currentHeading;
         headingCurrDeriv = headingLastErrors[0] - headingLastErrors[1];
@@ -170,7 +174,7 @@ public class DriveBase extends Subsystem
             //disables PID loop if rotating robot
             if (rotation == 0)
             {
-                double errorHeading = targetHeading - currentHeading;  
+                double errorHeading = currentHeading - targetHeading;  //just reversed originally intended direction
                 rotation += Constants.DKP * errorHeading + Constants.DKI * headingAccumError + Constants.DKD * headingCurrDeriv;       
             }
             else

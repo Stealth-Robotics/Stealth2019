@@ -16,9 +16,9 @@ public class Constants
     public static final double SPEED_NORMAL = 0.6;
 
     // !< driving pid constants
-    public static final double DKP = 0.01;
-    public static final double DKI = 0.005;
-    public static final double DKD = -0.001;
+    public static final double DKP = 0.005;
+    public static final double DKI = 0.0001;
+    public static final double DKD = -0.0001;
 
     // !< elvator pid constants
     public static final double EKP = 0.01;

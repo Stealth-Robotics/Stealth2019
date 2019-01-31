@@ -161,7 +161,7 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic() 
     {
-        driveBase.rawMove(0.5, 0.5, 0.5, 0.5);
+        driveBase.rawMove(0.2, 0.2, 0.2, 0.2);
     }
 
     /**
@@ -174,5 +174,6 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("OI/Twist", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_TWIST));
         SmartDashboard.putNumber("OI/Magnitude", oi.driveJoystick.getMagnitude());
         SmartDashboard.putNumber("OI/Direction", oi.driveJoystick.getDirectionDegrees());
+        SmartDashboard.putNumber("Telemetry/Heading", driveBase.getHeading());
     }
 }
