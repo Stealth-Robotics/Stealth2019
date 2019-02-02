@@ -3,14 +3,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LowerLegsLevel2 extends Command
+public class LiftToLevel2 extends Command
 {
-    public LowerLegsLevel2()
+    public LiftToLevel2()
     {
 
     }
 
-    
+
 
     @Override
     protected boolean isFinished() {
