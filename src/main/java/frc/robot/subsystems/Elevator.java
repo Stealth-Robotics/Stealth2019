@@ -61,7 +61,7 @@ public class Elevator extends Subsystem
     /**
      * Gets the error between the current position and the target postion
      */
-    public int getError()
+    private int getError()
     {
         return targetPos - elevator.getSelectedSensorPosition(0);
     }
