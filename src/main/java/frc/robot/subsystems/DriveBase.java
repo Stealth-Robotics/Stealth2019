@@ -131,6 +131,11 @@ public class DriveBase extends Subsystem
             speedCoef = Constants.SPEED_NORMAL;
         }
 
+        if (Robot.oi.resetHeadingButton.get())
+        {
+            setHeading(0);
+        }
+
         //gets control values from joystick
         double speed = joystick.getMagnitude() * speedCoef;
         speed = (speed > Constants.DEADZONE_MOVE) ? speed : 0;
@@ -182,6 +187,8 @@ public class DriveBase extends Subsystem
                 targetHeading = currentHeading;
             }
         }
+
+        System.out.println(currentHeading + " " + direction);
 
         //proceeds to motor calculations after corrections
         moveWithoutIMU(speed, direction, rotation);
@@ -251,11 +258,11 @@ public class DriveBase extends Subsystem
     /**
      * Accesses the imu heading
      * 
-     * @return the imu's current heading
+     * @return the imu's current heading in radians
      */
     public double getHeading()
     {
-        return imu.getFusedHeading();
+        return -imu.getFusedHeading() * Math.PI / 180;
     }
 
     /**

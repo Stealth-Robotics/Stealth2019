@@ -53,6 +53,7 @@ public class OI
 
     public Button slowButton;
     public Button fastButton;
+    public Button resetHeadingButton;
   
     OI()
     {
@@ -60,6 +61,7 @@ public class OI
 
         slowButton = new JoystickButton(driveJoystick, Constants.SLOW_BUTTON);
         fastButton = new JoystickButton(driveJoystick, Constants.FAST_BUTTON);
+        resetHeadingButton = new JoystickButton(driveJoystick, Constants.RESET_HEADING_BUTTON);
 
         elevatorJoystick = driveJoystick;
     }
