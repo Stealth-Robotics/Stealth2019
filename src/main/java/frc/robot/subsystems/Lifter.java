@@ -11,16 +11,16 @@ import frc.robot.RobotMap;
  * 
  * <p> It is designed to lift the robot onto the hab </p>
  * 
- * <p> It consists of three arms that push downwards, lifting the robot </p>
+ * <p> It consists of three legs that push downwards, lifting the robot </p>
  * 
- * <p> The rear arm has a wheel on its end, pushing the robot when it is off the ground </p>
+ * <p> The rear leg has a wheel on its end, pushing the robot when it is off the ground </p>
  */
 public class Lifter extends Subsystem
 {
-    private static WPI_TalonSRX armL; // !< Left lift arm
-    private static WPI_TalonSRX armR; // !< Right lift arm
-    private static WPI_TalonSRX armBack; // !< Rear lift arm
-    private static WPI_TalonSRX wheel; // !< Wheel mounted on back arm
+    private static WPI_TalonSRX legL; // !< Left lift leg
+    private static WPI_TalonSRX legR; // !< Right lift leg
+    private static WPI_TalonSRX legBack; // !< Rear lift leg
+    private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
     public Lifter()
     {
@@ -29,14 +29,14 @@ public class Lifter extends Subsystem
 
     public void initDefaultCommand()
     {
-        armL = new WPI_TalonSRX(RobotMap.armL);
-        armR = new WPI_TalonSRX(RobotMap.armR);
-        armBack = new WPI_TalonSRX(RobotMap.armBack);
+        legL = new WPI_TalonSRX(RobotMap.legL);
+        legR = new WPI_TalonSRX(RobotMap.legR);
+        legBack = new WPI_TalonSRX(RobotMap.legBack);
         wheel = new WPI_TalonSRX(RobotMap.wheel);
     }
 
     /**
-     * Operates the wheel mounted on the arm
+     * Operates the wheel mounted on the leg
      * 
      * @param speed
      */
@@ -46,23 +46,23 @@ public class Lifter extends Subsystem
     }
 
     /**
-     * Sets the speed of the rear arm motor
+     * Sets the speed of the rear leg motor
      * 
      * @param speed
      */
-    public void armBackSpeed(double speed)
+    public void legBackSpeed(double speed)
     {
-        armBack.set(speed);
+        legBack.set(speed);
     }
 
     /**
-     * Sets the speed of the front arm motors
+     * Sets the speed of the front leg motors
      * 
      * @param speed
      */
-    public void armsFrontSpeed(double speed)
+    public void legsFrontSpeed(double speed)
     {
-        armL.set(speed);
-        armR.set(speed);
+        legL.set(speed);
+        legR.set(speed);
     }
 }
