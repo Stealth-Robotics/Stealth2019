@@ -17,7 +17,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * Logs telemetry  to file
  */
 public class Logging extends Command 
 {

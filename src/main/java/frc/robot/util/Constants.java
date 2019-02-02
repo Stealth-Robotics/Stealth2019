@@ -40,5 +40,5 @@ public class Constants
 
     // !< hardware dimensions
     public static final double DRIVE_WHEEL_RADIUS = 3.0;
-    public static final double LEG_WHEEL_RADIUS = 2.0;
+    public static final double LEG_WHEEL_RADIUS = 1.5;
 }

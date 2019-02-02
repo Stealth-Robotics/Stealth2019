@@ -4,6 +4,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * An autonomous command that just drives forward for 5 seconds
+ */
 public class AutoDriveForward extends Command
 {
     private long startTime;
@@ -26,7 +29,7 @@ public class AutoDriveForward extends Command
     @Override
     protected void execute() 
     {
-        Robot.driveBase.moveWithoutIMU(0.5, 0, 0);
+        Robot.driveBase.move(0.5, 0, 0, true, false);
     }
   
     // Make this return true when this Command no longer needs to run execute()

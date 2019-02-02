@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.MPPaths.MPPath;
 
+/**
+ * Drives the robot using a motion profile
+ */
 public class ExecuteMPPath extends Command
 {
     private MPPath path;
