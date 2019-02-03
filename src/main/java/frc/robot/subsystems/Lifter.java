@@ -22,6 +22,9 @@ public class Lifter extends Subsystem
     private static WPI_TalonSRX legBack; // !< Rear lift leg
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
+    private int targetBack; // !< The target position for the back leg
+    private int targetFront; // !< The target position for the front leg
+
     public Lifter()
     {
 
@@ -33,6 +36,13 @@ public class Lifter extends Subsystem
         legR = new WPI_TalonSRX(RobotMap.legR);
         legBack = new WPI_TalonSRX(RobotMap.legBack);
         wheel = new WPI_TalonSRX(RobotMap.wheel);
+
+        target = legBack.getSelectedSensorPosition(0);
+    }
+    
+    public void setTarget(int target)
+    {
+
     }
 
     /**
