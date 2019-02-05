@@ -6,7 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
-import frc.robot.util.Constants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.util.*;
 
 /**
  * This subsystem defines the elevator that lifts the Grabber subsystem
@@ -25,6 +26,8 @@ public class Elevator extends Subsystem
     {
         elevator = new WPI_TalonSRX(RobotMap.elevator);
         accumError = 0;
+
+        SmartDashboard.putString("Elevator/Status", Status.Good.toString());
     }
 
     @Override

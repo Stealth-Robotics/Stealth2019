@@ -83,7 +83,7 @@ public class DriveBase extends Subsystem
         headingLastErrors = new double[2];
         headingCurrDeriv = 0;
 
-        SmartDashboard.putBoolean("DriveBase/Initialized", true);
+        SmartDashboard.putString("DriveBase/Status", Status.Good.toString());
     }
 
     /**

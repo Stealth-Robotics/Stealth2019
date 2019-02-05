@@ -6,6 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import edu.wpi.first.wpilibj.Solenoid; TODO uncomment this when ready to use
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.util.*;
 
 public class Grabber extends Subsystem
 {
@@ -22,6 +24,8 @@ public class Grabber extends Subsystem
         intakeL = new WPI_TalonSRX(RobotMap.intakeL);
         intakeR = new WPI_TalonSRX(RobotMap.intakeR);
         tilt = new WPI_TalonSRX(RobotMap.tilt);
+
+        SmartDashboard.putString("Grabber/Status", Status.Good.toString());
     }
 
     @Override

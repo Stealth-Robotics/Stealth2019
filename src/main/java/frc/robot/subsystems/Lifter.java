@@ -4,6 +4,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.util.*;
 import frc.robot.RobotMap;
 
 /**
@@ -36,6 +38,8 @@ public class Lifter extends Subsystem
         targetBack = legBack.getSelectedSensorPosition(0);
         targetFrontL = legL.getSelectedSensorPosition(0);
         targetFrontR = legR.getSelectedSensorPosition(0);
+
+        SmartDashboard.putString("Lifter/Status", Status.Good.toString());
     }
 
     @Override

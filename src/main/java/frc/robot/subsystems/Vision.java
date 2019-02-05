@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.*;
+import frc.robot.util.*;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -23,7 +24,7 @@ public class Vision extends Subsystem
             camera.setFPS(25);
         }).start();
     
-        SmartDashboard.putBoolean("Vision/Initialized", true);
+        SmartDashboard.putString("Vision/Status", Status.Good.toString());
     
         SmartDashboard.putNumber("Vision/TestNum", 10.25);
     }
