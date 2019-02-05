@@ -23,34 +23,97 @@ public class Lifter extends Subsystem
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
     private int targetBack; // !< The target position for the back leg
-    private int targetFront; // !< The target position for the front leg
+    private int targetFrontL; // !< The target position for the front left leg
+    private int targetFrontR; // !< The target position for the front right leg
 
     public Lifter()
-    {
-
-    }
-
-    public void initDefaultCommand()
     {
         legL = new WPI_TalonSRX(RobotMap.legL);
         legR = new WPI_TalonSRX(RobotMap.legR);
         legBack = new WPI_TalonSRX(RobotMap.legBack);
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
-        target = legBack.getSelectedSensorPosition(0);
+        targetBack = legBack.getSelectedSensorPosition(0);
+        targetFrontL = legL.getSelectedSensorPosition(0);
+        targetFrontR = legR.getSelectedSensorPosition(0);
     }
-    
-    public void setTarget(int target)
-    {
 
+    @Override
+    public void initDefaultCommand()
+    {
+        
     }
+
+    //#region Set Targets
+    
+    /**
+     * Sets the targets for the climb motors
+     * 
+     * @param backTarget
+     * the target for the back
+     * @param frontLTarget
+     * the target for the frontL
+     * @param frontRTarget
+     * the target for the frontR
+     */
+    public void setTargets(int backTarget, int frontLTarget, int frontRTarget){
+        setBackTarget(backTarget);
+        setFrontLTarget(frontLTarget);
+        setFrontRTarget(frontRTarget);
+    }
+
+    /**
+     * Sets the targets for the climb motors
+     * 
+     * @param backTarget
+     * the target for the back
+     * @param frontTarget
+     * the target fot the front motors
+     */
+    public void setTargets(int backTarget, int frontTarget){
+        setBackTarget(backTarget);
+        setFrontLTarget(frontTarget);
+        setFrontRTarget(frontTarget);
+    }
+
+    /**
+     * Sets the target for the back motor
+     * 
+     * @param target
+     */
+    public void setBackTarget(int target)
+    {
+        targetBack = target;
+    }
+
+    /**
+     * Sets the target for the front motors
+     * 
+     * @param target
+     */
+    public void setFrontLTarget(int target){
+        targetFrontL = target;
+    }
+
+    /**
+     * Sets the target for the front motors
+     * 
+     * @param target
+     */
+    public void setFrontRTarget(int target){
+        targetFrontR = target;
+    }
+
+    //#endregion
+
+    //#region Set Speeds
 
     /**
      * Operates the wheel mounted on the leg
      * 
      * @param speed
      */
-    public void runWheel(double speed)
+    public void setWheelSpeed(double speed)
     {
         wheel.set(speed);
     }
@@ -60,7 +123,7 @@ public class Lifter extends Subsystem
      * 
      * @param speed
      */
-    public void legBackSpeed(double speed)
+    public void setLegBackSpeed(double speed)
     {
         legBack.set(speed);
     }
@@ -70,9 +133,11 @@ public class Lifter extends Subsystem
      * 
      * @param speed
      */
-    public void legsFrontSpeed(double speed)
+    public void setLegsFrontSpeed(double speed)
     {
         legL.set(speed);
         legR.set(speed);
     }
+
+    //#endregion Set Speeds
 }
