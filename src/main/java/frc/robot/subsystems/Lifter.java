@@ -2,6 +2,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.sun.org.apache.bcel.internal.Const;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,8 +26,14 @@ public class Lifter extends Subsystem
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
     private int targetBack; // !< The target position for the back leg
+    private doubleObj integralBack = new doubleObj(0);
+    private intObj previousErrorBack = new intObj(0);
     private int targetFrontL; // !< The target position for the front left leg
+    private doubleObj integralFrontL = new doubleObj(0);
+    private intObj previousErrorFrontL = new intObj(0);
     private int targetFrontR; // !< The target position for the front right leg
+    private doubleObj integralFrontR = new doubleObj(0);
+    private intObj previousErrorFrontR = new intObj(0);
 
     public Lifter()
     {
@@ -47,6 +54,32 @@ public class Lifter extends Subsystem
     {
         
     }
+
+    /**
+     * Called when the run method of the Scheduler is called 
+     */
+    @Override
+    public void periodic()
+    {
+        //TODO:: figure out how to get dt for loops
+        PIDLoop(1);
+    }
+
+    public void PIDLoop(double dt){
+        //back PID
+        double BackPower = PIDHelper.PID_MATH(dt, targetBack, legBack.getSelectedSensorPosition(0), previousErrorBack, integralBack, Constants.BACK_LEG_Kp, Constants.BACK_LEG_Ki, Constants.BACK_LEG_Kd);
+        legBack.set(BackPower);
+
+        //Front Left PID
+        double LeftPower = PIDHelper.PID_MATH(dt, targetFrontL, legL.getSelectedSensorPosition(0), previousErrorFrontL, integralFrontL, Constants.FRONT_LEG_Kp, Constants.FRONT_LEG_Ki, Constants.FRONT_LEG_Kd);
+        legL.set(LeftPower);
+
+        //Front Right PID
+        double RightPower = PIDHelper.PID_MATH(dt, targetFrontR, legR.getSelectedSensorPosition(0), previousErrorFrontR, integralFrontR, Constants.FRONT_LEG_Kp, Constants.FRONT_LEG_Ki, Constants.FRONT_LEG_Kd);
+        legR.set(RightPower);
+    }
+    
+    
 
     //#region Set Targets
     

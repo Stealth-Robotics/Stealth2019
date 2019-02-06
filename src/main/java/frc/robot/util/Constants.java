@@ -41,4 +41,14 @@ public class Constants
     // !< hardware dimensions
     public static final double DRIVE_WHEEL_RADIUS = 3.0;
     public static final double LEG_WHEEL_RADIUS = 1.5;
+
+    // !< Back Leg PID Constants
+    public static final double BACK_LEG_Kp = 1;
+    public static final double BACK_LEG_Ki = 1;
+    public static final double BACK_LEG_Kd = 1;
+
+    // !< Front Leg PID Constants
+    public static final double FRONT_LEG_Kp = 1;
+    public static final double FRONT_LEG_Ki = 1;
+    public static final double FRONT_LEG_Kd = 1;
 }
