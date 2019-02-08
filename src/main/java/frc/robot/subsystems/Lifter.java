@@ -24,8 +24,10 @@ public class Lifter extends Subsystem
     private static WPI_TalonSRX legBack; // !< Rear lift leg
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
+    private boolean PID_Enabled = true;
+
     private int targetBack; // !< The target position for the back leg
-    private Reference<Double> integralBack = new Reference<Double>(0.0);
+    private Reference<Double> integralBack = new Reference<Double>(0.0); // !< Uses the Refrence class to store a pointer to the var
     private Reference<Integer> previousErrorBack = new Reference<Integer>(0);
     private int targetFrontL; // !< The target position for the front left leg
     private Reference<Double> integralFrontL = new Reference<Double>(0.0);
@@ -62,23 +64,47 @@ public class Lifter extends Subsystem
     @Override
     public void periodic()
     {
-        PIDLoop(timer.deltaTime());
+        if(PID_Enabled){
+            PIDLoop(timer.deltaTime());
+        }
+    }
+
+
+    public int SafteyChecks(int curentPosition, int maxPosition, int minPosition){
+        int outputPosition = curentPosition;
+
+        if (curentPosition > maxPosition){
+            outputPosition = maxPosition;
+        }
+
+        if (curentPosition < minPosition){
+            outputPosition = minPosition;
+        }
+
+        return outputPosition;
     }
 
     public void PIDLoop(double dt){
         //back PID
+        targetBack = SafteyChecks(legBack.getSelectedSensorPosition(0), Constants.BACK_LEG_MAX, Constants.BACK_LEG_MIN);
         double BackPower = PIDHelper.PID_MATH(dt, targetBack, legBack.getSelectedSensorPosition(0), previousErrorBack, integralBack, Constants.BACK_LEG_Kp, Constants.BACK_LEG_Ki, Constants.BACK_LEG_Kd);
         legBack.set(BackPower);
 
         //Front Left PID
+        targetFrontL = SafteyChecks(legL.getSelectedSensorPosition(0), Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN);
         double LeftPower = PIDHelper.PID_MATH(dt, targetFrontL, legL.getSelectedSensorPosition(0), previousErrorFrontL, integralFrontL, Constants.FRONT_LEG_Kp, Constants.FRONT_LEG_Ki, Constants.FRONT_LEG_Kd);
         legL.set(LeftPower);
 
         //Front Right PID
+        targetFrontR = SafteyChecks(legR.getSelectedSensorPosition(0), Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN);
         double RightPower = PIDHelper.PID_MATH(dt, targetFrontR, legR.getSelectedSensorPosition(0), previousErrorFrontR, integralFrontR, Constants.FRONT_LEG_Kp, Constants.FRONT_LEG_Ki, Constants.FRONT_LEG_Kd);
         legR.set(RightPower);
     }
     
+
+    public void setPIDEnabled(boolean enabled){
+        PID_Enabled = enabled;
+    }
     
 
     //#region Set Targets
