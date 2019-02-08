@@ -5,7 +5,7 @@ package frc.robot.util;
  */
 public class PIDHelper {
 
-    public static double PID_MATH(double dt, int target, int currentPosition, intObj previousError, doubleObj integral, double Kp, double Ki, double Kd){
+    public static double PID_MATH(double dt, int target, int currentPosition, Reference<Integer> previousError, Reference<Double> integral, double Kp, double Ki, double Kd){
         int error = target - currentPosition;
         integral.value = integral.value + error * dt;
         double derivarive = (error - previousError.value) / dt;

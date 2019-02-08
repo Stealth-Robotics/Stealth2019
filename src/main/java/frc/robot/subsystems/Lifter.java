@@ -25,14 +25,16 @@ public class Lifter extends Subsystem
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
     private int targetBack; // !< The target position for the back leg
-    private doubleObj integralBack = new doubleObj(0);
-    private intObj previousErrorBack = new intObj(0);
+    private Reference<Double> integralBack = new Reference<Double>(0.0);
+    private Reference<Integer> previousErrorBack = new Reference<Integer>(0);
     private int targetFrontL; // !< The target position for the front left leg
-    private doubleObj integralFrontL = new doubleObj(0);
-    private intObj previousErrorFrontL = new intObj(0);
+    private Reference<Double> integralFrontL = new Reference<Double>(0.0);
+    private Reference<Integer> previousErrorFrontL = new Reference<Integer>(0);
     private int targetFrontR; // !< The target position for the front right leg
-    private doubleObj integralFrontR = new doubleObj(0);
-    private intObj previousErrorFrontR = new intObj(0);
+    private Reference<Double> integralFrontR = new Reference<Double>(0.0);
+    private Reference<Integer> previousErrorFrontR = new Reference<Integer>(0);
+
+    private StopWatch timer = new StopWatch();
 
     public Lifter()
     {
@@ -60,8 +62,7 @@ public class Lifter extends Subsystem
     @Override
     public void periodic()
     {
-        //TODO:: figure out how to get dt for loops
-        PIDLoop(1);
+        PIDLoop(timer.deltaTime());
     }
 
     public void PIDLoop(double dt){
