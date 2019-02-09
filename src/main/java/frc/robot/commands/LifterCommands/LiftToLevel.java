@@ -1,11 +1,11 @@
 
-package frc.robot.commands;
+package frc.robot.commands.LifterCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftToLevel2 extends Command
+public class LiftToLevel extends Command
 {
-    public LiftToLevel2()
+    public LiftToLevel()
     {
 
     }

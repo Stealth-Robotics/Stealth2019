@@ -1,41 +1,48 @@
 
-package frc.robot.commands;
+package frc.robot.commands.DrivebaseCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
+import frc.robot.MPPaths.MPPath;
 
 /**
- * Allows the user to drive the robot using a joystick
+ * Drives the robot using a motion profile
  */
-public class UserDrive extends Command 
+public class ExecuteMPPath extends Command
 {
-    public UserDrive() 
+    private MPPath path;
+    private int pCount;
+
+    public ExecuteMPPath(MPPath path)
     {
-        super("UserDrive");
-        // Use requires() here to declare subsystem dependencies
+        super();
+
+        this.path = path;
+        pCount = 0;
+
         requires(Robot.driveBase);
     }
-  
+
     // Called just before this Command runs the first time
     @Override
-    protected void initialize() 
+    protected void initialize()
     {
         Robot.driveBase.resetHeadingAccumError();
     }
-  
+
     // Called repeatedly when this Command is scheduled to run
     @Override
-    protected void execute() 
+    protected void execute()
     {
-        Robot.driveBase.move(Robot.oi.driveJoystick, false, true); //withPID, then withHeadless
+
+        pCount++;
     }
-  
+
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() 
     {
-        return false;
+        return pCount == path.kNumPoints;
     }
   
     // Called once after isFinished returns true

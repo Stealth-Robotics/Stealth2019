@@ -55,4 +55,6 @@ public class Constants
     public static final double FRONT_LEG_Kd = 1;
     public static final int FRONT_LEG_MAX = 1000;
     public static final int FRONT_LEG_MIN = 0;
+
+    public static final int OVERRIDE_LIFT_PID_BUTTON = 1;
 }

@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import frc.robot.commands.*;
+import frc.robot.commands.LifterCommands.*;
+
 import frc.robot.util.Constants;
 
 /**
@@ -49,11 +52,16 @@ public class OI
   
     public Joystick driveJoystick;
 
-    public Joystick elevatorJoystick;
-
     public Button slowButton;
     public Button fastButton;
     public Button resetHeadingButton;
+
+    public Joystick mechJoystick;
+
+    public Joystick overrideJoystick;
+
+    public Button overrideLiftPIDButton;
+
   
     OI()
     {
@@ -63,7 +71,12 @@ public class OI
         fastButton = new JoystickButton(driveJoystick, Constants.FAST_BUTTON);
         resetHeadingButton = new JoystickButton(driveJoystick, Constants.RESET_HEADING_BUTTON);
 
-        elevatorJoystick = driveJoystick;
+        mechJoystick = new Joystick(1);
+
+        overrideJoystick = new Joystick(2);
+
+        overrideLiftPIDButton = new JoystickButton(overrideJoystick, Constants.OVERRIDE_LIFT_PID_BUTTON);
+        overrideLiftPIDButton.whenPressed(new OverrideLiftPID());
     }
 
 

@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.*;
 import frc.robot.commands.*;
+import frc.robot.commands.DrivebaseCommands.*;
+import frc.robot.commands.LifterCommands.*;
 import frc.robot.util.*;
 
 /**
