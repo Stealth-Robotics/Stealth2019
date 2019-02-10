@@ -12,6 +12,8 @@ public class PIDexecutor
     double KI;
     double KD;
 
+    double target;
+
     double accumError;
     double lastError;
 
@@ -27,11 +29,12 @@ public class PIDexecutor
      * @param KD the drrivative constant
      * @param curValueFunct the function for finding the error
      */
-    public PIDexecutor(double KP, double KI, double KD, DoubleSupplier curValueFunct)
+    public PIDexecutor(double KP, double KI, double KD, double target, DoubleSupplier curValueFunct)
     {
         this.KP = KP;
         this.KI = KI;
         this.KD = KD;
+        this.target = target;
 
         accumError = 0;
         lastError = 0;
@@ -46,7 +49,7 @@ public class PIDexecutor
      */
     public double run()
     {
-        double error = curValueFunct.getAsDouble();
+        double error = target - curValueFunct.getAsDouble();
 
         accumError += error;
 
@@ -55,5 +58,34 @@ public class PIDexecutor
         lastError = error;
 
         return result;
+    }
+
+    /**
+     * Resets previous error variables
+     */
+    public void reset()
+    {
+        accumError = 0;
+        lastError = curValueFunct.getAsDouble();
+    }
+
+    /**
+     * Sets the target value
+     * 
+     * @param target the target value;
+     */
+    public void setTarget(double target)
+    {
+        this.target = target;
+    }
+
+    /**
+     * Returns the current target
+     * 
+     * @return the current target
+     */
+    public double getTarget()
+    {
+        return target;
     }
 }
