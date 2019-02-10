@@ -12,9 +12,9 @@ package frc.robot.util;
  */
 public class StopWatch 
 {
-    long mStartTime = 0; // <! Time on last iteration
-    long mLastTimeDT = 0; // <! Change in time since called
-	long mWaitTime = 0; // <! The time to wait
+    long mStartTime = 0; // !< Time on last iteration
+    long mLastTimeDT = 0; // !< Change in time since called
+	long mWaitTime = 0; // !< The time to wait
     
     /**
      * Creates a stopwatch with the specified wait time
