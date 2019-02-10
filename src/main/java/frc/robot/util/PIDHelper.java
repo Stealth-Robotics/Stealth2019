@@ -1,5 +1,6 @@
 package frc.robot.util;
 
+@Deprecated
 /**
  * A Helper Class for all pid loops
  */
