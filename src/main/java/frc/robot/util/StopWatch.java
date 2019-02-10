@@ -8,60 +8,87 @@
 package frc.robot.util;
 
 /**
- * An All around helpfull class to keep time in order
+ * An class to keep time in order
  */
 public class StopWatch 
 {
-    long mLastTime = 0;
-    long mLastTimeDT = 0;
-	int mWaitTime = 0;
-	
-	public StopWatch(int waitTime)
+    long mStartTime = 0; // <! Time on last iteration
+    long mLastTimeDT = 0; // <! Change in time since called
+	long mWaitTime = 0; // <! The time to wait
+    
+    /**
+     * Creates a stopwatch with the specified wait time
+     * 
+     * @param waitTime The specified time in milliseconds
+     */
+	public StopWatch(long waitTime)
 	{
         mWaitTime = waitTime;
-        mLastTime = now();
+        mStartTime = now();
         mLastTimeDT = now();
     }
     
+    /**
+     * Creates a stopwatch to track time
+     */
     public StopWatch()
 	{
         mWaitTime = 0;
-        mLastTime = now();
+        mStartTime = now();
         mLastTimeDT = now();
 	}
-	
+    
+    /**
+     * Sets time to wait
+     * 
+     * @param waitTime The time to wait
+     */
 	public void setTime(int waitTime)
 	{
 		mWaitTime = waitTime;
 	}
-	
+    
+    /**
+     * Checks if the stopwatch is expired
+     * 
+     * @return If the stopwatch is past its wait time or not
+     */
 	public boolean isExpired()
 	{
-		if((now()-mLastTime)>mWaitTime)
-		{
-			return true;
-		}
-		return false;
+		return (now() - mStartTime) > mWaitTime;
 	}
-	
+    
+    /**
+     * Rests the start time
+     */
 	public void reset()
 	{
-        mLastTime = now();
+        mStartTime = now();
 	}
-	
+    
+    /**
+     * Finds the time left until the wait time is reached
+     * 
+     * @return The time remaining
+     */
 	public long timeLeft()
 	{
-		return mWaitTime - (now()-mLastTime);
+		return mWaitTime - (now() - mStartTime);
     }
     
+    /**
+     * Returns the current time in milliseconds
+     * 
+     * @return The time
+     */
     public static long now(){
         return System.nanoTime() * 1000000;
     }
 
     /**
      * Returns the time passed in miliseconds since the last time this function was called or the stopwatch was initilized
-     * @return
-     * The Delta Time
+     *
+     * @return The change in time
      */
     public long deltaTime(){
         //get the dt
