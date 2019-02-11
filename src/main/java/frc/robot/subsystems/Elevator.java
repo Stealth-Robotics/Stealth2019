@@ -21,7 +21,7 @@ public class Elevator extends Subsystem
 
     private static WPI_TalonSRX elevator; // !< The elevator motor controller
 
-    private PIDexecutor loop; // !< The PID loop executor
+    private static PIDexecutor loop; // !< The PID loop executor
 
     public Elevator()
     {

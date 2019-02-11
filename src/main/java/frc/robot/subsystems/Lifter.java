@@ -27,11 +27,11 @@ public class Lifter extends Subsystem
     private static WPI_TalonSRX legBack; // !< Rear lift leg
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
-    private boolean PID_Enabled = true;
+    private static boolean PID_Enabled = true;
 
-    private PIDexecutor backLoop;
-    private PIDexecutor leftLoop;
-    private PIDexecutor rightLoop;
+    private static PIDexecutor backLoop;
+    private static PIDexecutor leftLoop;
+    private static PIDexecutor rightLoop;
 
     public Lifter()
     {

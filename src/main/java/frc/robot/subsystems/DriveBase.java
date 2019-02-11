@@ -39,6 +39,8 @@ public class DriveBase extends Subsystem
     private static double headingLastErrors[]; // !< The last heading error for PID
     private static double headingCurrDeriv;
 
+    private static PIDexecutor headingPIDloop; 
+
     public DriveBase()
     {
         super();
@@ -78,6 +80,7 @@ public class DriveBase extends Subsystem
 
         targetHeading = getHeading(); //initial target heading
 
+        //TODO change to PID executor instead
         //sets up PID variables
         headingAccumError = 0;
         headingLastErrors = new double[2];
@@ -179,7 +182,7 @@ public class DriveBase extends Subsystem
             //disables PID loop if rotating robot
             if (rotation == 0)
             {
-                double errorHeading = currentHeading - targetHeading;  //just reversed originally intended direction
+                double errorHeading = currentHeading - targetHeading;  //reversed originally intended direction
                 rotation += Constants.DKP * errorHeading + Constants.DKI * headingAccumError + Constants.DKD * headingCurrDeriv;       
             }
             else

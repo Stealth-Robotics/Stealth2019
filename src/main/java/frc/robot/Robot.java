@@ -7,19 +7,22 @@
 
 package frc.robot;
 
-import java.io.Console;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.subsystems.*;
-import frc.robot.commands.*;
-import frc.robot.commands.DrivebaseCommands.*;
-import frc.robot.commands.LifterCommands.*;
-import frc.robot.util.*;
+import frc.robot.commands.Logging;
+import frc.robot.commands.DrivebaseCommands.AutoDriveForward;
+
+import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Grabber;
+import frc.robot.subsystems.Lifter;
+import frc.robot.subsystems.Vision;
+
+import frc.robot.util.Constants;
 
 /**
  * The VM is configured to automatically run this class, and to call the
