@@ -13,6 +13,7 @@ import frc.robot.commands.DrivebaseCommands.*;
 import frc.robot.util.*;
 
 import java.lang.Math;
+import java.util.function.DoubleSupplier;
 
 /**
  * This subsystem defines the drivebase of the robot
@@ -32,12 +33,6 @@ public class DriveBase extends Subsystem
     private static PigeonIMU imu; // !< The IMU
 
     private static double speedCoef; // !< Is used by the joystick version of move to lower max speed
-
-    private static double targetHeading; // !< The heading the move functions attempt to maintain
-
-    private static double headingAccumError; // !< The accumated heading error for PID
-    private static double headingLastErrors[]; // !< The last heading error for PID
-    private static double headingCurrDeriv;
 
     private static PIDexecutor headingPIDloop; 
 
@@ -76,15 +71,15 @@ public class DriveBase extends Subsystem
 
         setHeading(0);
 
+        headingPIDloop = new PIDexecutor(Constants.DKP, Constants.DKI, Constants.DKD, 0, new DoubleSupplier(){
+        
+            @Override
+            public double getAsDouble() {
+                return getHeading();
+            }
+        });
+
         speedCoef = Constants.SPEED_NORMAL; //Drive speed for UserDrive
-
-        targetHeading = getHeading(); //initial target heading
-
-        //TODO change to PID executor instead
-        //sets up PID variables
-        headingAccumError = 0;
-        headingLastErrors = new double[2];
-        headingCurrDeriv = 0;
 
         SmartDashboard.putString("DriveBase/Status", Status.Good.toString());
     }
@@ -104,11 +99,7 @@ public class DriveBase extends Subsystem
     @Override
     public void periodic()
     {
-        double currentHeading = getHeading();
-        headingAccumError += currentHeading - targetHeading; //just reversed intended direction
-        headingLastErrors[1] = headingLastErrors[0];
-        headingLastErrors[0] = currentHeading;
-        headingCurrDeriv = headingLastErrors[0] - headingLastErrors[1];
+        
     }
 
     /**
@@ -182,12 +173,11 @@ public class DriveBase extends Subsystem
             //disables PID loop if rotating robot
             if (rotation == 0)
             {
-                double errorHeading = currentHeading - targetHeading;  //reversed originally intended direction
-                rotation += Constants.DKP * errorHeading + Constants.DKI * headingAccumError + Constants.DKD * headingCurrDeriv;       
+                rotation -= headingPIDloop.run();    
             }
             else
             {
-                targetHeading = currentHeading;
+                headingPIDloop.setTarget(currentHeading);
             }
         }
 
@@ -255,7 +245,7 @@ public class DriveBase extends Subsystem
     public void setHeading(double heading)
     {
         imu.setFusedHeading(heading);
-        targetHeading = heading;
+        headingPIDloop.setTarget(heading);
     }
 
     /**
@@ -275,7 +265,7 @@ public class DriveBase extends Subsystem
      */
     public void setTargetHeading(double heading)
     {
-        targetHeading = heading;
+        headingPIDloop.setTarget(heading);
     }
 
     /**
@@ -283,7 +273,7 @@ public class DriveBase extends Subsystem
      */
     public void resetHeadingAccumError()
     {
-        headingAccumError = 0;
+        headingPIDloop.reset();
     }
 
     /**
@@ -291,7 +281,8 @@ public class DriveBase extends Subsystem
      * 
      * @return The Pigeon IMU Instance
      */
-    public PigeonIMU getPigeonIMU(){
+    public PigeonIMU getPigeonIMU()
+    {
         return imu;
     }
 }
