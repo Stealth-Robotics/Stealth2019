@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.util;
-
+@Deprecated
 /**
  * A class to pass vars by refrence
  * Uses Generics to make it so that we can use mutiple types

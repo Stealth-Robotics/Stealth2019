@@ -1,6 +1,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.function.DoubleSupplier;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,16 +18,22 @@ import frc.robot.util.*;
  */
 public class Elevator extends Subsystem
 {
-    private static int targetPos; // !< The target position
 
     private static WPI_TalonSRX elevator; // !< The elevator motor controller
 
-    private static double accumError;
+    private PIDexecutor loop; // !< The PID loop executor
 
     public Elevator()
     {
         elevator = new WPI_TalonSRX(RobotMap.elevator);
-        accumError = 0;
+
+        loop = new PIDexecutor(Constants.EKP, Constants.EKI, 0, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
+        
+            @Override
+            public double getAsDouble() {
+                return elevator.getSelectedSensorPosition(0);
+            }
+        });
 
         SmartDashboard.putString("Elevator/Status", Status.Good.toString());
     }
@@ -33,7 +41,7 @@ public class Elevator extends Subsystem
     @Override
     public void periodic()
     {
-        accumError += getError();
+
     }
 
     /**
@@ -47,8 +55,7 @@ public class Elevator extends Subsystem
 
     public void move()
     {
-        double error = getError();
-        setSpeed(error * Constants.EKP + accumError * Constants.EKI);
+        setSpeed(loop.run());
     }
 
     /**
@@ -58,15 +65,7 @@ public class Elevator extends Subsystem
      */
     public void setTarget(int target)
     {
-        targetPos = target;
-    }
-
-    /**
-     * Gets the error between the current position and the target postion
-     */
-    private int getError()
-    {
-        return targetPos - elevator.getSelectedSensorPosition(0);
+        loop.setTarget(target);
     }
 
     /**
@@ -84,6 +83,6 @@ public class Elevator extends Subsystem
      */
     public void resetAccumError()
     {
-        accumError = 0;
+        loop.reset();
     }
 }

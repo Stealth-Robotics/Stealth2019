@@ -33,8 +33,6 @@ public class Lifter extends Subsystem
     private PIDexecutor leftLoop;
     private PIDexecutor rightLoop;
 
-    private StopWatch timer = new StopWatch();
-
     public Lifter()
     {
         legL = new WPI_TalonSRX(RobotMap.legL);
@@ -94,7 +92,7 @@ public class Lifter extends Subsystem
      * @param minPosition the minimun allowable position
      * @return the target position inside the allowable range
      */
-    public int SafetyChecks(int currentPosition, int maxPosition, int minPosition)
+    public int safetyChecks(int currentPosition, int maxPosition, int minPosition)
     {
         return (currentPosition > maxPosition) ? maxPosition : ((currentPosition < minPosition) ? minPosition : currentPosition);
     }
@@ -105,17 +103,14 @@ public class Lifter extends Subsystem
     public void PIDLoops()
     {
         //back PID
-        backLoop.setTarget(SafetyChecks(legBack.getSelectedSensorPosition(0), Constants.BACK_LEG_MAX, Constants.BACK_LEG_MIN));
         double BackPower = backLoop.run();
         legBack.set(BackPower);
 
         //Front Left PID
-        leftLoop.setTarget(SafetyChecks(legL.getSelectedSensorPosition(0), Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
         double LeftPower = leftLoop.run();
         legL.set(LeftPower);
 
         //Front Right PID
-        rightLoop.setTarget(SafetyChecks(legR.getSelectedSensorPosition(0), Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
         double RightPower = rightLoop.run();
         legR.set(RightPower);
     }
@@ -139,9 +134,9 @@ public class Lifter extends Subsystem
      */
     public void setTargets(int backTarget, int frontLTarget, int frontRTarget)
     {
-        setBackTarget(backTarget);
-        setFrontLTarget(frontLTarget);
-        setFrontRTarget(frontRTarget);
+        setBackTarget(safetyChecks(backTarget, Constants.BACK_LEG_MAX, Constants.BACK_LEG_MIN));
+        setFrontLTarget(safetyChecks(frontLTarget, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
+        setFrontRTarget(safetyChecks(frontRTarget, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
     }
 
     /**
@@ -152,9 +147,9 @@ public class Lifter extends Subsystem
      */
     public void setTargets(int backTarget, int frontTarget)
     {
-        setBackTarget(backTarget);
-        setFrontLTarget(frontTarget);
-        setFrontRTarget(frontTarget);
+        setBackTarget(safetyChecks(backTarget, Constants.BACK_LEG_MAX, Constants.BACK_LEG_MIN));
+        setFrontLTarget(safetyChecks(frontTarget, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
+        setFrontRTarget(safetyChecks(frontTarget, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
     }
 
     /**
@@ -164,7 +159,7 @@ public class Lifter extends Subsystem
      */
     public void setBackTarget(int target)
     {
-        backLoop.setTarget(target);
+        backLoop.setTarget(safetyChecks(target, Constants.BACK_LEG_MAX, Constants.BACK_LEG_MIN));
     }
 
     /**
@@ -174,7 +169,7 @@ public class Lifter extends Subsystem
      */
     public void setFrontLTarget(int target)
     {
-        leftLoop.setTarget(target);
+        leftLoop.setTarget(safetyChecks(target, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
     }
 
     /**
@@ -184,7 +179,7 @@ public class Lifter extends Subsystem
      */
     public void setFrontRTarget(int target)
     {
-        rightLoop.setTarget(target);
+        rightLoop.setTarget(safetyChecks(target, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
     }
 
     /**
