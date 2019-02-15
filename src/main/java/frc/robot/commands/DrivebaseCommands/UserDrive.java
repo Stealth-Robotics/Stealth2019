@@ -29,6 +29,7 @@ public class UserDrive extends Command
     protected void execute() 
     {
         Robot.driveBase.move(Robot.oi.driveJoystick, false, true); //withPID, then withHeadless
+        Robot.elevator.move(Robot.oi.mechJoystick);
     }
   
     // Make this return true when this Command no longer needs to run execute()

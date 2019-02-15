@@ -5,6 +5,7 @@ import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
@@ -41,7 +42,7 @@ public class Elevator extends Subsystem
     @Override
     public void periodic()
     {
-
+        setSpeed(loop.run());
     }
 
     /**
@@ -53,9 +54,17 @@ public class Elevator extends Subsystem
         //setDefaultCommand(command);
     }
 
-    public void move()
+    public void move(Joystick joystick)
     {
-        setSpeed(loop.run());
+        double joystickY = joystick.getRawAxis(Constants.ELEVATOR_JOYSTICK_Y);
+        if (joystickY != 0)
+        {
+            loop.setTarget(loop.getTarget() - joystickY * Constants.ELEVATOR_SPEED_NORMAL);
+        }
+        else
+        {
+            loop.setTarget(loop.getTarget());
+        }
     }
 
     /**

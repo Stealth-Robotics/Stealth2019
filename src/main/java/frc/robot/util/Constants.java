@@ -15,6 +15,9 @@ public class Constants
     public static final double SPEED_FAST = 1;
     public static final double SPEED_NORMAL = 0.6;
 
+    // !< elevator speed constants
+    public static final double ELEVATOR_SPEED_NORMAL = 5;
+
     // !< driving pid constants
     public static final double DKP = 0.005;
     public static final double DKI = 0.0001;
@@ -30,6 +33,8 @@ public class Constants
 
     // !< twist axis
     public static final int DRIVE_JOYSTICK_TWIST = 2;
+
+    public static final int ELEVATOR_JOYSTICK_Y = 1;
 
     // !< drive speed button
     public static final int SLOW_BUTTON = 1;
