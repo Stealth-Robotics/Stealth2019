@@ -40,26 +40,32 @@ public class Lifter extends Subsystem
         legBack = new WPI_TalonSRX(RobotMap.legBack);
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
-        backLoop = new PIDexecutor(Constants.BACK_LEG_KP, Constants.BACK_LEG_KI, Constants.BACK_LEG_KD, legBack.getSelectedSensorPosition(0), new DoubleSupplier(){
+        backLoop = new PIDexecutor(Constants.BACK_LEG_KP, Constants.BACK_LEG_KI, Constants.BACK_LEG_KD, legBack.getSelectedSensorPosition(0), new DoubleSupplier()
+        {
         
             @Override
-            public double getAsDouble() {
+            public double getAsDouble()
+            {
                 return legBack.getSelectedSensorPosition(0);
             }
         });
 
-        leftLoop = new PIDexecutor(Constants.FRONT_LEG_KP, Constants.FRONT_LEG_KI, Constants.FRONT_LEG_KD, legL.getSelectedSensorPosition(0), new DoubleSupplier(){
+        leftLoop = new PIDexecutor(Constants.FRONT_LEG_KP, Constants.FRONT_LEG_KI, Constants.FRONT_LEG_KD, legL.getSelectedSensorPosition(0), new DoubleSupplier()
+        {
         
             @Override
-            public double getAsDouble() {
+            public double getAsDouble() 
+            {
                 return legR.getSelectedSensorPosition(0);
             }
         });
 
-        rightLoop = new PIDexecutor(Constants.FRONT_LEG_KP, Constants.FRONT_LEG_KI, Constants.FRONT_LEG_KD, legR.getSelectedSensorPosition(0), new DoubleSupplier(){
+        rightLoop = new PIDexecutor(Constants.FRONT_LEG_KP, Constants.FRONT_LEG_KI, Constants.FRONT_LEG_KD, legR.getSelectedSensorPosition(0), new DoubleSupplier()
+        {
         
             @Override
-            public double getAsDouble() {
+            public double getAsDouble() 
+            {
                 return legR.getSelectedSensorPosition(0);
             }
         });
@@ -79,7 +85,8 @@ public class Lifter extends Subsystem
     @Override
     public void periodic()
     {
-        if(PID_Enabled){
+        if(PID_Enabled)
+        {
             PIDLoops();
         }
     }
