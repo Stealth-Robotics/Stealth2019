@@ -56,5 +56,12 @@ public class Constants
     public static final int FRONT_LEG_MAX = 1000;
     public static final int FRONT_LEG_MIN = 0;
 
+    // !< Tilt motor for grabber Constants
+    public static final double TILT_KP = 0.01;
+    public static final double TILT_KI = 0.01;
+    public static final double TILT_KD = -0;
+    public static final double TILT_MAX = 100;
+    public static final double TILT_MIN = 0;
+
     public static final int OVERRIDE_LIFT_PID_BUTTON = 1;
 }
