@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.constants.*;
 
-public class UserControlFront extends Command
+public class UserControlBack extends Command
 {
-    public UserControlFront()
+    public UserControlBack()
     {
         requires(Robot.lifter);
     }
@@ -24,13 +24,13 @@ public class UserControlFront extends Command
     {
         if (Robot.oi.legUpButton.get())
         {
-            Robot.lifter.setFrontLTarget(Robot.lifter.getFrontLPosition() - 10);
-            Robot.lifter.setFrontRTarget(Robot.lifter.getFrontRPosition() - 10);
+            Robot.lifter.setBackTarget(Robot.lifter.getBackPosition() - 10);
+            Robot.lifter.setBackTarget(Robot.lifter.getBackPosition() - 10);
         }
         else if (Robot.oi.legDownButton.get())
         {
-            Robot.lifter.setFrontLTarget(Robot.lifter.getFrontLPosition() + 10);
-            Robot.lifter.setFrontRTarget(Robot.lifter.getFrontRPosition() + 10);
+            Robot.lifter.setBackTarget(Robot.lifter.getBackPosition() + 10);
+            Robot.lifter.setBackTarget(Robot.lifter.getBackPosition() + 10);
         }
         Robot.lifter.setWheelSpeed(-Robot.oi.driveJoystick.getRawAxis(OIConstants.DRIVE_JOYSTICK_Y));
     }
