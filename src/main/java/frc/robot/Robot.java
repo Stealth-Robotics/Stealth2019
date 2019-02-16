@@ -150,6 +150,7 @@ public class Robot extends TimedRobot
         {
             m_autonomousCommand.cancel();
         }
+        lifter.resetEncoders();
     }
   
     /**
@@ -160,6 +161,11 @@ public class Robot extends TimedRobot
     {
         Scheduler.getInstance().run();
         lifter.runLoops();
+    }
+
+    @Override
+    public void testInit() {
+        lifter.resetEncoders();
     }
   
     /**
@@ -172,9 +178,7 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("Lifter/EncoderL", lifter.getFrontLPosition());
         SmartDashboard.putNumber("Lifter/EncoderR", lifter.getFrontRPosition());
         SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
-        SmartDashboard.putNumber("Lifter/TargetL", Lifter.leftLoop.getTarget());
-        SmartDashboard.putNumber("Lifter/TargetR", Lifter.rightLoop.getTarget());
-        SmartDashboard.putNumber("Lifter/TargetB", Lifter.backLoop.getTarget());
+        SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
         lifter.runLoops();
     }
 

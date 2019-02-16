@@ -77,4 +77,9 @@ public class Grabber extends Subsystem
         intakeL.set(speed);
         intakeR.set(speed);
     }
+
+    public int getTiltPosition()
+    {
+        return tilt.getSelectedSensorPosition(0);
+    }
 }

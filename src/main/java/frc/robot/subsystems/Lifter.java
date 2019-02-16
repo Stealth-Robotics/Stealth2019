@@ -30,9 +30,9 @@ public class Lifter extends Subsystem
 
     private static boolean PID_Enabled = true;
 
-    public static PIDexecutor backLoop;
-    public static PIDexecutor leftLoop;
-    public static PIDexecutor rightLoop;
+    private static PIDexecutor backLoop;
+    private static PIDexecutor leftLoop;
+    private static PIDexecutor rightLoop;
 
     public Lifter()
     {
@@ -41,9 +41,7 @@ public class Lifter extends Subsystem
         legBack = new WPI_TalonSRX(RobotMap.legBack);
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
-        legL.setSelectedSensorPosition(0, 0, 30);
-        legR.setSelectedSensorPosition(0, 0, 30);
-        legBack.setSelectedSensorPosition(0, 0, 30);
+        resetEncoders();
 
         backLoop = new PIDexecutor(Constants.BACK_LEG_KP, Constants.BACK_LEG_KI, Constants.BACK_LEG_KD, legBack.getSelectedSensorPosition(0), new DoubleSupplier()
         {
@@ -149,6 +147,7 @@ public class Lifter extends Subsystem
         return legBack.getSelectedSensorPosition(0);
     }
     
+    {};
     /**
      * Sets the targets for the climb motors
      * 
@@ -235,5 +234,12 @@ public class Lifter extends Subsystem
     {
         legL.set(speed);
         legR.set(speed);
+    }
+
+    public void resetEncoders()
+    {
+        legL.setSelectedSensorPosition(0, 0, 30);
+        legR.setSelectedSensorPosition(0, 0, 30);
+        legBack.setSelectedSensorPosition(0, 0, 30);
     }
 }
