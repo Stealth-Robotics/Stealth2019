@@ -8,7 +8,7 @@ import edu.wpi.first.cameraserver.*;
 import frc.robot.util.*;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * Sets up the camera
  */
 public class Vision extends Subsystem 
 {

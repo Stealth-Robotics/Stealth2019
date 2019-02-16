@@ -8,7 +8,7 @@
 package frc.robot.util;
 
 /**
- * An class to keep time in order
+ * An class to track time
  */
 public class StopWatch 
 {
@@ -41,7 +41,7 @@ public class StopWatch
     /**
      * Sets time to wait
      * 
-     * @param waitTime The time to wait
+     * @param waitTime The time to wait in milliseconds
      */
 	public void setTime(int waitTime)
 	{
@@ -69,7 +69,7 @@ public class StopWatch
     /**
      * Finds the time left until the wait time is reached
      * 
-     * @return The time remaining
+     * @return The time remaining in milliseconds
      */
 	public long timeLeft()
 	{
@@ -77,20 +77,22 @@ public class StopWatch
     }
     
     /**
-     * Returns the current time in milliseconds
+     * Returns the current time
      * 
-     * @return The time
+     * @return The time in milliseconds
      */
-    public static long now(){
+    public static long now()
+    {
         return System.nanoTime() * 1000000;
     }
 
     /**
-     * Returns the time passed in miliseconds since the last time this function was called or the stopwatch was initilized
+     * Returns the time passed since the last time this function was called or the stopwatch was initilized
      *
-     * @return The change in time
+     * @return The change in time in miliseconds 
      */
-    public long deltaTime(){
+    public long deltaTime()
+    {
         //get the dt
         long output = now() - mLastTimeDT;
         //reset last time
