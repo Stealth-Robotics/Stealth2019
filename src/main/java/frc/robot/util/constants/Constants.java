@@ -27,22 +27,6 @@ public class Constants
     public static final double EKP = 0.01;
     public static final double EKI = 0.005;
 
-    // !< the drive axes
-    public static final int DRIVE_JOYSTICK_Y = 1;
-    public static final int DRIVE_JOYSTICK_X = 0;
-
-    // !< twist axis
-    public static final int DRIVE_JOYSTICK_TWIST = 2;
-
-    public static final int ELEVATOR_JOYSTICK_Y = 1;
-
-    // !< drive speed button
-    public static final int SLOW_BUTTON = 1;
-    public static final int FAST_BUTTON = 2;
-
-    // !< reset heading button
-    public static final int RESET_HEADING_BUTTON = 3;
-
     // !< hardware dimensions
     public static final double DRIVE_WHEEL_RADIUS = 3.0;
     public static final double LEG_WHEEL_RADIUS = 1.5;
@@ -73,6 +57,4 @@ public class Constants
     public static final double TILT_KD = -0;
     public static final double TILT_MAX = 100;
     public static final double TILT_MIN = 0;
-
-    public static final int OVERRIDE_LIFT_PID_BUTTON = 1;
 }

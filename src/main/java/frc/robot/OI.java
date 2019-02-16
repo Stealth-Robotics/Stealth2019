@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.LifterCommands.*;
-import frc.robot.util.constants.*;
+import frc.robot.util.constants.OIConstants;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -58,6 +58,7 @@ public class OI
 
     public Button legDownButton;
     public Button legUpButton;
+    public Button nextStageButton;
 
     public Joystick overrideJoystick;
 
@@ -68,17 +69,19 @@ public class OI
     {
         driveJoystick = new Joystick(0);
 
-        slowButton = new JoystickButton(driveJoystick, Constants.SLOW_BUTTON);
-        fastButton = new JoystickButton(driveJoystick, Constants.FAST_BUTTON);
-        resetHeadingButton = new JoystickButton(driveJoystick, Constants.RESET_HEADING_BUTTON);
+        slowButton = new JoystickButton(driveJoystick, OIConstants.SLOW_BUTTON);
+        fastButton = new JoystickButton(driveJoystick, OIConstants.FAST_BUTTON);
+        resetHeadingButton = new JoystickButton(driveJoystick, OIConstants.RESET_HEADING_BUTTON);
 
         mechJoystick = new Joystick(1);
 
-        legDownButton = new JoystickButton(mechJoystick, Constants.)
+        legDownButton = new JoystickButton(mechJoystick, OIConstants.LEG_DOWN_BUTTON);
+        legUpButton = new JoystickButton(mechJoystick, OIConstants.LEG_UP_BUTTON);
+        nextStageButton = new JoystickButton(mechJoystick, OIConstants.NEXT_STAGE_BUTTON);
 
         overrideJoystick = new Joystick(2);
 
-        overrideLiftPIDButton = new JoystickButton(overrideJoystick, Constants.OVERRIDE_LIFT_PID_BUTTON);
+        overrideLiftPIDButton = new JoystickButton(overrideJoystick, OIConstants.OVERRIDE_LIFT_PID_BUTTON);
         overrideLiftPIDButton.whenPressed(new OverrideLiftPID());
     }
 

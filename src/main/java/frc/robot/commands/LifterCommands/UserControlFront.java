@@ -21,6 +21,21 @@ public class UserControlFront extends Command
     @Override
     protected void execute()
     {
-        Robot.lifter.setFrontLTarget(Robot.lifter.getFrontLPosition() + Robot.oi.mechJoystick);
+        if (Robot.oi.legUpButton.get())
+        {
+            Robot.lifter.setFrontLTarget(Robot.lifter.getFrontLPosition() - 10);
+            Robot.lifter.setFrontRTarget(Robot.lifter.getFrontRPosition() - 10);
+        }
+        else if (Robot.oi.legDownButton.get())
+        {
+            Robot.lifter.setFrontLTarget(Robot.lifter.getFrontLPosition() + 10);
+            Robot.lifter.setFrontRTarget(Robot.lifter.getFrontRPosition() + 10);
+        }
+    }
+
+    @Override
+    protected boolean isFinished()
+    {
+        return Robot.oi.nextStageButton.get();
     }
 }

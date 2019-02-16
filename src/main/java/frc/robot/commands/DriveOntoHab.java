@@ -14,5 +14,6 @@ public class DriveOntoHab extends CommandGroup
         requires(Robot.driveBase);
         addSequential(new LiftToLevel(level));
         addParallel(new UserDrive());
+        addSequential(new UserControlFront());
     }
 }

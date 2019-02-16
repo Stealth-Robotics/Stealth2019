@@ -22,7 +22,7 @@ import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Lifter;
 import frc.robot.subsystems.Vision;
 
-import frc.robot.util.constants.Constants;
+import frc.robot.util.constants.OIConstants;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -174,9 +174,9 @@ public class Robot extends TimedRobot
      */
     public void putOiInfo()
     {
-        SmartDashboard.putNumber("OI/X-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_X));
-        SmartDashboard.putNumber("OI/Y-axis", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_Y));
-        SmartDashboard.putNumber("OI/Twist", oi.driveJoystick.getRawAxis(Constants.DRIVE_JOYSTICK_TWIST));
+        SmartDashboard.putNumber("OI/X-axis", oi.driveJoystick.getRawAxis(OIConstants.DRIVE_JOYSTICK_X));
+        SmartDashboard.putNumber("OI/Y-axis", oi.driveJoystick.getRawAxis(OIConstants.DRIVE_JOYSTICK_Y));
+        SmartDashboard.putNumber("OI/Twist", oi.driveJoystick.getRawAxis(OIConstants.DRIVE_JOYSTICK_TWIST));
         SmartDashboard.putNumber("OI/Magnitude", oi.driveJoystick.getMagnitude());
         SmartDashboard.putNumber("OI/Direction", oi.driveJoystick.getDirectionDegrees());
         SmartDashboard.putNumber("Telemetry/Heading", driveBase.getHeading());
