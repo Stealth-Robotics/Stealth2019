@@ -1,5 +1,5 @@
 
-package frc.robot.commands.DrivebaseCommands;
+package frc.robot.commands.drivebaseCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;

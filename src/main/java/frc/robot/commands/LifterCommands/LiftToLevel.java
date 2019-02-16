@@ -1,5 +1,5 @@
 
-package frc.robot.commands.LifterCommands;
+package frc.robot.commands.lifterCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;

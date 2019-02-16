@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.util.*;
 import frc.robot.util.constants.Constants;
+import frc.robot.util.constants.OIConstants;
 
 /**
  * This subsystem defines the elevator that lifts the Grabber subsystem
@@ -63,7 +64,7 @@ public class Elevator extends Subsystem
      */
     public void move(Joystick joystick)
     {
-        double joystickY = joystick.getRawAxis(Constants.ELEVATOR_JOYSTICK_Y);
+        double joystickY = joystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
         if (joystickY != 0)
         {
             loop.setTarget(loop.getTarget() - joystickY * Constants.ELEVATOR_SPEED_NORMAL);

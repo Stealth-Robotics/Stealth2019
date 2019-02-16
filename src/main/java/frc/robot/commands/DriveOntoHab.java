@@ -4,8 +4,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import frc.robot.Robot;
-import frc.robot.commands.LifterCommands.*;
-import frc.robot.commands.DrivebaseCommands.*;
+import frc.robot.commands.lifterCommands.*;
+import frc.robot.commands.drivebaseCommands.*;
 
 public class DriveOntoHab extends CommandGroup
 {

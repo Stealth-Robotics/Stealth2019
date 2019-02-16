@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import frc.robot.commands.LifterCommands.*;
+import frc.robot.commands.lifterCommands.*;
 import frc.robot.util.constants.OIConstants;
 
 /**
