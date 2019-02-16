@@ -131,6 +131,21 @@ public class Lifter extends Subsystem
     {
         PID_Enabled = enabled;
     }
+
+    public int getFrontLPosition()
+    {
+        return legL.getSelectedSensorPosition(0);
+    }
+
+    public int getFrontRPosition()
+    {
+        return legR.getSelectedSensorPosition(0);
+    }
+
+    public int getBackPosition()
+    {
+        return legR.getSelectedSensorPosition(0);
+    }
     
     /**
      * Sets the targets for the climb motors
@@ -139,7 +154,7 @@ public class Lifter extends Subsystem
      * @param frontLTarget the target for the frontL
      * @param frontRTarget the target for the frontR
      */
-    public void setTargets(int backTarget, int frontLTarget, int frontRTarget)
+    public void setTargets(int frontLTarget, int frontRTarget, int backTarget)
     {
         setBackTarget(safetyChecks(backTarget, Constants.BACK_LEG_MAX, Constants.BACK_LEG_MIN));
         setFrontLTarget(safetyChecks(frontLTarget, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
@@ -152,7 +167,7 @@ public class Lifter extends Subsystem
      * @param backTarget the target for the back
      * @param frontTarget the target fot the front motors
      */
-    public void setTargets(int backTarget, int frontTarget)
+    public void setTargets(int frontTarget, int backTarget)
     {
         setBackTarget(safetyChecks(backTarget, Constants.BACK_LEG_MAX, Constants.BACK_LEG_MIN));
         setFrontLTarget(safetyChecks(frontTarget, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));

@@ -47,21 +47,27 @@ public class Constants
     public static final double DRIVE_WHEEL_RADIUS = 3.0;
     public static final double LEG_WHEEL_RADIUS = 1.5;
 
-    // !< Back Leg PID Constants
+    // !< Back Leg PID constants
     public static final double BACK_LEG_KP = 1;
     public static final double BACK_LEG_KI = 1;
     public static final double BACK_LEG_KD = -1;
     public static final int BACK_LEG_MAX = 1000;
     public static final int BACK_LEG_MIN = 0;
 
-    // !< Front Leg PID Constants
+    // !< Front Leg PID constants
     public static final double FRONT_LEG_KP = 1;
     public static final double FRONT_LEG_KI = 1;
     public static final double FRONT_LEG_KD = -1;
     public static final int FRONT_LEG_MAX = 1000;
     public static final int FRONT_LEG_MIN = 0;
 
-    // !< Tilt motor for grabber Constants
+    // Lifter level constants
+    public static final int FRONT_LEGS_LEVEL_2 = 5000;
+    public static final int BACK_LEG_LEVEL_2 = 5000;
+    public static final int FRONT_LEGS_LEVEL_3 = 10000;
+    public static final int BACK_LEG_LEVEL_3 = 10000;
+
+    // !< Tilt motor for grabber constants
     public static final double TILT_KP = 0.01;
     public static final double TILT_KI = 0.01;
     public static final double TILT_KD = -0;
