@@ -7,9 +7,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 //import edu.wpi.first.wpilibj.Solenoid; TODO uncomment this when ready to use
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.RobotMap;
 import frc.robot.util.*;
+import frc.robot.util.constants.Constants;
 
 /**
  * This class defines the grabber subsystem

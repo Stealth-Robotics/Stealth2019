@@ -3,7 +3,7 @@ package frc.robot.commands.LifterCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.util.Constants;
+import frc.robot.util.constants.Constants;
 
 public class LiftToLevel extends Command
 {

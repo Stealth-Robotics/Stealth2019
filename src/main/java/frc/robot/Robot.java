@@ -22,7 +22,7 @@ import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Lifter;
 import frc.robot.subsystems.Vision;
 
-import frc.robot.util.Constants;
+import frc.robot.util.constants.Constants;
 
 /**
  * The VM is configured to automatically run this class, and to call the

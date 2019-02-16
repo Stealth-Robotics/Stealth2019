@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.LifterCommands.*;
-
-import frc.robot.util.Constants;
+import frc.robot.util.constants.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -57,6 +56,9 @@ public class OI
 
     public Joystick mechJoystick;
 
+    public Button legDownButton;
+    public Button legUpButton;
+
     public Joystick overrideJoystick;
 
     public Button overrideLiftPIDButton;
@@ -71,6 +73,8 @@ public class OI
         resetHeadingButton = new JoystickButton(driveJoystick, Constants.RESET_HEADING_BUTTON);
 
         mechJoystick = new Joystick(1);
+
+        legDownButton = new JoystickButton(mechJoystick, Constants.)
 
         overrideJoystick = new Joystick(2);
 

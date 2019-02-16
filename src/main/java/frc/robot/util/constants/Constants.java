@@ -1,5 +1,5 @@
 
-package frc.robot.util;
+package frc.robot.util.constants;
 
 /**
  * Holds the constants in one place
