@@ -35,7 +35,7 @@ public class RobotMap
     public static final int elevator = 5;
 
     //module for hatch picker solenoid
-    public static final int pickerModule = 16;
+    public static final int pickerModule = 9;
     //channel for hatch picker solenoid
     public static final int pickerChannel = 0;
     //ports for intake talons
@@ -51,5 +51,5 @@ public class RobotMap
     public static final int wheel = 12;
   
     //talon for the pigeon IMU
-    public static final int pigeonIMU = 12;
+    public static final int pigeonIMU = 16;
 }
