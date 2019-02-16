@@ -1,5 +1,5 @@
 
-package frc.robot.MPPaths;
+package frc.robot.mpPaths;
 
 /**
  * A basic outline of a motion profile

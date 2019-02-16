@@ -28,11 +28,9 @@ public class UserControlBack extends Command
         if (Robot.oi.legUpButton.get())
         {
             Robot.lifter.setBackTarget(Robot.lifter.getBackPosition() - 10);
-            Robot.lifter.setBackTarget(Robot.lifter.getBackPosition() - 10);
         }
         else if (Robot.oi.legDownButton.get())
         {
-            Robot.lifter.setBackTarget(Robot.lifter.getBackPosition() + 10);
             Robot.lifter.setBackTarget(Robot.lifter.getBackPosition() + 10);
         }
         Robot.lifter.setWheelSpeed(-Robot.oi.driveJoystick.getRawAxis(OIConstants.DRIVE_JOYSTICK_Y));

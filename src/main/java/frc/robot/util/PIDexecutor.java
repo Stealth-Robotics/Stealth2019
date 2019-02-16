@@ -53,7 +53,7 @@ public class PIDexecutor
 
         accumError += error;
 
-        double result =  stopWatch.deltaTime() * (KP * error + KI * accumError + KD * (error - lastError));
+        double result = stopWatch.deltaTime() * (KP * error + KI * accumError + KD * (error - lastError));
 
         lastError = error;
 
