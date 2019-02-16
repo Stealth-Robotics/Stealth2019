@@ -42,7 +42,7 @@ public class Elevator extends Subsystem
     @Override
     public void periodic()
     {
-        setSpeed(loop.run());
+        
     }
 
     /**
@@ -54,6 +54,11 @@ public class Elevator extends Subsystem
         //setDefaultCommand(command);
     }
 
+    /**
+     * Moves elevator using joystick
+     * 
+     * @param joystick the driving joystick
+     */
     public void move(Joystick joystick)
     {
         double joystickY = joystick.getRawAxis(Constants.ELEVATOR_JOYSTICK_Y);
@@ -65,6 +70,8 @@ public class Elevator extends Subsystem
         {
             loop.setTarget(loop.getTarget());
         }
+        
+        setSpeed(loop.run());
     }
 
     /**
