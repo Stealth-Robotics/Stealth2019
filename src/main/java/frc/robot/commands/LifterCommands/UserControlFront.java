@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.constants.*;
 
+/**
+ * Command to control front leg while driving onto hab
+ */
 public class UserControlFront extends Command
 {
     public UserControlFront()

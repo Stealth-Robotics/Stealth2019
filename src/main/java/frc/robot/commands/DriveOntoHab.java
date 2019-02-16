@@ -7,6 +7,9 @@ import frc.robot.Robot;
 import frc.robot.commands.lifterCommands.*;
 import frc.robot.commands.drivebaseCommands.*;
 
+/**
+ * Command to enable drivers with driving onto hab
+ */
 public class DriveOntoHab extends CommandGroup
 {
     public DriveOntoHab(int level)

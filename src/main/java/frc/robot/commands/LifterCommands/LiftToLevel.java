@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.constants.Constants;
 
+/**
+ * Moves lifter commands to certain level to prepare to drive onto hab
+ */
 public class LiftToLevel extends Command
 {
     private int level;
@@ -50,5 +53,11 @@ public class LiftToLevel extends Command
         {
             return true;
         }
+    }
+
+    @Override
+    protected void interrupted()
+    {
+        Robot.lifter.setTargets(Robot.lifter.getFrontLPosition(), Robot.lifter.getFrontRPosition(), Robot.lifter.getBackPosition());
     }
 }

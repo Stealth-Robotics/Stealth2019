@@ -10,6 +10,9 @@ package frc.robot.commands.lifterCommands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * Disables PID loop for lifter
+ */
 public class OverrideLiftPID extends Command {
   public OverrideLiftPID() {
     // Use requires() here to declare subsystem dependencies
