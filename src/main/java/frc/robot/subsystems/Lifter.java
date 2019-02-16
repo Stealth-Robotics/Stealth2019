@@ -30,9 +30,9 @@ public class Lifter extends Subsystem
 
     private static boolean PID_Enabled = true;
 
-    private static PIDexecutor backLoop;
-    private static PIDexecutor leftLoop;
-    private static PIDexecutor rightLoop;
+    public static PIDexecutor backLoop;
+    public static PIDexecutor leftLoop;
+    public static PIDexecutor rightLoop;
 
     public Lifter()
     {
@@ -40,6 +40,10 @@ public class Lifter extends Subsystem
         legR = new WPI_TalonSRX(RobotMap.legR);
         legBack = new WPI_TalonSRX(RobotMap.legBack);
         wheel = new WPI_TalonSRX(RobotMap.wheel);
+
+        legL.setSelectedSensorPosition(0, 0, 30);
+        legR.setSelectedSensorPosition(0, 0, 30);
+        legBack.setSelectedSensorPosition(0, 0, 30);
 
         backLoop = new PIDexecutor(Constants.BACK_LEG_KP, Constants.BACK_LEG_KI, Constants.BACK_LEG_KD, legBack.getSelectedSensorPosition(0), new DoubleSupplier()
         {
@@ -57,7 +61,7 @@ public class Lifter extends Subsystem
             @Override
             public double getAsDouble() 
             {
-                return legR.getSelectedSensorPosition(0);
+                return legL.getSelectedSensorPosition(0);
             }
         });
 
@@ -86,10 +90,7 @@ public class Lifter extends Subsystem
     @Override
     public void periodic()
     {
-        if(PID_Enabled)
-        {
-            PIDLoops();
-        }
+        
     }
 
     /**
@@ -108,19 +109,19 @@ public class Lifter extends Subsystem
     /**
      * Runs PID loops for legs
      */
-    public void PIDLoops()
+    public void runLoops()
     {
         //back PID
-        double BackPower = backLoop.run();
-        legBack.set(BackPower);
+        double backPower = backLoop.run();
+        legBack.set(backPower);
 
         //Front Left PID
-        double LeftPower = leftLoop.run();
-        legL.set(LeftPower);
+        double leftPower = leftLoop.run();
+        legL.set(leftPower);
 
         //Front Right PID
-        double RightPower = rightLoop.run();
-        legR.set(RightPower);
+        double rightPower = rightLoop.run();
+        legR.set(rightPower);
     }
     
     /**
@@ -145,7 +146,7 @@ public class Lifter extends Subsystem
 
     public int getBackPosition()
     {
-        return legR.getSelectedSensorPosition(0);
+        return legBack.getSelectedSensorPosition(0);
     }
     
     /**

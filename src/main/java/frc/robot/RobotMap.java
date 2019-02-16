@@ -46,9 +46,9 @@ public class RobotMap
 
     //ports for lifter talons
     public static final int legL = 6;
-    public static final int legR = 7;
-    public static final int legBack = 8;
-    public static final int wheel = 9;
+    public static final int legR = 4;
+    public static final int legBack = 3;
+    public static final int wheel = 12;
   
     //talon for the pigeon IMU
     public static final int pigeonIMU = 12;

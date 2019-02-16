@@ -8,18 +8,18 @@ import java.util.function.DoubleSupplier;
  */
 public class PIDexecutor
 {
-    double KP;
-    double KI;
-    double KD;
+    private double KP;
+    private double KI;
+    private double KD;
 
-    double target;
+    private double target;
 
-    double accumError;
-    double lastError;
+    private double accumError;
+    private double lastError;
 
-    DoubleSupplier curValueFunct;
+    private DoubleSupplier curValueFunct;
 
-    StopWatch stopWatch;
+    // StopWatch stopWatch;
 
     /**
      * Sets up variables
@@ -41,7 +41,7 @@ public class PIDexecutor
 
         this.curValueFunct = curValueFunct;
         
-        stopWatch = new StopWatch();
+        // stopWatch = new StopWatch();
     }
 
     /**
@@ -49,11 +49,11 @@ public class PIDexecutor
      */
     public double run()
     {
-        double error = target - curValueFunct.getAsDouble();
+        double error = curValueFunct.getAsDouble() - target;
 
         accumError += error;
 
-        double result = stopWatch.deltaTime() * (KP * error + KI * accumError + KD * (error - lastError));
+        double result = KP * error + KI * accumError + KD * (error - lastError);
 
         lastError = error;
 

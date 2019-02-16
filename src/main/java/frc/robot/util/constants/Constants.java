@@ -32,16 +32,16 @@ public class Constants
     public static final double LEG_WHEEL_RADIUS = 1.5;
 
     // !< Back Leg PID constants
-    public static final double BACK_LEG_KP = 1;
-    public static final double BACK_LEG_KI = 1;
-    public static final double BACK_LEG_KD = -1;
+    public static final double BACK_LEG_KP = 0.0001;
+    public static final double BACK_LEG_KI = 0;
+    public static final double BACK_LEG_KD = -0;
     public static final int BACK_LEG_MAX = 1000;
     public static final int BACK_LEG_MIN = 0;
 
     // !< Front Leg PID constants
-    public static final double FRONT_LEG_KP = 1;
-    public static final double FRONT_LEG_KI = 1;
-    public static final double FRONT_LEG_KD = -1;
+    public static final double FRONT_LEG_KP = 0.0001;
+    public static final double FRONT_LEG_KI = 0;
+    public static final double FRONT_LEG_KD = -0;
     public static final int FRONT_LEG_MAX = 1000;
     public static final int FRONT_LEG_MIN = 0;
 

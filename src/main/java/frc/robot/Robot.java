@@ -136,6 +136,7 @@ public class Robot extends TimedRobot
     public void autonomousPeriodic()
     {
         Scheduler.getInstance().run();
+        lifter.runLoops();
     }
   
     @Override
@@ -158,6 +159,7 @@ public class Robot extends TimedRobot
     public void teleopPeriodic() 
     {
         Scheduler.getInstance().run();
+        lifter.runLoops();
     }
   
     /**
@@ -166,7 +168,14 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic() 
     {
-        driveBase.rawMove(0.2, 0.2, 0.2, 0.2);
+        //driveBase.rawMove(0.2, 0.2, 0.2, 0.2);
+        SmartDashboard.putNumber("Lifter/EncoderL", lifter.getFrontLPosition());
+        SmartDashboard.putNumber("Lifter/EncoderR", lifter.getFrontRPosition());
+        SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
+        SmartDashboard.putNumber("Lifter/TargetL", Lifter.leftLoop.getTarget());
+        SmartDashboard.putNumber("Lifter/TargetR", Lifter.rightLoop.getTarget());
+        SmartDashboard.putNumber("Lifter/TargetB", Lifter.backLoop.getTarget());
+        lifter.runLoops();
     }
 
     /**

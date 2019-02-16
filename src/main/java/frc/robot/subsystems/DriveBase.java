@@ -71,8 +71,6 @@ public class DriveBase extends Subsystem
             imu = new PigeonIMU(new WPI_TalonSRX(RobotMap.pigeonIMU));
         }
 
-        setHeading(0);
-
         headingPIDloop = new PIDexecutor(Constants.DKP, Constants.DKI, Constants.DKD, 0, new DoubleSupplier(){
         
             @Override
@@ -80,6 +78,8 @@ public class DriveBase extends Subsystem
                 return getHeading();
             }
         });
+
+        setHeading(0);
 
         speedCoef = Constants.SPEED_NORMAL; //Drive speed for UserDrive
 
