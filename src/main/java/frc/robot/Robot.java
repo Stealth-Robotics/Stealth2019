@@ -80,6 +80,11 @@ public class Robot extends TimedRobot
     public void robotPeriodic() 
     {
         putOiInfo();
+
+        SmartDashboard.putNumber("Lifter/EncoderL", lifter.getFrontLPosition());
+        SmartDashboard.putNumber("Lifter/EncoderR", lifter.getFrontRPosition());
+        SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
+        SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
     }
   
     /**
@@ -93,6 +98,9 @@ public class Robot extends TimedRobot
         System.out.printf("Disabled Init");
     }
   
+    /**
+     * This function is called periodically during Disabled mode
+     */
     @Override
     public void disabledPeriodic()
     {
@@ -163,8 +171,12 @@ public class Robot extends TimedRobot
         lifter.runLoops();
     }
 
+    /**
+     * This function is called once each time the robot enters test mode
+     */
     @Override
-    public void testInit() {
+    public void testInit() 
+    {
         lifter.resetEncoders();
     }
   
@@ -174,7 +186,6 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic() 
     {
-        //driveBase.rawMove(0.2, 0.2, 0.2, 0.2);
         SmartDashboard.putNumber("Lifter/EncoderL", lifter.getFrontLPosition());
         SmartDashboard.putNumber("Lifter/EncoderR", lifter.getFrontRPosition());
         SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
