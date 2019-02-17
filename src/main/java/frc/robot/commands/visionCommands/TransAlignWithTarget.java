@@ -3,28 +3,27 @@ package frc.robot.commands.visionCommands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj.command.*;
-
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
 import frc.robot.util.PIDexecutor;
 import frc.robot.util.constants.Constants;
 
-public class RotAlignWithTarget extends Command
+public class TransAlignWithTarget extends Command
 {
-    PIDexecutor alignment;
 
-    public RotAlignWithTarget(int target)
+    PIDexecutor transAlignment;
+
+    public TransAlignWithTarget()
     {
         requires(Robot.driveBase);
 
-        SmartDashboard.getEntry("limelight/pipeline").setNumber(target);
-        alignment = new PIDexecutor(Constants.ROT_ALIGN_KD, Constants.ROT_ALIGN_KI, Constants.ROT_ALIGN_KD, 0, new DoubleSupplier()
+        transAlignment = new PIDexecutor(Constants.TRANS_ALIGN_KP, Constants.TRANS_ALIGN_KI, Constants.TRANS_ALIGN_KD, 0, new DoubleSupplier()
         {
+        
             @Override
-            public double getAsDouble() 
-            {
+            public double getAsDouble() {
                 return SmartDashboard.getNumber("limelight/tx", 0);
             }
         });
@@ -33,7 +32,8 @@ public class RotAlignWithTarget extends Command
     @Override
     protected void execute() 
     {
-        Robot.driveBase.move(0, 0, alignment.run(), true, false);
+        double correction = transAlignment.run();
+        Robot.driveBase.move(correction, (correction < 0) ? Math.PI / 2 : -Math.PI / 2, 0, true, false);
     }
 
     @Override

@@ -65,11 +65,16 @@ public class Constants
     //Rotation speed when finding vision target
     public static final double FIND_ROT_SPEED = 0.5;
 
-    //Finding vision targets PID constants
+    //Aligning with vision targets rotation PID constants
     public static final double ROT_ALIGN_KP = 0.01;
     public static final double ROT_ALIGN_KI = 0.01;
     public static final double ROT_ALIGN_KD = -0.01;
     public static final double ROT_ALIGN_END = 3;
+
+    //Aligning with vision targets translation PID constants
+    public static final double TRANS_ALIGN_KP = 0.1;
+    public static final double TRANS_ALIGN_KI = 0.01;
+    public static final double TRANS_ALIGN_KD = -0.01;
 
     //Driving to vision targets PID constants
     public static final double DRIVE_TOWARDS_KP = 0.01;

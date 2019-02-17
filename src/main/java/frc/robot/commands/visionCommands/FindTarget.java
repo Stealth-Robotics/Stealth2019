@@ -23,7 +23,7 @@ public class FindTarget extends Command
     @Override
     protected void execute()
     {
-        Robot.driveBase.move(0, 0, Constants.FIND_ROT_SPEED, true, true);
+        Robot.driveBase.move(0, 0, Constants.FIND_ROT_SPEED, true, false);
     }
 
     @Override
