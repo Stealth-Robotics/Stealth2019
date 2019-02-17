@@ -25,8 +25,8 @@ public class Lifter extends Subsystem
 {
     private static WPI_TalonSRX legL; // !< Left lift leg
     private static WPI_TalonSRX legR; // !< Right lift leg
-    public static WPI_TalonSRX legBack; // !< Rear lift leg TODO remember to make this private again
-    public static WPI_TalonSRX legBackEncoder;
+    private static WPI_TalonSRX legBack; // !< Rear lift leg
+    private static WPI_TalonSRX legBackEncoder; // Talon for rear encoder
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
     private static boolean PID_Enabled = true;
