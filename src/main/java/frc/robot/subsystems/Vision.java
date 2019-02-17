@@ -2,11 +2,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.*;
-import frc.robot.util.*;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.cscore.UsbCamera;
+// import edu.wpi.first.cameraserver.*;
+// import frc.robot.util.*;
 
+@Deprecated
 /**
  * Sets up the camera
  */

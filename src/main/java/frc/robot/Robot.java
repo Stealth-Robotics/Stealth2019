@@ -20,7 +20,7 @@ import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Lifter;
-import frc.robot.subsystems.Vision;
+// import frc.robot.subsystems.Vision;
 
 import frc.robot.util.constants.OIConstants;
 
@@ -33,7 +33,7 @@ import frc.robot.util.constants.OIConstants;
  */
 public class Robot extends TimedRobot 
 {
-    public static Vision vision;
+    // public static Vision vision;
     public static DriveBase driveBase;
     public static Elevator elevator;
     public static Grabber grabber;
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit() 
     {
-        vision = new Vision();
+        // vision = new Vision();
         driveBase = new DriveBase();
         elevator = new Elevator();
         grabber = new Grabber();
@@ -180,8 +180,8 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
         SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
 
-        int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
-        int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
+        // int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
+        // int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
 
         // lifter.setTargets(frontTarget, frontTarget, backTarget);
 
