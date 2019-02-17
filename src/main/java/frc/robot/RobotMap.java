@@ -51,5 +51,5 @@ public class RobotMap
     public static final int wheel = 12;
   
     //talon for the pigeon IMU
-    public static final int pigeonIMU = 16;
+    public static final int pigeonIMU = 12;
 }

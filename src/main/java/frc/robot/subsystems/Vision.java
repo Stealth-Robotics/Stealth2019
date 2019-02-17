@@ -17,16 +17,16 @@ public class Vision extends Subsystem
   
     public Vision() 
     {
-        new Thread(() -> 
-        {
-            UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-            camera.setResolution(640, 480);
-            camera.setFPS(25);
-        }).start();
+        // new Thread(() -> 
+        // {
+        //     UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        //     camera.setResolution(640, 480);
+        //     camera.setFPS(25);
+        // }).start();
     
-        SmartDashboard.putString("Vision/Status", Status.Good.toString());
+        // SmartDashboard.putString("Vision/Status", Status.Good.toString());
     
-        SmartDashboard.putNumber("Vision/TestNum", 10.25);
+        // SmartDashboard.putNumber("Vision/TestNum", 10.25);
     }
   
   

@@ -29,6 +29,10 @@ public class LiftToLevel extends Command
         {
             Robot.lifter.setTargets(Constants.FRONT_LEGS_LEVEL_3, Constants.BACK_LEG_LEVEL_3);
         }
+        else if (level == 0)
+        {
+            Robot.lifter.setTargets(0, 0);
+        }
         else
         {
             cancel();
@@ -49,6 +53,12 @@ public class LiftToLevel extends Command
             return Math.abs(Robot.lifter.getFrontLPosition() - Constants.FRONT_LEGS_LEVEL_3) < 5 &&
                     Math.abs(Robot.lifter.getFrontRPosition() - Constants.FRONT_LEGS_LEVEL_3) < 5 &&
                     Math.abs(Robot.lifter.getBackPosition() - Constants.BACK_LEG_LEVEL_3) < 5;
+        }
+        else if (level == 0)
+        {
+            return Math.abs(Robot.lifter.getFrontLPosition() - Constants.FRONT_LEGS_LEVEL_0) < 5 &&
+                    Math.abs(Robot.lifter.getFrontRPosition() - Constants.FRONT_LEGS_LEVEL_0) < 5 &&
+                    Math.abs(Robot.lifter.getBackPosition() - Constants.BACK_LEG_LEVEL_0) < 5;
         }
         else
         {

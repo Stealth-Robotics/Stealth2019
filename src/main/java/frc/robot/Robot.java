@@ -179,6 +179,12 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("Lifter/EncoderR", lifter.getFrontRPosition());
         SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
         SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
+
+        int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
+        int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
+
+        lifter.setTargets(frontTarget, frontTarget, backTarget);
+
         lifter.runLoops();
     }
 

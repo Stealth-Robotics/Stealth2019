@@ -41,6 +41,8 @@ public class Lifter extends Subsystem
         legBack = new WPI_TalonSRX(RobotMap.legBack);
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
+        legL.setInverted(true);
+
         resetEncoders();
 
         backLoop = new PIDexecutor(Constants.BACK_LEG_KP, Constants.BACK_LEG_KI, Constants.BACK_LEG_KD, legBack.getSelectedSensorPosition(0), new DoubleSupplier()
@@ -152,7 +154,6 @@ public class Lifter extends Subsystem
         return legBack.getSelectedSensorPosition(0);
     }
     
-    {};
     /**
      * Sets the targets for the climb motors
      * 
