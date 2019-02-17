@@ -73,13 +73,13 @@ public class OI
         fastButton = new JoystickButton(driveJoystick, OIConstants.FAST_BUTTON);
         resetHeadingButton = new JoystickButton(driveJoystick, OIConstants.RESET_HEADING_BUTTON);
 
-        mechJoystick = new Joystick(1);
+        mechJoystick = new Joystick(2);
 
         legDownButton = new JoystickButton(mechJoystick, OIConstants.LEG_DOWN_BUTTON);
         legUpButton = new JoystickButton(mechJoystick, OIConstants.LEG_UP_BUTTON);
         nextStageButton = new JoystickButton(mechJoystick, OIConstants.NEXT_STAGE_BUTTON);
 
-        overrideJoystick = new Joystick(2);
+        overrideJoystick = new Joystick(3);
 
         overrideLiftPIDButton = new JoystickButton(overrideJoystick, OIConstants.OVERRIDE_LIFT_PID_BUTTON);
         overrideLiftPIDButton.whenPressed(new OverrideLiftPID());
