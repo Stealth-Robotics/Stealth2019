@@ -45,6 +45,11 @@ public class Constants
     public static final int FRONT_LEG_MAX = 16500;
     public static final int FRONT_LEG_MIN = 0;
 
+    // Stablilization PID constants
+    public static final double STABLILIZATION_KP = 0.009;
+    public static final double STABLILIZATION_KI = 0;
+    public static final double STABLILIZATION_KD = -0;
+
     // Lifter level constants
     public static final int FRONT_LEGS_LEVEL_2 = 5000;
     public static final int BACK_LEG_LEVEL_2 = 5000;

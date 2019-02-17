@@ -11,11 +11,11 @@ import frc.robot.Robot;
 import frc.robot.util.PIDexecutor;
 import frc.robot.util.constants.Constants;
 
-public class AlignWithTarget extends Command
+public class RotAlignWithTarget extends Command
 {
     PIDexecutor alignment;
 
-    public AlignWithTarget(int target)
+    public RotAlignWithTarget(int target)
     {
         requires(Robot.driveBase);
 

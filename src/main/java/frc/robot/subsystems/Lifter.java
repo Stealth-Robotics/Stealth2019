@@ -34,6 +34,7 @@ public class Lifter extends Subsystem
     private static PIDexecutor backLoop;
     private static PIDexecutor leftLoop;
     private static PIDexecutor rightLoop;
+    private static PIDexecutor stablilization;
 
     public Lifter()
     {
@@ -72,6 +73,15 @@ public class Lifter extends Subsystem
             public double getAsDouble() 
             {
                 return legR.getSelectedSensorPosition(0);
+            }
+        });
+
+        stablilization = new PIDexecutor(Constants.STABLILIZATION_KP, Constants.STABLILIZATION_KI, Constants.STABLILIZATION_KD, 0, new DoubleSupplier()
+        {
+            @Override
+            public double getAsDouble() 
+            {
+                return legL.getSelectedSensorPosition(0) - legR.getSelectedSensorPosition(0);
             }
         });
 
@@ -123,12 +133,14 @@ public class Lifter extends Subsystem
         double backPower = backLoop.run();
         legBack.set(backPower);
 
+        double correction = stablilization.run();
+
         //Front Left PID
-        double leftPower = leftLoop.run();
+        double leftPower = leftLoop.run() - correction;
         legL.set(leftPower);
 
         //Front Right PID
-        double rightPower = rightLoop.run();
+        double rightPower = rightLoop.run() + correction;
         legR.set(rightPower);
     }
     
