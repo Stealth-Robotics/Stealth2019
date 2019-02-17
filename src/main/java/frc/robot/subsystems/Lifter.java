@@ -25,7 +25,7 @@ public class Lifter extends Subsystem
 {
     private static WPI_TalonSRX legL; // !< Left lift leg
     private static WPI_TalonSRX legR; // !< Right lift leg
-    private static WPI_TalonSRX legBack; // !< Rear lift leg
+    public static WPI_TalonSRX legBack; // !< Rear lift leg
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
     private static boolean PID_Enabled = true;
@@ -42,6 +42,7 @@ public class Lifter extends Subsystem
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
         legL.setInverted(true);
+        legBack.setInverted(true);
 
         resetEncoders();
 
@@ -118,7 +119,7 @@ public class Lifter extends Subsystem
 
         //back PID
         double backPower = backLoop.run();
-        legBack.set(backPower);
+        legBack.set(-backPower);
 
         //Front Left PID
         double leftPower = leftLoop.run();

@@ -183,9 +183,11 @@ public class Robot extends TimedRobot
         int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
         int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
 
-        lifter.setTargets(frontTarget, frontTarget, backTarget);
+        // lifter.setTargets(frontTarget, frontTarget, backTarget);
 
-        lifter.runLoops();
+        // lifter.runLoops();
+
+        Lifter.legBack.set(oi.driveJoystick.getRawAxis(1));
     }
 
     /**
@@ -198,6 +200,7 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("OI/Twist", oi.driveJoystick.getRawAxis(OIConstants.DRIVE_JOYSTICK_TWIST));
         SmartDashboard.putNumber("OI/Magnitude", oi.driveJoystick.getMagnitude());
         SmartDashboard.putNumber("OI/Direction", oi.driveJoystick.getDirectionDegrees());
+        SmartDashboard.putNumber("OI/POVinfo", oi.mechJoystick.getPOV());
         SmartDashboard.putNumber("Telemetry/Heading", driveBase.getHeading());
     }
 }
