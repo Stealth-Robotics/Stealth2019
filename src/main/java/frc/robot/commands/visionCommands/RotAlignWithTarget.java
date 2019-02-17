@@ -20,7 +20,7 @@ public class RotAlignWithTarget extends Command
         requires(Robot.driveBase);
 
         SmartDashboard.getEntry("limelight/pipeline").setNumber(target);
-        alignment = new PIDexecutor(Constants.FIND_KD, Constants.FIND_KI, Constants.FIND_KD, 0, new DoubleSupplier()
+        alignment = new PIDexecutor(Constants.ROT_ALIGN_KD, Constants.ROT_ALIGN_KI, Constants.ROT_ALIGN_KD, 0, new DoubleSupplier()
         {
             @Override
             public double getAsDouble() 
@@ -39,6 +39,6 @@ public class RotAlignWithTarget extends Command
     @Override
     protected boolean isFinished()
     {
-        return SmartDashboard.getNumber("limelight/tx", 0) < 3;
+        return SmartDashboard.getNumber("limelight/tx", 0) < Constants.ROT_ALIGN_END;
     }
 }

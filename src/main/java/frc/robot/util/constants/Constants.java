@@ -6,11 +6,12 @@ package frc.robot.util.constants;
  */
 public class Constants
 {
-    // !< deadzone width
-    public static final double DEADZONE_MOVE = 0.07;
-    public static final double DEADZONE_TWIST = 0.15;
 
-    // !< driving constants
+    // !< hardware dimensions
+    public static final double DRIVE_WHEEL_RADIUS = 3.0;
+    public static final double LEG_WHEEL_RADIUS = 1.5;
+
+    // !< driving speed constants
     public static final double SPEED_SLOW = 0.3;
     public static final double SPEED_FAST = 1;
     public static final double SPEED_NORMAL = 0.6;
@@ -26,10 +27,6 @@ public class Constants
     // !< elvator pid constants
     public static final double ELEVATOR_KP = 0.01;
     public static final double ELEVATOR_KI = 0.005;
-
-    // !< hardware dimensions
-    public static final double DRIVE_WHEEL_RADIUS = 3.0;
-    public static final double LEG_WHEEL_RADIUS = 1.5;
 
     // !< Back Leg PID constants
     public static final double BACK_LEG_KP = 0.002;
@@ -58,15 +55,25 @@ public class Constants
     public static final int FRONT_LEGS_LEVEL_0 = 0;
     public static final int BACK_LEG_LEVEL_0 = 0;
 
-    // !< Tilt motor for grabber constants
+    // !< Tilt motor for grabber PID constants
     public static final double TILT_KP = 0.01;
     public static final double TILT_KI = 0.01;
     public static final double TILT_KD = -0;
     public static final double TILT_MAX = 100;
     public static final double TILT_MIN = 0;
 
+    //Rotation speed when finding vision target
+    public static final double FIND_ROT_SPEED = 0.5;
+
     //Finding vision targets PID constants
-    public static final double FIND_KP = 0.01;
-    public static final double FIND_KI = 0.01;
-    public static final double FIND_KD = -0.01;
+    public static final double ROT_ALIGN_KP = 0.01;
+    public static final double ROT_ALIGN_KI = 0.01;
+    public static final double ROT_ALIGN_KD = -0.01;
+    public static final double ROT_ALIGN_END = 3;
+
+    //Driving to vision targets PID constants
+    public static final double DRIVE_TOWARDS_KP = 0.01;
+    public static final double DRIVE_TOWARDS_KI = 0.01;
+    public static final double DRIVE_TOWARDS_KD = 0.01;
+    public static final int DRIVE_TOWARDS_END = 75;
 }

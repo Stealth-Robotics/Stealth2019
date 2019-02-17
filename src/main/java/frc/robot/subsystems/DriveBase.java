@@ -134,10 +134,10 @@ public class DriveBase extends Subsystem
 
         //gets control values from joystick
         double speed = joystick.getMagnitude() * speedCoef;
-        speed = (speed > Constants.DEADZONE_MOVE) ? speed : 0;
+        speed = (speed > OIConstants.DEADZONE_MOVE) ? speed : 0;
         double direction = joystick.getDirectionRadians();
         double rotation = joystick.getTwist() * speedCoef;
-        rotation = (Math.abs(rotation) > Constants.DEADZONE_TWIST) ? rotation : 0;
+        rotation = (Math.abs(rotation) > OIConstants.DEADZONE_TWIST) ? rotation : 0;
 
         //checks if IMU input necessary, and sends to appropriate function
         if (withHeadingPID || headless)

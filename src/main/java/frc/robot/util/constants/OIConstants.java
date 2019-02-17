@@ -3,6 +3,10 @@ package frc.robot.util.constants;
 
 public class OIConstants 
 {
+    // !< deadzone width
+    public static final double DEADZONE_MOVE = 0.07;
+    public static final double DEADZONE_TWIST = 0.15;
+
     // !< the drive axes
     public static final int DRIVE_JOYSTICK_Y = 1;
     public static final int DRIVE_JOYSTICK_X = 0;
