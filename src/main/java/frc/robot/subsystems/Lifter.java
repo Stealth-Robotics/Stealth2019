@@ -48,7 +48,6 @@ public class Lifter extends Subsystem
 
         backLoop = new PIDexecutor(Constants.BACK_LEG_KP, Constants.BACK_LEG_KI, Constants.BACK_LEG_KD, legBack.getSelectedSensorPosition(0), new DoubleSupplier()
         {
-        
             @Override
             public double getAsDouble()
             {
@@ -58,7 +57,6 @@ public class Lifter extends Subsystem
 
         leftLoop = new PIDexecutor(Constants.FRONT_LEG_KP, Constants.FRONT_LEG_KI, Constants.FRONT_LEG_KD, legL.getSelectedSensorPosition(0), new DoubleSupplier()
         {
-        
             @Override
             public double getAsDouble() 
             {
@@ -68,7 +66,6 @@ public class Lifter extends Subsystem
 
         rightLoop = new PIDexecutor(Constants.FRONT_LEG_KP, Constants.FRONT_LEG_KI, Constants.FRONT_LEG_KD, legR.getSelectedSensorPosition(0), new DoubleSupplier()
         {
-        
             @Override
             public double getAsDouble() 
             {
@@ -79,6 +76,9 @@ public class Lifter extends Subsystem
         SmartDashboard.putString("Lifter/Status", Status.Good.toString());
     }
 
+    /**
+     * Where the default command is set
+     */
     @Override
     public void initDefaultCommand()
     {
@@ -140,16 +140,31 @@ public class Lifter extends Subsystem
         PID_Enabled = enabled;
     }
 
+    /**
+     * Gets the position of the left front leg
+     * 
+     * @return the position, in ticks
+     */
     public int getFrontLPosition()
     {
         return legL.getSelectedSensorPosition(0);
     }
 
+    /**
+     * Gets the position of the right front leg
+     * 
+     * @return the position, in ticks
+     */
     public int getFrontRPosition()
     {
         return legR.getSelectedSensorPosition(0);
     }
 
+    /**
+     * Gets the position of the back leg
+     * 
+     * @return the position, in ticks
+     */
     public int getBackPosition()
     {
         return legBack.getSelectedSensorPosition(0);
@@ -193,7 +208,7 @@ public class Lifter extends Subsystem
     }
 
     /**
-     * Sets the target for the front motors
+     * Sets the target for the front left motor
      * 
      * @param target the target position
      */
@@ -203,7 +218,7 @@ public class Lifter extends Subsystem
     }
 
     /**
-     * Sets the target for the front motors
+     * Sets the target for the front right motor
      * 
      * @param target the target position
      */
@@ -243,6 +258,9 @@ public class Lifter extends Subsystem
         legR.set(speed);
     }
 
+    /**
+     * Resets all encoders to zero
+     */
     public void resetEncoders()
     {
         legL.setSelectedSensorPosition(0, 0, 30);
