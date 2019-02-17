@@ -71,7 +71,7 @@ public class DriveBase extends Subsystem
             imu = new PigeonIMU(new WPI_TalonSRX(RobotMap.pigeonIMU));
         }
 
-        headingPIDloop = new PIDexecutor(Constants.DKP, Constants.DKI, Constants.DKD, 0, new DoubleSupplier(){
+        headingPIDloop = new PIDexecutor(Constants.DRIVE_KP, Constants.DRIVE_KI, Constants.DRIVE_KD, 0, new DoubleSupplier(){
         
             @Override
             public double getAsDouble() {

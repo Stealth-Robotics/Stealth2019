@@ -31,7 +31,7 @@ public class Elevator extends Subsystem
     {
         elevator = new WPI_TalonSRX(RobotMap.elevator);
 
-        loop = new PIDexecutor(Constants.EKP, Constants.EKI, 0, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
+        loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, 0, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
         
             @Override
             public double getAsDouble() {

@@ -19,13 +19,13 @@ public class Constants
     public static final double ELEVATOR_SPEED_NORMAL = 5;
 
     // !< driving pid constants
-    public static final double DKP = 0.005;
-    public static final double DKI = 0.0001;
-    public static final double DKD = -0.0001;
+    public static final double DRIVE_KP = 0.005;
+    public static final double DRIVE_KI = 0.0001;
+    public static final double DRIVE_KD = -0.0001;
 
     // !< elvator pid constants
-    public static final double EKP = 0.01;
-    public static final double EKI = 0.005;
+    public static final double ELEVATOR_KP = 0.01;
+    public static final double ELEVATOR_KI = 0.005;
 
     // !< hardware dimensions
     public static final double DRIVE_WHEEL_RADIUS = 3.0;
@@ -57,4 +57,9 @@ public class Constants
     public static final double TILT_KD = -0;
     public static final double TILT_MAX = 100;
     public static final double TILT_MIN = 0;
+
+    //Finding vision targets PID constants
+    public static final double FIND_KP = 0.01;
+    public static final double FIND_KI = 0.01;
+    public static final double FIND_KD = -0.01;
 }

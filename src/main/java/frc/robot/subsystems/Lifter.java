@@ -28,7 +28,7 @@ public class Lifter extends Subsystem
     private static WPI_TalonSRX legBack; // !< Rear lift leg
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
-    // private static boolean PID_Enabled = true;
+    private static boolean PID_Enabled = true;
 
     private static PIDexecutor backLoop;
     private static PIDexecutor leftLoop;
@@ -109,6 +109,11 @@ public class Lifter extends Subsystem
      */
     public void runLoops()
     {
+        if (!PID_Enabled)
+        {
+            return;
+        }
+
         //back PID
         double backPower = backLoop.run();
         legBack.set(backPower);
@@ -125,12 +130,11 @@ public class Lifter extends Subsystem
     /**
      * Sets if the PID loop is enabled
      * 
-     * @deprecated
      * @param enabled if the loop is enabled or not
      */
     public void setPIDEnabled(boolean enabled)
     {
-        // PID_Enabled = enabled;
+        PID_Enabled = enabled;
     }
 
     public int getFrontLPosition()
