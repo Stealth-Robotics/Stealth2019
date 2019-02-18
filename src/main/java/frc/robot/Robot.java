@@ -171,7 +171,7 @@ public class Robot extends TimedRobot
     {
         Scheduler.getInstance().run();
         lifter.runLoops();
-        grabber.runLoop();
+        grabber.run();
     }
 
     /**

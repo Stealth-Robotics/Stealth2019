@@ -40,6 +40,10 @@ public class OIConstants
     public static final int GRAB_HATCH_BUTTON = 8;
     public static final int RELEASE_HATCH_BUTTON = 9;
 
+    // button to rub intake
+    public static final int RUN_INTAKE_BUTTON = 10;
+    public static final int REVERSE_INTAKE_BUTTON = 11;
+
     // button to override the lifter pid
     public static final int OVERRIDE_LIFT_PID_BUTTON = 1;
     public static final int OVERRIDE_TILT_GRABBER_PID_BUTTON = 2;

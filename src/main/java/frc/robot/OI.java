@@ -72,6 +72,9 @@ public class OI
     public Button grabHatchButton;
     public Button releaseHatchButton;
 
+    public Button runIntakeButton;
+    public Button reverseIntakeButton;
+
     // public Joystick overrideJoystick;
 
     // public Button overrideLiftPIDButton;
@@ -107,6 +110,9 @@ public class OI
 
         grabHatchButton = new JoystickButton(mechJoystick, OIConstants.GRAB_HATCH_BUTTON);
         releaseHatchButton = new JoystickButton(mechJoystick, OIConstants.RELEASE_HATCH_BUTTON);
+
+        runIntakeButton = new JoystickButton(mechJoystick, OIConstants.RUN_INTAKE_BUTTON);
+        reverseIntakeButton = new JoystickButton(mechJoystick, OIConstants.REVERSE_INTAKE_BUTTON);
 
         // overrideJoystick = new Joystick(2);
 

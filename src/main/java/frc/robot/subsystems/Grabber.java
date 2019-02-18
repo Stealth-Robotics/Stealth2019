@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.util.*;
 import frc.robot.util.constants.Constants;
@@ -59,9 +60,25 @@ public class Grabber extends Subsystem
 
     }
 
-    public void runLoop()
+    public void run()
     {
         tilt.set(tiltController.run());
+
+        if (Robot.oi.runIntakeButton.get())
+        {
+            intakeL.set(Constants.INTAKE_SPEED);
+            intakeR.set(Constants.INTAKE_SPEED);
+        }
+        else if (Robot.oi.reverseIntakeButton.get())
+        {
+            intakeL.set(-Constants.INTAKE_SPEED);
+            intakeR.set(-Constants.INTAKE_SPEED);
+        }
+        else
+        {
+            intakeL.set(0);
+            intakeR.set(0);
+        }
     }
 
     /**

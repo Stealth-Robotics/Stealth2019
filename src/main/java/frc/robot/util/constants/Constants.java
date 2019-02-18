@@ -79,4 +79,6 @@ public class Constants
     public static final double DRIVE_TOWARDS_KI = 0.01;
     public static final double DRIVE_TOWARDS_KD = 0.01;
     public static final int DRIVE_TOWARDS_END = 75;
+
+    public static final double INTAKE_SPEED = 1;
 }
