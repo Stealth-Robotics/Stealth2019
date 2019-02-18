@@ -47,8 +47,7 @@ public class LiftFrontToLevel extends Command
     {
         super.initialize();
 
-        Robot.lifter.setFrontLTarget(target);
-        Robot.lifter.setFrontRTarget(target);
+        Robot.lifter.setFrontTargets(target);
     }
 
     /**

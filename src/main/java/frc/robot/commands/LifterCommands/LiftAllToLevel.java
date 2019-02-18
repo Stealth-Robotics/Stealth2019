@@ -59,7 +59,7 @@ public class LiftAllToLevel extends Command
     {
         super.initialize();
 
-        Robot.lifter.setTargets(frontTarget, Constants.BACK_LEG_LEVEL_0);
+        Robot.lifter.setFrontTargets(frontTarget);
     }
 
     /**

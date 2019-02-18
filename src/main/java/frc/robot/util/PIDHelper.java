@@ -3,6 +3,9 @@ package frc.robot.util;
 @Deprecated
 /**
  * A Helper Class for all pid loops
+ * @deprecated Not very clean or easy to use
+ *             Will be removed eventually, probably
+ *             use {@link #PIDexecutor()} instead
  */
 public class PIDHelper {
 

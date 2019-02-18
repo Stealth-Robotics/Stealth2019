@@ -156,6 +156,18 @@ public class Lifter extends Subsystem
     {
         PID_Enabled = enabled;
     }
+    
+    /**
+     * Resets all encoders to zero
+     */
+    public void resetEncoders()
+    {
+        legL.setSelectedSensorPosition(0, 0, 30);
+        legR.setSelectedSensorPosition(0, 0, 30);
+        legBackEncoder.setSelectedSensorPosition(0, 0, 30);
+    }
+
+    //#region Get positions
 
     /**
      * Gets the position of the left front leg
@@ -186,7 +198,11 @@ public class Lifter extends Subsystem
     {
         return legBackEncoder.getSelectedSensorPosition(0);
     }
+
+    //#endregion
     
+    //#region Leg targeting functions
+
     /**
      * Sets the targets for the climb motors
      * 
@@ -212,6 +228,17 @@ public class Lifter extends Subsystem
         setBackTarget(safetyChecks(backTarget, Constants.BACK_LEG_MAX, Constants.BACK_LEG_MIN));
         setFrontLTarget(safetyChecks(frontTarget, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
         setFrontRTarget(safetyChecks(frontTarget, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
+    }
+
+    /**
+     * Sets the targets for both front motors
+     * 
+     * @param target the target for the front motors
+     */
+    public void setFrontTargets(int target)
+    {
+        setFrontLTarget(target);
+        setFrontRTarget(target);
     }
 
     /**
@@ -244,6 +271,10 @@ public class Lifter extends Subsystem
         rightLoop.setTarget(safetyChecks(target, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
     }
 
+    //#endregion
+
+    //#region Set wheel and leg speeds
+
     /**
      * Operates the wheel mounted on the leg
      * 
@@ -275,18 +306,39 @@ public class Lifter extends Subsystem
         legR.set(speed);
     }
 
-    /**
-     * Resets all encoders to zero
-     */
-    public void resetEncoders()
-    {
-        legL.setSelectedSensorPosition(0, 0, 30);
-        legR.setSelectedSensorPosition(0, 0, 30);
-        legBackEncoder.setSelectedSensorPosition(0, 0, 30);
-    }
+    //#endregion
 
+    //#region Get targets
+
+    /**
+     * Gets the target for the back leg
+     * 
+     * @return the back target
+     */
     public int getBackTarget()
     {
         return (int)backLoop.getTarget();
     }
+
+    /**
+     * Gets the target for the front left leg
+     * 
+     * @return the front left target
+     */
+    public int getFrontLTarget()
+    {
+        return (int)leftLoop.getTarget();
+    }
+
+    /**
+     * Gets the target for the front right leg
+     * 
+     * @return the front right target
+     */
+    public int getFrontRTarget()
+    {
+        return (int)rightLoop.getTarget();
+    }
+
+    //#endregion
 }
