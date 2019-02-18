@@ -7,10 +7,15 @@ import frc.robot.commands.lifterCommands.*;
 import frc.robot.util.constants.Constants;
 
 /**
- * Command to enable drivers with driving onto hab
+ * Command to enable drivers to drive onto hab
  */
 public class DriveOntoHab extends CommandGroup
 {
+    /**
+     * Creates a new command with specific level to target
+     * 
+     * @param level the level to use
+     */
     public DriveOntoHab(int level)
     {
         requires(Robot.lifter);
@@ -21,11 +26,18 @@ public class DriveOntoHab extends CommandGroup
         addSequential(new LiftBackToLevel(0));
     }
 
+    /**
+     * Command can be finished with pressing cancel button
+     */
     @Override
-    protected boolean isFinished() {
+    protected boolean isFinished() 
+    {
         return Robot.oi.cancelClimbButton.get();
     }
 
+    /**
+     * When finishing, brings all legs back up
+     */
     @Override
     protected void end()
     {

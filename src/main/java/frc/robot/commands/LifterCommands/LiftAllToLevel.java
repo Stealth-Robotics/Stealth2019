@@ -8,7 +8,9 @@ import frc.robot.util.StopWatch;
 import frc.robot.util.constants.Constants;
 
 /**
- * Moves lifter commands to certain level to prepare to drive onto hab
+ * Moves all legs to prepare to drive onto hab
+ * 
+ * The front legs begin movement first, with a 500 ms delay
  */
 public class LiftAllToLevel extends Command
 {
@@ -17,6 +19,11 @@ public class LiftAllToLevel extends Command
 
     private StopWatch stopWatch;
 
+    /**
+     * Creates new command using specific leve
+     * 
+     * @param level the level to use
+     */
     public LiftAllToLevel(int level)
     {
         if (level == 0)
@@ -44,6 +51,9 @@ public class LiftAllToLevel extends Command
         stopWatch = new StopWatch(500);
     }
 
+    /**
+     * initializes the front targets
+     */
     @Override
     protected void initialize() 
     {
@@ -52,6 +62,9 @@ public class LiftAllToLevel extends Command
         Robot.lifter.setTargets(frontTarget, Constants.BACK_LEG_LEVEL_0);
     }
 
+    /**
+     * if 500 ms have passed, set back target
+     */
     @Override
     protected void execute() 
     {
@@ -62,7 +75,9 @@ public class LiftAllToLevel extends Command
         }
     }
 
-
+    /**
+     * command is finished if all legs are in position
+     */
     @Override
     protected boolean isFinished() 
     {
@@ -71,6 +86,9 @@ public class LiftAllToLevel extends Command
                     Math.abs(Robot.lifter.getBackPosition() - backTarget) < 100;
     }
 
+    /**
+     * if interrupted, sets legs to current position
+     */
     @Override
     protected void interrupted()
     {

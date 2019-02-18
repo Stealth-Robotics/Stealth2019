@@ -7,12 +7,17 @@ import frc.robot.Robot;
 import frc.robot.util.constants.Constants;
 
 /**
- * Moves lifter commands to certain level to prepare to drive onto hab
+ * Moves back legs only to certain level
  */
 public class LiftFrontToLevel extends Command
 {
     private int target;
 
+    /**
+     * Creates a new command with the specific level to move to
+     * 
+     * @param level the level to move the legs to
+     */
     public LiftFrontToLevel(int level)
     {
         if (level == 0)
@@ -35,6 +40,9 @@ public class LiftFrontToLevel extends Command
     }
 
     @Override
+    /**
+     * Sets the targets for the front legs
+     */
     protected void initialize() 
     {
         super.initialize();
@@ -43,7 +51,9 @@ public class LiftFrontToLevel extends Command
         Robot.lifter.setFrontRTarget(target);
     }
 
-
+    /**
+     * Finishes when the legs are in position
+     */
     @Override
     protected boolean isFinished() 
     {
@@ -51,6 +61,9 @@ public class LiftFrontToLevel extends Command
                     Math.abs(Robot.lifter.getFrontRPosition() - target) < 100;
     }
 
+    /**
+     * When interrupted, sets all leg positions to where they are currently
+     */
     @Override
     protected void interrupted()
     {

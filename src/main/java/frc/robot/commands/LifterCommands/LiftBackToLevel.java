@@ -7,12 +7,17 @@ import frc.robot.Robot;
 import frc.robot.util.constants.Constants;
 
 /**
- * Moves lifter commands to certain level to prepare to drive onto hab
+ * Moves front legs only to certain level
  */
 public class LiftBackToLevel extends Command
 {
     private int target;
 
+    /**
+     * Lifts back legs to level
+     * 
+     * @param level the level to move to
+     */
     public LiftBackToLevel(int level)
     {
         if (level == 0)
@@ -34,6 +39,9 @@ public class LiftBackToLevel extends Command
         }
     }
 
+    /**
+     * Sets the back target
+     */
     @Override
     protected void initialize() 
     {
@@ -42,13 +50,18 @@ public class LiftBackToLevel extends Command
         Robot.lifter.setBackTarget(target);
     }
 
-
+    /**
+     * Finishes when the back leg is in position
+     */
     @Override
     protected boolean isFinished() 
     {
         return Math.abs(Robot.lifter.getBackPosition() - target) < 100;
     }
 
+    /**
+     * If interrupted, sets all legs to current position
+     */
     @Override
     protected void interrupted()
     {

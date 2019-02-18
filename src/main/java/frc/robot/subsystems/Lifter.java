@@ -34,7 +34,7 @@ public class Lifter extends Subsystem
     private static PIDexecutor backLoop;
     private static PIDexecutor leftLoop;
     private static PIDexecutor rightLoop;
-    private static PIDexecutor stablilization;
+    // private static PIDexecutor stablilization;
 
     public Lifter()
     {
@@ -77,14 +77,14 @@ public class Lifter extends Subsystem
             }
         });
 
-        stablilization = new PIDexecutor(Constants.STABLILIZATION_KP, Constants.STABLILIZATION_KI, Constants.STABLILIZATION_KD, 0, new DoubleSupplier()
-        {
-            @Override
-            public double getAsDouble() 
-            {
-                return legL.getSelectedSensorPosition(0) - legR.getSelectedSensorPosition(0);
-            }
-        });
+        // stablilization = new PIDexecutor(Constants.STABLILIZATION_KP, Constants.STABLILIZATION_KI, Constants.STABLILIZATION_KD, 0, new DoubleSupplier()
+        // {
+        //     @Override
+        //     public double getAsDouble() 
+        //     {
+        //         return legL.getSelectedSensorPosition(0) - legR.getSelectedSensorPosition(0);
+        //     }
+        // });
 
         SmartDashboard.putString("Lifter/Status", Status.Good.toString());
     }
@@ -109,6 +109,8 @@ public class Lifter extends Subsystem
 
     /**
      * Checks if the current position is outside the range of allowable positions
+     * 
+     * Used in setting targets
      * 
      * @param currentPosition the current position of the mechanism
      * @param maxPosition the maximum allowable position
