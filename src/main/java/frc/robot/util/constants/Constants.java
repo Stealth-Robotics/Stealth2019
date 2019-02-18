@@ -29,7 +29,7 @@ public class Constants
     public static final double ELEVATOR_KI = 0.005;
 
     // !< Front Leg PID constants
-    public static final double FRONT_LEG_KP = 0.0017;
+    public static final double FRONT_LEG_KP = 0.0023;
     public static final double FRONT_LEG_KI = 0;
     public static final double FRONT_LEG_KD = -0;
     public static final int FRONT_LEG_MAX = 16500;

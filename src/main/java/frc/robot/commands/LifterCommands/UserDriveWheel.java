@@ -26,11 +26,11 @@ public class UserDriveWheel extends Command
         }
         else if (pov == 90)
         {
-            Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() + 2);
+            Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() + 10);
         }
         else if (pov == 270)
         {
-            Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() - 2);
+            Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() - 10);
         }
         else
         {

@@ -31,6 +31,10 @@ public class LiftPhaseTarget extends Command
         {
             Robot.lifter.setTargets(Constants.FRONT_LEGS_LEVEL_3, Constants.BACK_LEG_LEVEL_3);
         }
+        else if (phase == 4)
+        {
+            Robot.lifter.setTargets(Constants.FRONT_LEGS_LEVEL_3, Constants.FRONT_LEGS_LEVEL_3, Constants.BACK_LEG_LEVEL_0);
+        }
         else if (phase == 0)
         {
             Robot.lifter.setTargets(0, 0);
@@ -69,11 +73,26 @@ public class LiftPhaseTarget extends Command
                     Math.abs(Robot.lifter.getFrontRPosition() - Constants.FRONT_LEGS_LEVEL_3) < 100 &&
                     Math.abs(Robot.lifter.getBackPosition() - Constants.BACK_LEG_LEVEL_3) < 100;
         }
+        else if (phase == 4)
+        {
+            return Math.abs(Robot.lifter.getFrontLPosition() - Constants.FRONT_LEGS_LEVEL_3) < 100 &&
+                    Math.abs(Robot.lifter.getFrontRPosition() - Constants.FRONT_LEGS_LEVEL_3) < 100 &&
+                    Math.abs(Robot.lifter.getBackPosition() - Constants.BACK_LEG_LEVEL_0) < 100;
+        }
         else if (phase == 0)
         {
             return Math.abs(Robot.lifter.getFrontLPosition() - Constants.FRONT_LEGS_LEVEL_0) < 100 &&
                     Math.abs(Robot.lifter.getFrontRPosition() - Constants.FRONT_LEGS_LEVEL_0) < 100 &&
                     Math.abs(Robot.lifter.getBackPosition() - Constants.BACK_LEG_LEVEL_0) < 100;
+        }
+        else if (phase == -1)
+        {
+            return Math.abs(Robot.lifter.getFrontLPosition() - Constants.FRONT_LEGS_LEVEL_0) < 100 &&
+                    Math.abs(Robot.lifter.getFrontRPosition() - Constants.FRONT_LEGS_LEVEL_0) < 100;
+        }
+        else if (phase == -2)
+        {
+            return Math.abs(Robot.lifter.getBackPosition() - Constants.BACK_LEG_LEVEL_0) < 100;
         }
         else
         {

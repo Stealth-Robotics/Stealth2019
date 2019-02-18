@@ -46,6 +46,7 @@ public class Lifter extends Subsystem
 
         legL.setInverted(true);
         legBackEncoder.setInverted(true);
+        wheel.setInverted(true);
 
         resetEncoders();
 
