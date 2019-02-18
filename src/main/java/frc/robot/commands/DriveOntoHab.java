@@ -16,9 +16,21 @@ public class DriveOntoHab extends CommandGroup
         requires(Robot.lifter);
         addSequential(new LiftToLevel(level));
         addSequential(new UserDriveWheel());
+        addSequential(new LiftToLevel(-1));
+        addSequential(new UserDriveWheel());
+        addSequential(new LiftToLevel(-2));
+    }
+
+    @Override
+    protected boolean isFinished() {
+        return Robot.oi.cancelClimbButton.get();
+    }
+
+    @Override
+    protected void end()
+    {
         Robot.lifter.setFrontLTarget(Constants.FRONT_LEGS_LEVEL_0);
         Robot.lifter.setFrontRTarget(Constants.FRONT_LEGS_LEVEL_0);
-        addSequential(new UserDriveWheel());
         Robot.lifter.setBackTarget(Constants.BACK_LEG_LEVEL_0);
     }
 }

@@ -33,6 +33,15 @@ public class LiftToLevel extends Command
         {
             Robot.lifter.setTargets(0, 0);
         }
+        else if (level == -1)
+        {
+            Robot.lifter.setFrontLTarget(Constants.FRONT_LEGS_LEVEL_0);
+            Robot.lifter.setFrontRTarget(Constants.FRONT_LEGS_LEVEL_0);
+        }
+        else if (level == -2)
+        {
+            Robot.lifter.setBackTarget(Constants.BACK_LEG_LEVEL_0);
+        }
         else
         {
             cancel();

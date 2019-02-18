@@ -13,8 +13,10 @@ public class UserDriveWheel extends Command
     }
 
     @Override
-    protected void execute() {
-        Robot.lifter.setWheelSpeed((Robot.oi.mechJoystick.getPOV() == 0) ? 1 : -1);
+    protected void execute() 
+    {
+        if (Robot.oi.mechJoystick.getPOV() != -1)
+            Robot.lifter.setWheelSpeed((Robot.oi.mechJoystick.getPOV() == 0) ? 1 : -1);
     }
 
     @Override

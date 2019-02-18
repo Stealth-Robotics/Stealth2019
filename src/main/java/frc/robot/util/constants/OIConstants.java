@@ -5,7 +5,7 @@ public class OIConstants
 {
     // !< deadzone width
     public static final double DEADZONE_MOVE = 0.07;
-    public static final double DEADZONE_TWIST = 0.15;
+    public static final double DEADZONE_TWIST = 0.2;
 
     // !< the drive axes
     public static final int DRIVE_JOYSTICK_Y = 1;
@@ -25,9 +25,10 @@ public class OIConstants
     public static final int ELEVATOR_JOYSTICK_Y = 1;
 
     // lifter control buttons
-    public static final int LEG_DOWN_BUTTON = 1;
-    public static final int LEG_UP_BUTTON = 2;
+    public static final int LEVEL_2_BUTTON = 2;
+    public static final int LEVEL_3_BUTTON = 1;
     public static final int NEXT_STAGE_BUTTON = 3;
+    public static final int CANCEL_CLIMB_BUTTON = 4;
 
     // button to override the lifter pid
     public static final int OVERRIDE_LIFT_PID_BUTTON = 1;

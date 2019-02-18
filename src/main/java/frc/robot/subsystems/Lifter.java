@@ -136,11 +136,11 @@ public class Lifter extends Subsystem
         double correction = stablilization.run();
 
         //Front Left PID
-        double leftPower = leftLoop.run() - correction;
+        double leftPower = leftLoop.run();// - correction;
         legL.set(leftPower);
 
         //Front Right PID
-        double rightPower = rightLoop.run() + correction;
+        double rightPower = rightLoop.run();// + correction;
         legR.set(rightPower);
     }
     

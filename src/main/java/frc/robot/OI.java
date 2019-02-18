@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import frc.robot.commands.*;
 import frc.robot.commands.lifterCommands.*;
 import frc.robot.util.constants.OIConstants;
 
@@ -56,13 +57,14 @@ public class OI
 
     public Joystick mechJoystick;
 
-    public Button legDownButton;
-    public Button legUpButton;
+    public Button level2Button;
+    public Button level3Button;
     public Button nextStageButton;
+    public Button cancelClimbButton;
 
-    public Joystick overrideJoystick;
+    // public Joystick overrideJoystick;
 
-    public Button overrideLiftPIDButton;
+    // public Button overrideLiftPIDButton;
 
   
     OI()
@@ -73,16 +75,22 @@ public class OI
         fastButton = new JoystickButton(driveJoystick, OIConstants.FAST_BUTTON);
         resetHeadingButton = new JoystickButton(driveJoystick, OIConstants.RESET_HEADING_BUTTON);
 
-        mechJoystick = new Joystick(2);
+        mechJoystick = new Joystick(1);
 
-        legDownButton = new JoystickButton(mechJoystick, OIConstants.LEG_DOWN_BUTTON);
-        legUpButton = new JoystickButton(mechJoystick, OIConstants.LEG_UP_BUTTON);
+        level2Button = new JoystickButton(mechJoystick, OIConstants.LEVEL_2_BUTTON);
+        level3Button = new JoystickButton(mechJoystick, OIConstants.LEVEL_3_BUTTON);
         nextStageButton = new JoystickButton(mechJoystick, OIConstants.NEXT_STAGE_BUTTON);
+        cancelClimbButton = new JoystickButton(mechJoystick, OIConstants.CANCEL_CLIMB_BUTTON);
 
-        overrideJoystick = new Joystick(3);
+        level2Button.whenPressed(new DriveOntoHab(2));
+        level3Button.whenPressed(new DriveOntoHab(3));
 
-        overrideLiftPIDButton = new JoystickButton(overrideJoystick, OIConstants.OVERRIDE_LIFT_PID_BUTTON);
-        overrideLiftPIDButton.whenPressed(new OverrideLiftPID());
+
+
+        // overrideJoystick = new Joystick(2);
+
+        // overrideLiftPIDButton = new JoystickButton(overrideJoystick, OIConstants.OVERRIDE_LIFT_PID_BUTTON);
+        // overrideLiftPIDButton.whenPressed(new OverrideLiftPID());
     }
 
 

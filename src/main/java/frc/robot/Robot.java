@@ -168,7 +168,7 @@ public class Robot extends TimedRobot
     public void teleopPeriodic() 
     {
         Scheduler.getInstance().run();
-        lifter.runLoops();
+        // lifter.runLoops();
     }
 
     /**
@@ -197,6 +197,16 @@ public class Robot extends TimedRobot
         lifter.setTargets(frontTarget, frontTarget, backTarget);
 
         lifter.runLoops();
+
+        
+        if (Robot.oi.mechJoystick.getPOV() != -1)
+        {
+            Robot.lifter.setWheelSpeed((Robot.oi.mechJoystick.getPOV() == 0) ? 1 : -1);
+        }
+        else
+        {
+            Robot.lifter.setWheelSpeed(0);
+        }
 
         // Lifter.legBack.set(oi.driveJoystick.getRawAxis(1));
     }

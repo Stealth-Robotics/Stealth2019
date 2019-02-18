@@ -36,7 +36,7 @@ public class Constants
     public static final int BACK_LEG_MIN = -17000;
 
     // !< Front Leg PID constants
-    public static final double FRONT_LEG_KP = 0.003;
+    public static final double FRONT_LEG_KP = 0.0025;
     public static final double FRONT_LEG_KI = 0;
     public static final double FRONT_LEG_KD = -0;
     public static final int FRONT_LEG_MAX = 16500;
