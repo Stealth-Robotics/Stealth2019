@@ -10,14 +10,23 @@ import frc.robot.util.constants.Constants;
 
 public class FindTarget extends Command
 {
+    int target;
 
     StopWatch stopwatch;
 
-    public FindTarget()
+    public FindTarget(int target)
     {
         requires(Robot.driveBase);
 
+        this.target = target;
+
         stopwatch = new StopWatch(10000);
+    }
+
+    @Override
+    protected void initialize()
+    {
+        SmartDashboard.getEntry("limelight/pipeline").setNumber(target);
     }
 
     @Override

@@ -13,13 +13,13 @@ import frc.robot.util.constants.Constants;
 
 public class RotAlignWithTarget extends Command
 {
+    
     PIDexecutor alignment;
 
-    public RotAlignWithTarget(int target)
+    public RotAlignWithTarget()
     {
         requires(Robot.driveBase);
 
-        SmartDashboard.getEntry("limelight/pipeline").setNumber(target);
         alignment = new PIDexecutor(Constants.ROT_ALIGN_KD, Constants.ROT_ALIGN_KI, Constants.ROT_ALIGN_KD, 0, new DoubleSupplier()
         {
             @Override

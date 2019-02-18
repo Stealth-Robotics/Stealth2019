@@ -21,6 +21,8 @@ public class OIConstants
     // !< reset heading button
     public static final int RESET_HEADING_BUTTON = 3;
 
+    public static final int ALIGN_WITH_TARGET_BUTTON = 4;
+
     // vertical joystick axis for mech joystick
     public static final int ELEVATOR_JOYSTICK_Y = 1;
 

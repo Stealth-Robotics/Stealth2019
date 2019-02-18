@@ -54,6 +54,8 @@ public class OI
     public Button fastButton;
     public Button resetHeadingButton;
 
+    public Button alignWithTargetButton;
+
     public Joystick mechJoystick;
 
     public Button level2Button;
@@ -73,6 +75,8 @@ public class OI
         slowButton = new JoystickButton(driveJoystick, OIConstants.SLOW_BUTTON);
         fastButton = new JoystickButton(driveJoystick, OIConstants.FAST_BUTTON);
         resetHeadingButton = new JoystickButton(driveJoystick, OIConstants.RESET_HEADING_BUTTON);
+
+        alignWithTargetButton = new JoystickButton(driveJoystick, OIConstants.ALIGN_WITH_TARGET_BUTTON);
 
         mechJoystick = new Joystick(1);
 
