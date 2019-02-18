@@ -1,34 +1,33 @@
 
-package frc.robot.commands.drivebaseCommands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.Robot;
 
 /**
- * Allows the user to drive the robot using a joystick
+ * Allows the user to drive the elevator using a joystick
  */
-public class UserDrive extends Command 
+public class UserDriveElevator extends Command 
 {
-    public UserDrive() 
+    public UserDriveElevator() 
     {
-        super("UserDrive");
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.driveBase);
+        requires(Robot.elevator);
     }
   
     // Called just before this Command runs the first time
     @Override
     protected void initialize() 
     {
-        Robot.driveBase.resetHeadingAccumError();
+        
     }
   
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() 
     {
-        Robot.driveBase.move(Robot.oi.driveJoystick, false, false); //withPID, then withHeadless
+        Robot.elevator.move(Robot.oi.mechJoystick);
     }
   
     // Make this return true when this Command no longer needs to run execute()

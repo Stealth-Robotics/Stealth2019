@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
+import frc.robot.commands.UserDriveElevator;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.util.*;
@@ -54,7 +55,7 @@ public class Elevator extends Subsystem
     @Override
     public void initDefaultCommand()
     {
-        //setDefaultCommand(command);
+        setDefaultCommand(new UserDriveElevator());
     }
 
     /**
