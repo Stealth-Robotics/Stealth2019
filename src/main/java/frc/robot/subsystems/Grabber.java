@@ -5,7 +5,7 @@ import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Solenoid; //TODO uncomment this when ready to use
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -33,8 +33,8 @@ public class Grabber extends Subsystem
 
     public Grabber()
     {
-        hatchHolder = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel); //TODO uncomment this when ready to use
-        pusher = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel); //TODO uncomment this when ready to use
+        hatchHolder = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel);
+        pusher = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel);
 
         intakeL = new WPI_TalonSRX(RobotMap.intakeL);
         intakeR = new WPI_TalonSRX(RobotMap.intakeR);
@@ -57,6 +57,11 @@ public class Grabber extends Subsystem
     public void initDefaultCommand()
     {
 
+    }
+
+    public void runLoop()
+    {
+        tilt.set(tiltController.run());
     }
 
     /**

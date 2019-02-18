@@ -6,11 +6,6 @@ package frc.robot.util.constants;
  */
 public class Constants
 {
-
-    // !< hardware dimensions
-    public static final double DRIVE_WHEEL_RADIUS = 3.0;
-    public static final double LEG_WHEEL_RADIUS = 1.5;
-
     // !< driving speed constants
     public static final double SPEED_SLOW = 0.3;
     public static final double SPEED_FAST = 1;
@@ -55,12 +50,15 @@ public class Constants
     public static final int FRONT_LEGS_LEVEL_0 = 0;
     public static final int BACK_LEG_LEVEL_0 = 0;
 
+    //tilt position constants
+    public static final int TILT_VERTICAL = 0;
+    public static final int TILT_HORIZONTAL = 100;
+    public static final int TILT_DOWN = 150;
+
     // !< Tilt motor for grabber PID constants
     public static final double TILT_KP = 0.01;
     public static final double TILT_KI = 0.01;
     public static final double TILT_KD = -0;
-    public static final double TILT_MAX = 100;
-    public static final double TILT_MIN = 0;
 
     //Rotation speed when finding vision target
     public static final double FIND_ROT_SPEED = 0.5;

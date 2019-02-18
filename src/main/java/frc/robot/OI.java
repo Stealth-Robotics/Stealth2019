@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.*;
+import frc.robot.commands.grabberCommands.*;
+import frc.robot.util.constants.Constants;
 import frc.robot.util.constants.OIConstants;
 
 /**
@@ -63,6 +65,10 @@ public class OI
     public Button nextStageButton;
     public Button cancelClimbButton;
 
+    public Button tiltGrabberPos1Button;
+    public Button tiltGrabberPos2Button;
+    public Button tiltGrabberPos3Button;
+
     // public Joystick overrideJoystick;
 
     // public Button overrideLiftPIDButton;
@@ -87,6 +93,14 @@ public class OI
 
         level2Button.whenPressed(new DriveOntoHab(2));
         level3Button.whenPressed(new DriveOntoHab(3));
+
+        tiltGrabberPos1Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_1);
+        tiltGrabberPos2Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_2);
+        tiltGrabberPos3Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_3);
+
+        tiltGrabberPos1Button.whenPressed(new SetTiltPos(Constants.TILT_VERTICAL));
+        tiltGrabberPos2Button.whenPressed(new SetTiltPos(Constants.TILT_HORIZONTAL));
+        tiltGrabberPos3Button.whenPressed(new SetTiltPos(Constants.TILT_DOWN));
 
         // overrideJoystick = new Joystick(2);
 
