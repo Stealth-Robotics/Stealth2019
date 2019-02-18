@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.*;
-import frc.robot.commands.lifterCommands.*;
 import frc.robot.util.constants.OIConstants;
 
 /**
@@ -84,8 +83,6 @@ public class OI
 
         level2Button.whenPressed(new DriveOntoHab(2));
         level3Button.whenPressed(new DriveOntoHab(3));
-
-
 
         // overrideJoystick = new Joystick(2);
 

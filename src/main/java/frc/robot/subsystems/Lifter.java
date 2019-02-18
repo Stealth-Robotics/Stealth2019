@@ -133,7 +133,7 @@ public class Lifter extends Subsystem
         double backPower = backLoop.run();
         legBack.set(backPower);
 
-        double correction = stablilization.run();
+        // double correction = stablilization.run();
 
         //Front Left PID
         double leftPower = leftLoop.run();// - correction;
@@ -280,5 +280,10 @@ public class Lifter extends Subsystem
         legL.setSelectedSensorPosition(0, 0, 30);
         legR.setSelectedSensorPosition(0, 0, 30);
         legBackEncoder.setSelectedSensorPosition(0, 0, 30);
+    }
+
+    public int getBackTarget()
+    {
+        return (int)backLoop.getTarget();
     }
 }

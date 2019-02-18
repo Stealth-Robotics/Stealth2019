@@ -23,6 +23,7 @@ import frc.robot.subsystems.Lifter;
 // import frc.robot.subsystems.Vision;
 
 import frc.robot.util.constants.OIConstants;
+import frc.robot.util.constants.Constants;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -159,6 +160,7 @@ public class Robot extends TimedRobot
             m_autonomousCommand.cancel();
         }
         lifter.resetEncoders();
+        lifter.setTargets(Constants.FRONT_LEGS_LEVEL_0, Constants.FRONT_LEGS_LEVEL_0, Constants.BACK_LEG_LEVEL_0);
     }
   
     /**
@@ -168,7 +170,7 @@ public class Robot extends TimedRobot
     public void teleopPeriodic() 
     {
         Scheduler.getInstance().run();
-        // lifter.runLoops();
+        lifter.runLoops();
     }
 
     /**

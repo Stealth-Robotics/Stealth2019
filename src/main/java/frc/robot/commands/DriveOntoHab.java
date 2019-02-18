@@ -14,11 +14,11 @@ public class DriveOntoHab extends CommandGroup
     public DriveOntoHab(int level)
     {
         requires(Robot.lifter);
-        addSequential(new LiftToLevel(level));
+        addSequential(new LiftPhaseTarget(level));
         addSequential(new UserDriveWheel());
-        addSequential(new LiftToLevel(-1));
+        addSequential(new LiftPhaseTarget(-1));
         addSequential(new UserDriveWheel());
-        addSequential(new LiftToLevel(-2));
+        addSequential(new LiftPhaseTarget(-2));
     }
 
     @Override

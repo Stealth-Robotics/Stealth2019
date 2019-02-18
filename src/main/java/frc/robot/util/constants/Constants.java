@@ -28,19 +28,19 @@ public class Constants
     public static final double ELEVATOR_KP = 0.01;
     public static final double ELEVATOR_KI = 0.005;
 
-    // !< Back Leg PID constants
-    public static final double BACK_LEG_KP = 0.002;
-    public static final double BACK_LEG_KI = 0;
-    public static final double BACK_LEG_KD = -0;
-    public static final int BACK_LEG_MAX = 17000;
-    public static final int BACK_LEG_MIN = -17000;
-
     // !< Front Leg PID constants
-    public static final double FRONT_LEG_KP = 0.0025;
+    public static final double FRONT_LEG_KP = 0.0017;
     public static final double FRONT_LEG_KI = 0;
     public static final double FRONT_LEG_KD = -0;
     public static final int FRONT_LEG_MAX = 16500;
     public static final int FRONT_LEG_MIN = 0;
+
+    // !< Back Leg PID constants
+    public static final double BACK_LEG_KP = 0.0017;
+    public static final double BACK_LEG_KI = 0;
+    public static final double BACK_LEG_KD = -0;
+    public static final int BACK_LEG_MAX = 17000;
+    public static final int BACK_LEG_MIN = -17000;
 
     // Stablilization PID constants
     public static final double STABLILIZATION_KP = 0.009;
@@ -50,8 +50,8 @@ public class Constants
     // Lifter level constants
     public static final int FRONT_LEGS_LEVEL_2 = 5000;
     public static final int BACK_LEG_LEVEL_2 = 5000;
-    public static final int FRONT_LEGS_LEVEL_3 = 17500;
-    public static final int BACK_LEG_LEVEL_3 = 17500;
+    public static final int FRONT_LEGS_LEVEL_3 = 16500;
+    public static final int BACK_LEG_LEVEL_3 = 17000;
     public static final int FRONT_LEGS_LEVEL_0 = 0;
     public static final int BACK_LEG_LEVEL_0 = 0;
 
