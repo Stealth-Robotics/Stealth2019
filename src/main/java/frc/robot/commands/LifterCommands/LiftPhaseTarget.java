@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.constants.Constants;
 
+@Deprecated
 /**
  * Moves lifter commands to certain level to prepare to drive onto hab
  */
