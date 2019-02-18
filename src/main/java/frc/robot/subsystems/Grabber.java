@@ -5,7 +5,7 @@ import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-//import edu.wpi.first.wpilibj.Solenoid; TODO uncomment this when ready to use
+import edu.wpi.first.wpilibj.Solenoid; //TODO uncomment this when ready to use
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -22,17 +22,19 @@ import frc.robot.util.constants.Constants;
  */
 public class Grabber extends Subsystem
 {
-    //public static Solenoid pistons; // !< The solenoid to control the velcro pistons
-    
-    public static WPI_TalonSRX intakeL; // !< The talon for the left intake wheel
-    public static WPI_TalonSRX intakeR; // !< The talon for the right intake wheel
-    public static WPI_TalonSRX tilt; // !< The talon for the tilt motor
+    private static Solenoid hatchHolder; // !< The solenoid to control the velcro pistons
+    private static Solenoid pusher;
 
-    public static PIDexecutor tiltController; // !< The PID loop executor to maintain position for the tilt motor
+    private static WPI_TalonSRX intakeL; // !< The talon for the left intake wheel
+    private static WPI_TalonSRX intakeR; // !< The talon for the right intake wheel
+    private static WPI_TalonSRX tilt; // !< The talon for the tilt motor
+
+    private static PIDexecutor tiltController; // !< The PID loop executor to maintain position for the tilt motor
 
     public Grabber()
     {
-        //pistons = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel); TODO uncomment this when ready to use
+        hatchHolder = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel); //TODO uncomment this when ready to use
+        pusher = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel); //TODO uncomment this when ready to use
 
         intakeL = new WPI_TalonSRX(RobotMap.intakeL);
         intakeR = new WPI_TalonSRX(RobotMap.intakeR);
@@ -78,8 +80,23 @@ public class Grabber extends Subsystem
         intakeR.set(speed);
     }
 
+    /**
+     * Gets the position of the tilt motot
+     * 
+     * @return the tilt position
+     */
     public int getTiltPosition()
     {
         return tilt.getSelectedSensorPosition(0);
+    }
+
+    public void setHolderState(boolean isOn)
+    {
+        hatchHolder.set(isOn);
+    }
+
+    public void setPusherState(boolean isOn)
+    {
+        pusher.set(isOn);
     }
 }
