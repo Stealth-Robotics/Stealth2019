@@ -33,9 +33,12 @@ public class OIConstants
     public static final int CANCEL_CLIMB_BUTTON = 4;
 
     // Buttons to control tilt motor for grabber
-    public static final int TILT_GRABBER_POS_1 = 5;
-    public static final int TILT_GRABBER_POS_2 = 6;
-    public static final int TILT_GRABBER_POS_3 = 7;
+    public static final int TILT_GRABBER_POS_1_BUTTON = 5;
+    public static final int TILT_GRABBER_POS_2_BUTTON = 6;
+    public static final int TILT_GRABBER_POS_3_BUTTON = 7;
+
+    public static final int GRAB_HATCH_BUTTON = 8;
+    public static final int RELEASE_HATCH_BUTTON = 9;
 
     // button to override the lifter pid
     public static final int OVERRIDE_LIFT_PID_BUTTON = 1;

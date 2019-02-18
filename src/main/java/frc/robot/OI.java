@@ -69,6 +69,9 @@ public class OI
     public Button tiltGrabberPos2Button;
     public Button tiltGrabberPos3Button;
 
+    public Button grabHatchButton;
+    public Button releaseHatchButton;
+
     // public Joystick overrideJoystick;
 
     // public Button overrideLiftPIDButton;
@@ -94,13 +97,16 @@ public class OI
         level2Button.whenPressed(new DriveOntoHab(2));
         level3Button.whenPressed(new DriveOntoHab(3));
 
-        tiltGrabberPos1Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_1);
-        tiltGrabberPos2Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_2);
-        tiltGrabberPos3Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_3);
+        tiltGrabberPos1Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_1_BUTTON);
+        tiltGrabberPos2Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_2_BUTTON);
+        tiltGrabberPos3Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_3_BUTTON);
 
         tiltGrabberPos1Button.whenPressed(new SetTiltPos(Constants.TILT_VERTICAL));
         tiltGrabberPos2Button.whenPressed(new SetTiltPos(Constants.TILT_HORIZONTAL));
         tiltGrabberPos3Button.whenPressed(new SetTiltPos(Constants.TILT_DOWN));
+
+        grabHatchButton = new JoystickButton(mechJoystick, OIConstants.GRAB_HATCH_BUTTON);
+        releaseHatchButton = new JoystickButton(mechJoystick, OIConstants.RELEASE_HATCH_BUTTON);
 
         // overrideJoystick = new Joystick(2);
 
