@@ -48,7 +48,6 @@ public class RobotMap
     public static final int legL = 6;
     public static final int legR = 4;
     public static final int legBack = 5;
-    public static final int legBackEncoder = 3;
     public static final int wheel = 12;
   
     //talon for the pigeon IMU

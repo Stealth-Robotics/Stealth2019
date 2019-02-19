@@ -26,7 +26,6 @@ public class Lifter extends Subsystem
     private static WPI_TalonSRX legL; // !< Left lift leg
     private static WPI_TalonSRX legR; // !< Right lift leg
     private static WPI_TalonSRX legBack; // !< Rear lift leg
-    private static WPI_TalonSRX legBackEncoder; // Talon for rear encoder
     private static WPI_TalonSRX wheel; // !< Wheel mounted on back leg
 
     private static boolean PID_Enabled = true;
@@ -41,11 +40,9 @@ public class Lifter extends Subsystem
         legL = new WPI_TalonSRX(RobotMap.legL);
         legR = new WPI_TalonSRX(RobotMap.legR);
         legBack = new WPI_TalonSRX(RobotMap.legBack);
-        legBackEncoder = new WPI_TalonSRX(RobotMap.legBackEncoder);
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
         legL.setInverted(true);
-        legBackEncoder.setInverted(true);
         wheel.setInverted(true);
 
         resetEncoders();
@@ -55,7 +52,7 @@ public class Lifter extends Subsystem
             @Override
             public double getAsDouble()
             {
-                return legBackEncoder.getSelectedSensorPosition(0);
+                return legBack.getSelectedSensorPosition(0);
             }
         });
 
@@ -164,7 +161,7 @@ public class Lifter extends Subsystem
     {
         legL.setSelectedSensorPosition(0, 0, 30);
         legR.setSelectedSensorPosition(0, 0, 30);
-        legBackEncoder.setSelectedSensorPosition(0, 0, 30);
+        legBack.setSelectedSensorPosition(0, 0, 30);
     }
 
     //#region Get positions
@@ -196,7 +193,7 @@ public class Lifter extends Subsystem
      */
     public int getBackPosition()
     {
-        return legBackEncoder.getSelectedSensorPosition(0);
+        return legBack.getSelectedSensorPosition(0);
     }
 
     //#endregion
