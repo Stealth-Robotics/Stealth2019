@@ -27,22 +27,28 @@ public class OIConstants
     public static final int ELEVATOR_JOYSTICK_Y = 1;
 
     // lifter control buttons
-    public static final int LEVEL_2_BUTTON = 2;
-    public static final int LEVEL_3_BUTTON = 1;
-    public static final int NEXT_STAGE_BUTTON = 3;
-    public static final int CANCEL_CLIMB_BUTTON = 4;
+    public static final int LEVEL_2_BUTTON = 4;
+    public static final int LEVEL_3_BUTTON = 8;
+    public static final int NEXT_STAGE_BUTTON = 6;
+    public static final int CANCEL_CLIMB_BUTTON = 1;
+
+    public static final int WHEEL_FORWARD_BUTTON = 13;
+    public static final int WHEEL_BACKWARD_BUTTON = 16;
+
+    public static final int BACK_LEG_UP = 15;
+    public static final int BACK_LEG_DOWN = 14;
 
     // Buttons to control tilt motor for grabber
-    public static final int TILT_GRABBER_POS_1_BUTTON = 5;
-    public static final int TILT_GRABBER_POS_2_BUTTON = 6;
-    public static final int TILT_GRABBER_POS_3_BUTTON = 7;
+    public static final int TILT_GRABBER_POS_1_BUTTON = 4;
+    public static final int TILT_GRABBER_POS_2_BUTTON = 2;
+    public static final int TILT_GRABBER_POS_3_BUTTON = 1;
 
-    public static final int GRAB_HATCH_BUTTON = 8;
-    public static final int RELEASE_HATCH_BUTTON = 9;
+    public static final int GRAB_HATCH_BUTTON = 5;
+    public static final int RELEASE_HATCH_BUTTON = 6;
 
     // button to rub intake
-    public static final int RUN_INTAKE_BUTTON = 10;
-    public static final int REVERSE_INTAKE_BUTTON = 11;
+    public static final int RUN_INTAKE_TRIGGER = 2;
+    public static final int REVERSE_INTAKE_TRIGGER = 3;
 
     // button to override the lifter pid
     public static final int OVERRIDE_LIFT_PID_BUTTON = 1;

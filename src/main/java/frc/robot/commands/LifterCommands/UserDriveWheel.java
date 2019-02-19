@@ -15,27 +15,29 @@ public class UserDriveWheel extends Command
     @Override
     protected void execute() 
     {
-        int pov = Robot.oi.mechJoystick.getPOV();
-        if (pov == 0)
+        if (Robot.oi.wheelForwardButton.get())
         {
             Robot.lifter.setWheelSpeed(1);
         }
-        else if (pov == 180)
+        else if (Robot.oi.wheelBackwardButton.get())
         {
             Robot.lifter.setWheelSpeed(-1);
-        }
-        else if (pov == 90)
-        {
-            Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() + 10);
-        }
-        else if (pov == 270)
-        {
-            Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() - 10);
         }
         else
         {
             Robot.lifter.setWheelSpeed(0);
         }
+        
+        
+        if (Robot.oi.backLegDown.get())
+        {
+            Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() + 10);
+        }
+        else if (Robot.oi.backLegUp.get())
+        {
+            Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() - 10);
+        }
+        
     }
 
     @Override

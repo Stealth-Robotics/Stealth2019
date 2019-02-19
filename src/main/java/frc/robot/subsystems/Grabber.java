@@ -13,6 +13,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.util.*;
 import frc.robot.util.constants.Constants;
+import frc.robot.util.constants.OIConstants;
 
 /**
  * This class defines the grabber subsystem
@@ -64,20 +65,21 @@ public class Grabber extends Subsystem
     {
         tilt.set(tiltController.run());
 
-        if (Robot.oi.runIntakeButton.get())
+        double triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.RUN_INTAKE_TRIGGER);
+        if (triggerValue > 0)
         {
-            intakeL.set(Constants.INTAKE_SPEED);
-            intakeR.set(Constants.INTAKE_SPEED);
+            intakeL.set(triggerValue);
+            intakeR.set(triggerValue);
         }
-        else if (Robot.oi.reverseIntakeButton.get())
+        else if ((triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.REVERSE_INTAKE_TRIGGER)) > 0)
         {
-            intakeL.set(-Constants.INTAKE_SPEED);
-            intakeR.set(-Constants.INTAKE_SPEED);
+            intakeL.set(-triggerValue);
+            intakeR.set(-triggerValue);
         }
         else
         {
-            intakeL.set(0);
-            intakeR.set(0);
+            intakeL.set(0.15);
+            intakeR.set(0.15);
         }
     }
 

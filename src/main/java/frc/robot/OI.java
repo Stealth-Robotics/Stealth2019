@@ -65,6 +65,12 @@ public class OI
     public Button nextStageButton;
     public Button cancelClimbButton;
 
+    public Button wheelForwardButton;
+    public Button wheelBackwardButton;
+
+    public Button backLegUp;
+    public Button backLegDown;
+
     public Button tiltGrabberPos1Button;
     public Button tiltGrabberPos2Button;
     public Button tiltGrabberPos3Button;
@@ -72,10 +78,10 @@ public class OI
     public Button grabHatchButton;
     public Button releaseHatchButton;
 
-    public Button runIntakeButton;
-    public Button reverseIntakeButton;
+    // public Button runIntakeButton;
+    // public Button reverseIntakeButton;
 
-    // public Joystick overrideJoystick;
+    public Joystick stationJoystick;
 
     // public Button overrideLiftPIDButton;
 
@@ -92,13 +98,7 @@ public class OI
 
         mechJoystick = new Joystick(1);
 
-        level2Button = new JoystickButton(mechJoystick, OIConstants.LEVEL_2_BUTTON);
-        level3Button = new JoystickButton(mechJoystick, OIConstants.LEVEL_3_BUTTON);
-        nextStageButton = new JoystickButton(mechJoystick, OIConstants.NEXT_STAGE_BUTTON);
-        cancelClimbButton = new JoystickButton(mechJoystick, OIConstants.CANCEL_CLIMB_BUTTON);
-
-        level2Button.whenPressed(new DriveOntoHab(2));
-        level3Button.whenPressed(new DriveOntoHab(3));
+        
 
         tiltGrabberPos1Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_1_BUTTON);
         tiltGrabberPos2Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_2_BUTTON);
@@ -111,8 +111,26 @@ public class OI
         grabHatchButton = new JoystickButton(mechJoystick, OIConstants.GRAB_HATCH_BUTTON);
         releaseHatchButton = new JoystickButton(mechJoystick, OIConstants.RELEASE_HATCH_BUTTON);
 
-        runIntakeButton = new JoystickButton(mechJoystick, OIConstants.RUN_INTAKE_BUTTON);
-        reverseIntakeButton = new JoystickButton(mechJoystick, OIConstants.REVERSE_INTAKE_BUTTON);
+        // runIntakeButton = new JoystickButton(mechJoystick, OIConstants.RUN_INTAKE_TRIGGER);
+        // reverseIntakeButton = new JoystickButton(mechJoystick, OIConstants.REVERSE_INTAKE_TRIGGER);
+
+        stationJoystick = new Joystick(2);
+
+        level2Button = new JoystickButton(stationJoystick, OIConstants.LEVEL_2_BUTTON);
+        level3Button = new JoystickButton(stationJoystick, OIConstants.LEVEL_3_BUTTON);
+        nextStageButton = new JoystickButton(stationJoystick, OIConstants.NEXT_STAGE_BUTTON);
+        cancelClimbButton = new JoystickButton(stationJoystick, OIConstants.CANCEL_CLIMB_BUTTON);
+
+        wheelForwardButton = new JoystickButton(stationJoystick, OIConstants.WHEEL_FORWARD_BUTTON);
+        wheelBackwardButton = new JoystickButton(stationJoystick, OIConstants.WHEEL_BACKWARD_BUTTON);
+
+        backLegUp = new JoystickButton(stationJoystick, OIConstants.BACK_LEG_UP);
+        backLegDown = new JoystickButton(stationJoystick, OIConstants.BACK_LEG_DOWN);
+
+        level2Button.whenPressed(new DriveOntoHab(2));
+        level3Button.whenPressed(new DriveOntoHab(3));
+
+
 
         // overrideJoystick = new Joystick(2);
 
