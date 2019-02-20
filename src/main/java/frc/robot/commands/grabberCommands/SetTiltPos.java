@@ -25,6 +25,6 @@ public class SetTiltPos extends Command
     @Override
     protected boolean isFinished()
     {
-        return Math.abs(Robot.grabber.getTiltPosition() - pos) < 25;
+        return Math.abs(Robot.grabber.getTiltPosition() - pos) < 50;
     }
 }

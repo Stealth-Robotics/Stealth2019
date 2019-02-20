@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -67,6 +68,13 @@ public class Robot extends TimedRobot
         m_chooser.setDefaultOption("Default Auto", new AutoDriveForward());
         // chooser.addOption("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", m_chooser);
+
+        // _instance = this;
+
+        //Compressor c = new Compressor(RobotMap.PCM);
+        //c.setClosedLoopControl(true);
+        
+        //c.close();
     }
   
     /**
@@ -136,6 +144,13 @@ public class Robot extends TimedRobot
         {
             m_autonomousCommand.start();
         }
+
+        grabber.init();
+
+        lifter.resetEncoders();
+        lifter.setTargets(Constants.FRONT_LEGS_LEVEL_0, Constants.FRONT_LEGS_LEVEL_0, Constants.BACK_LEG_LEVEL_0);
+
+        elevator.reset();
     }
   
     /**
@@ -147,6 +162,11 @@ public class Robot extends TimedRobot
         Scheduler.getInstance().run();
         lifter.runLoops();
     }
+
+    /*@Override
+    public boolean isDisabled() {
+        return super.isDisabled() || disabled;
+    }*/
   
     @Override
     public void teleopInit() 
@@ -161,6 +181,12 @@ public class Robot extends TimedRobot
         }
         lifter.resetEncoders();
         lifter.setTargets(Constants.FRONT_LEGS_LEVEL_0, Constants.FRONT_LEGS_LEVEL_0, Constants.BACK_LEG_LEVEL_0);
+
+        grabber.init();
+        grabber.setTiltPosition(0);
+
+        elevator.reset();
+        elevator.setTarget(0);
     }
   
     /**
@@ -189,27 +215,27 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic() 
     {
-        SmartDashboard.putNumber("Lifter/EncoderL", lifter.getFrontLPosition());
-        SmartDashboard.putNumber("Lifter/EncoderR", lifter.getFrontRPosition());
-        SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
-        SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
+        // SmartDashboard.putNumber("Lifter/EncoderL", lifter.getFrontLPosition());
+        // SmartDashboard.putNumber("Lifter/EncoderR", lifter.getFrontRPosition());
+        // SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
+        // SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
 
-        int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
-        int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
+        // int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
+        // int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
 
-        lifter.setTargets(frontTarget, frontTarget, backTarget);
+        // lifter.setTargets(frontTarget, frontTarget, backTarget);
 
-        lifter.runLoops();
+        // lifter.runLoops();
 
         
-        if (Robot.oi.mechJoystick.getPOV() != -1)
-        {
-            Robot.lifter.setWheelSpeed((Robot.oi.mechJoystick.getPOV() == 0) ? 1 : -1);
-        }
-        else
-        {
-            Robot.lifter.setWheelSpeed(0);
-        }
+        // if (Robot.oi.mechJoystick.getPOV() != -1)
+        // {
+        //     Robot.lifter.setWheelSpeed((Robot.oi.mechJoystick.getPOV() == 0) ? 1 : -1);
+        // }
+        // else
+        // {
+        //     Robot.lifter.setWheelSpeed(0);
+        // }
 
         // Lifter.legBack.set(oi.driveJoystick.getRawAxis(1));
     }

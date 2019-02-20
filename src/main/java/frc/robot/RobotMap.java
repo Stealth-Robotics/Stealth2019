@@ -32,24 +32,33 @@ public class RobotMap
     public static final int driveRR = 1;
   
     //ports for elevator talon
-    public static final int elevator = 5;
+    public static final int elevator = 10;
 
-    //module for hatch picker solenoid
-    public static final int pickerModule = 9;
-    //channel for hatch picker solenoid
-    public static final int pickerChannel = 0;
+    //CAN ID for pcm
+    public static final int PCM = 16;
+    //channel for the hatch holder on the PCM
+    public static final int hatchHolderChanel = 2;
+    //chanel for the hatch pusher on the PCM
+    public static final int hatchPusherChanel = 0;
     //ports for intake talons
-    public static final int intakeL = 10;
+    //Yellow/Black
+    public static final int intakeL = 9;
+    //Purple/Black
     public static final int intakeR = 11;
     //port for tilt motor talon
-    public static final int tilt = 13;
+    //Orange/Black
+    public static final int tilt = 5;
+
+    //Common Ground and power is Grey and Orange
 
     //ports for lifter talons
     public static final int legL = 6;
     public static final int legR = 4;
-    public static final int legBack = 5;
+    public static final int legBack = 3;
     public static final int wheel = 12;
   
     //talon for the pigeon IMU
     public static final int pigeonIMU = 12;
+
+    
 }

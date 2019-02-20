@@ -41,11 +41,17 @@ public class Elevator extends Subsystem
         });
 
         SmartDashboard.putString("Elevator/Status", Status.Good.toString());
+
+        reset();
     }
 
     @Override
     public void periodic()
     {
+
+        SmartDashboard.putNumber("Elevator/Target", loop.getTarget());
+        SmartDashboard.putNumber("Elevator/Position", elevator.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("Elevator/MotorPower", elevator.get());
         
     }
 
@@ -66,13 +72,13 @@ public class Elevator extends Subsystem
     public void move(Joystick joystick)
     {
         double joystickY = joystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
-        if (joystickY != 0)
+        if (Math.abs(joystickY) > 0.2)
         {
-            loop.setTarget(loop.getTarget() - joystickY * Constants.ELEVATOR_SPEED_NORMAL);
+            loop.setTarget(loop.getTarget() + joystickY * Constants.ELEVATOR_SPEED_NORMAL);
         }
         else
         {
-            loop.setTarget(loop.getTarget());
+            loop.setTarget(loop.getTarget() - joystickY * Constants.ELEVATOR_SPEED_NORMAL);
         }
         
         setSpeed(loop.run());
@@ -104,5 +110,10 @@ public class Elevator extends Subsystem
     public void resetAccumError()
     {
         loop.reset();
+    }
+
+    public void reset(){
+        elevator.setSelectedSensorPosition(0, 0, 30);
+        setTarget(0);
     }
 }

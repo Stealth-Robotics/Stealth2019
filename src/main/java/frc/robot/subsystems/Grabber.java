@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -11,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.grabberCommands.UserTiltDrive;
 import frc.robot.util.*;
 import frc.robot.util.constants.Constants;
 import frc.robot.util.constants.OIConstants;
@@ -35,12 +38,21 @@ public class Grabber extends Subsystem
 
     public Grabber()
     {
-        hatchHolder = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel);
-        pusher = new Solenoid(RobotMap.pickerModule, RobotMap.pickerChannel);
+        hatchHolder = new Solenoid(RobotMap.PCM, RobotMap.hatchHolderChanel);
+        pusher = new Solenoid(RobotMap.PCM, RobotMap.hatchPusherChanel);
 
         intakeL = new WPI_TalonSRX(RobotMap.intakeL);
         intakeR = new WPI_TalonSRX(RobotMap.intakeR);
+
+        intakeL.setInverted(false);
+        intakeR.setInverted(true);
+
         tilt = new WPI_TalonSRX(RobotMap.tilt);
+
+        tilt.setInverted(true);
+
+        //tilt.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 40);
+        //tilt.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 40);
 
         tiltController = new PIDexecutor(Constants.TILT_KP, Constants.TILT_KI, Constants.TILT_KD, tilt.getSelectedSensorPosition(0), new DoubleSupplier()
         {
@@ -52,35 +64,78 @@ public class Grabber extends Subsystem
             }
         });
 
+        
+
         SmartDashboard.putString("Grabber/Status", Status.Good.toString());
+    }
+
+    public void init(){
+        resetEncoders();
+        setTiltPosition(0);
     }
 
     @Override
     public void initDefaultCommand()
     {
+        setDefaultCommand(new UserTiltDrive());
+    }
 
+    @Override
+    public void periodic()
+    {
+        SmartDashboard.putNumber("Grabber/WristTarget", tiltController.getTarget());
+        SmartDashboard.putNumber("Grabber/WristPosition", getTiltPosition());
+        SmartDashboard.putNumber("Grabber/WristPower", tilt.get());
+        SmartDashboard.putBoolean("Grabber/BackLimitSwitch", isBackLimitSwitchClosed());
+        SmartDashboard.putBoolean("Grabber/FrontLimitSwitch", isFrontLimitSwitchClosed());
     }
 
     public void run()
     {
+        /*if(isBackLimitSwitchClosed()){
+            tiltController.setTarget(getTiltPosition() - 20);
+        }*/
+
         tilt.set(tiltController.run());
 
+        
+
         double triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.RUN_INTAKE_TRIGGER);
-        if (triggerValue > 0)
+        if (triggerValue > 0.15)
         {
             intakeL.set(triggerValue);
             intakeR.set(triggerValue);
         }
-        else if ((triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.REVERSE_INTAKE_TRIGGER)) > 0)
+        else if ((triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.REVERSE_INTAKE_TRIGGER)) > 0.15)
         {
             intakeL.set(-triggerValue);
             intakeR.set(-triggerValue);
         }
         else
         {
-            intakeL.set(0.15);
-            intakeR.set(0.15);
+            intakeL.set(0.3);
+            intakeR.set(0.3);
         }
+    }
+
+    /**
+     * Resets all encoders to zero
+     */
+    public void resetEncoders()
+    {
+        tilt.setSelectedSensorPosition(0, 0, 30);
+    }
+
+    public boolean isBackLimitSwitchClosed(){
+        return tilt.getSensorCollection().isRevLimitSwitchClosed();
+    }
+
+    public boolean isFrontLimitSwitchClosed(){
+        return tilt.getSensorCollection().isFwdLimitSwitchClosed();
+    }
+
+    public double getTiltTarget(){
+        return tiltController.getTarget();
     }
 
     /**

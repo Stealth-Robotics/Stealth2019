@@ -8,44 +8,25 @@ import frc.robot.util.*;
 
 public class ReleaseHatch extends Command
 {
-    StopWatch stopWatch;
-    StopWatch stopWatch2;
+    boolean state = false;
 
-    public ReleaseHatch()
+    public ReleaseHatch(boolean State)
     {
         requires(Robot.grabber);
-        stopWatch = new StopWatch(250);
-        stopWatch2 = new StopWatch(750);
+        state = State;
     }
 
     @Override
     protected void initialize() 
     {
         super.initialize();
-        Robot.grabber.setHolderState(true);
-        Robot.grabber.setPusherState(true);
-    }
-
-    @Override
-    protected void execute() 
-    {
-        super.execute();
-        if (stopWatch.isExpired())
-        {
-            Robot.grabber.setPusherState(false);
-        }
+        Robot.grabber.setPusherState(state);
     }
 
     @Override
     protected boolean isFinished() 
     {
-        return stopWatch2.isExpired();
-    }
-
-    @Override
-    protected void end()
-    {
-        Robot.grabber.setHolderState(false);
+        return true;
     }
 
 

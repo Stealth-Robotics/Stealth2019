@@ -20,8 +20,8 @@ public class Constants
     public static final double DRIVE_KD = -0.0001;
 
     // !< elvator pid constants
-    public static final double ELEVATOR_KP = 0.01;
-    public static final double ELEVATOR_KI = 0.005;
+    public static final double ELEVATOR_KP = 0.005;
+    public static final double ELEVATOR_KI = 0;
 
     // !< Front Leg PID constants
     public static final double FRONT_LEG_KP = 0.0023;
@@ -56,9 +56,9 @@ public class Constants
     public static final int TILT_DOWN = 150;
 
     // !< Tilt motor for grabber PID constants
-    public static final double TILT_KP = 0.01;
-    public static final double TILT_KI = 0.01;
-    public static final double TILT_KD = -0;
+    public static final double TILT_KP = -0.0015;
+    public static final double TILT_KI = 0;
+    public static final double TILT_KD = -0.000;
 
     //Rotation speed when finding vision target
     public static final double FIND_ROT_SPEED = 0.5;

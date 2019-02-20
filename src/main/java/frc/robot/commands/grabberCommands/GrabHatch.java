@@ -8,30 +8,24 @@ import frc.robot.util.*;
 
 public class GrabHatch extends Command
 {
-    StopWatch stopwatch;
+    boolean state = false;
 
-    public GrabHatch()
+    public GrabHatch(boolean State)
     {
         requires(Robot.grabber);
-        stopwatch = new StopWatch(125);
+        state = State;
     }
 
     @Override
     protected void initialize() 
     {
         super.initialize();
-        Robot.grabber.setHolderState(true);
+        Robot.grabber.setHolderState(state);
     }
 
     @Override
     protected boolean isFinished() 
     {
-        return stopwatch.isExpired();
-    }
-
-    @Override
-    protected void end()
-    {
-        Robot.grabber.setHolderState(false);
+        return true;
     }
 }

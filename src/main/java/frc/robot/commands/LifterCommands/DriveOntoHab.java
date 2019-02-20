@@ -1,5 +1,5 @@
 
-package frc.robot.commands;
+package frc.robot.commands.lifterCommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
@@ -19,7 +19,9 @@ public class DriveOntoHab extends CommandGroup
     public DriveOntoHab(int level)
     {
         requires(Robot.lifter);
-        addSequential(new LiftAllToLevel(level));
+        //addSequential(new LiftAllToLevel(level));
+        addSequential(new LiftFrontToLevel(level));
+        addSequential(new LiftBackToLevel(level));
         addSequential(new UserDriveWheel());
         addSequential(new LiftFrontToLevel(0));
         addSequential(new UserDriveWheel());

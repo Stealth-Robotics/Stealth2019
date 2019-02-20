@@ -46,6 +46,8 @@ public class OIConstants
     public static final int GRAB_HATCH_BUTTON = 5;
     public static final int RELEASE_HATCH_BUTTON = 6;
 
+    public static final int WRIST_JOYSTICK_Y = 5;
+
     // button to rub intake
     public static final int RUN_INTAKE_TRIGGER = 2;
     public static final int REVERSE_INTAKE_TRIGGER = 3;
