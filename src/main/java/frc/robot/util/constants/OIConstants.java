@@ -7,6 +7,9 @@ public class OIConstants
     public static final double DEADZONE_MOVE = 0.07;
     public static final double DEADZONE_TWIST = 0.2;
 
+    //trigger thresholds
+    public static final double TRIGGER_THRESHOLD = 0.15;
+    
     // !< the drive axes
     public static final int DRIVE_JOYSTICK_Y = 1;
     public static final int DRIVE_JOYSTICK_X = 0;

@@ -19,10 +19,11 @@ public class UserTiltDrive extends Command
     {
         super.execute();
 
-        int target = (int)Robot.grabber.getTiltTarget();
+        int target = Robot.grabber.getTiltTarget();
 
         double axis = Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
-        if(Math.abs(axis) > 0.2){
+        if(Math.abs(axis) > 0.2)
+        {
             target += axis * 10;
         }
 
