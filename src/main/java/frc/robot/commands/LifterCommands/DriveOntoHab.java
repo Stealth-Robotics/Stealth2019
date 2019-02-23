@@ -3,7 +3,6 @@ package frc.robot.commands.lifterCommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
-import frc.robot.commands.lifterCommands.*;
 import frc.robot.util.constants.Constants;
 
 /**
