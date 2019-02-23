@@ -10,12 +10,13 @@ public class Constants
     public static final double SPEED_SLOW = 0.3;
     public static final double SPEED_FAST = 1;
     public static final double SPEED_NORMAL = 0.6;
+    public static final double SPEED_TURN = 0.75;
 
     // !< elevator speed constants
     public static final double ELEVATOR_SPEED_NORMAL = 5;
 
     // !< driving pid constants
-    public static final double DRIVE_KP = 0.005;
+    public static final double DRIVE_KP = 0.01;
     public static final double DRIVE_KI = 0.0001;
     public static final double DRIVE_KD = -0.0001;
 
