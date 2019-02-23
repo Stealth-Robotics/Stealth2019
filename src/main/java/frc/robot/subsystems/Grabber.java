@@ -3,8 +3,8 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+// import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+// import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -44,7 +44,6 @@ public class Grabber extends Subsystem
         intakeL = new WPI_TalonSRX(RobotMap.intakeL);
         intakeR = new WPI_TalonSRX(RobotMap.intakeR);
 
-        intakeL.setInverted(false);
         intakeR.setInverted(true);
 
         tilt = new WPI_TalonSRX(RobotMap.tilt);
@@ -69,7 +68,8 @@ public class Grabber extends Subsystem
         SmartDashboard.putString("Grabber/Status", Status.Good.toString());
     }
 
-    public void init(){
+    public void init()
+    {
         resetEncoders();
         setTiltPosition(0);
     }
@@ -101,12 +101,12 @@ public class Grabber extends Subsystem
         
 
         double triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.RUN_INTAKE_TRIGGER);
-        if (triggerValue > 0.15)
+        if (triggerValue > OIConstants.TRIGGER_THRESHOLD)
         {
             intakeL.set(triggerValue);
             intakeR.set(triggerValue);
         }
-        else if ((triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.REVERSE_INTAKE_TRIGGER)) > 0.15)
+        else if ((triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.REVERSE_INTAKE_TRIGGER)) > OIConstants.TRIGGER_THRESHOLD)
         {
             intakeL.set(-triggerValue);
             intakeR.set(-triggerValue);
@@ -134,8 +134,8 @@ public class Grabber extends Subsystem
         return tilt.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
-    public double getTiltTarget(){
-        return tiltController.getTarget();
+    public int getTiltTarget(){
+        return (int)tiltController.getTarget();
     }
 
     /**

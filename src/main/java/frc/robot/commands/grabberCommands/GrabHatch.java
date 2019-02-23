@@ -4,7 +4,6 @@ package frc.robot.commands.grabberCommands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.Robot;
-import frc.robot.util.*;
 
 public class GrabHatch extends Command
 {

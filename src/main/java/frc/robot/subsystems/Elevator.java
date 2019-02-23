@@ -78,7 +78,7 @@ public class Elevator extends Subsystem
         }
         else
         {
-            loop.setTarget(loop.getTarget() - joystickY * Constants.ELEVATOR_SPEED_NORMAL);
+            loop.setTarget(loop.getTarget());
         }
         
         setSpeed(loop.run());
