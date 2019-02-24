@@ -15,6 +15,7 @@ import java.util.Date;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.robot.Robot;
+import frc.robot.subsystems.*;
 
 /**
  * Logs telemetry  to file
@@ -57,12 +58,15 @@ public class Logging extends Command
             date = new Date();
             StartTime = date.getTime();
             
-            try {
+            try 
+            {
                 logMatch = new FileWriter("/LOGS/logMatch.csv", true);
                 logSystems = new FileWriter("/LOGS/logSystems.csv", true);
                 logError = new FileWriter("/LOGS/logError.csv", true);
                 //logEvents = new FileWriter("/LOGS/logEvents.csv", true);
-            } catch(IOException e) {
+            } 
+            catch (IOException e) 
+            {
                 e.printStackTrace();
                 System.out.println("Unable to create/find FileWriter");
 
@@ -76,7 +80,8 @@ public class Logging extends Command
             
             SmartDashboard.putBoolean("Logging/Initialized", true);
 
-            while(run){
+            while (run)
+            {
                 //get common things so that we dont call them a million times
                 imu = Robot.driveBase.getPigeonIMU();
                 driverStation = DriverStation.getInstance();
@@ -84,6 +89,7 @@ public class Logging extends Command
                 //log the things!
                 LogErrors();
                 LogMatch();
+                LogSystems();
             }
         }).start();
     }
@@ -110,9 +116,11 @@ public class Logging extends Command
         end();
     }
 
-    private void LogErrors() {
+    private void LogErrors() 
+    {
 		
-		try {
+        try 
+        {
 			//System Start Time, System Time, 
 			//isBrownedOut, isSysActive,
 			//Fault Count 3.3v, Fault Count 5v, Fault Count 6v,
@@ -136,15 +144,19 @@ public class Logging extends Command
 					
 					+ "\n"
 					);
-		} catch(IOException e) {
+        } 
+        catch (IOException e)
+        {
 			e.printStackTrace();
 	        System.out.println("Unable to write to LogError");
 	    }
 	}
   
-    private void LogMatch() {
+    private void LogMatch()
+    {
 		
-		try {
+        try 
+        {
 			//System Start Time, System Time, 
 			//Match Time, isFMSConnected, Event Name, Match Number, Match Type, Alliance, Replay Number, Game Specific Message
 			logMatch.write(
@@ -162,9 +174,50 @@ public class Logging extends Command
 					
 					+ "\n"
 			);
-		} catch(IOException e) {
+        } 
+        catch (IOException e) 
+        {
 			e.printStackTrace();
 	        System.out.println("Unable to write to LogMatch");
+	    }
+    }
+    
+    private void LogSystems() 
+    {
+		
+        try 
+        {
+			//System Start Time, System Time, 
+			//isBrownedOut, isSysActive,
+			//Fault Count 3.3v, Fault Count 5v, Fault Count 6v,
+			//CAN Status,
+            //Gyro Last error, Gyro State
+            
+            DriveBase driveBase = Robot.driveBase;
+            Elevator elevator = Robot.elevator;
+            Grabber grabber = Robot.grabber;
+            Lifter lifter = Robot.lifter;
+
+
+			logSystems.write(
+					StartTime + "," +
+					date.getTime() + "," +
+					
+					driveBase.getDefaultCommandName() + "," +
+					
+					elevator.getDefaultCommandName() + "," +
+				
+					grabber.getDefaultCommandName() + "," +
+					
+					lifter.getDefaultCommandName() + ","
+					
+					+ "\n"
+					);
+        } 
+        catch (IOException e) 
+        {
+			e.printStackTrace();
+	        System.out.println("Unable to write to LogError");
 	    }
 	}
 }
