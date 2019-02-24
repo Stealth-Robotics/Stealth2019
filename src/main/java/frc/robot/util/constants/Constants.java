@@ -12,17 +12,28 @@ public class Constants
     public static final double SPEED_NORMAL = 0.6;
     public static final double SPEED_TURN = 0.75;
 
-    // !< elevator speed constants
-    public static final double ELEVATOR_SPEED_NORMAL = 5;
-
     // !< driving pid constants
     public static final double DRIVE_KP = 0.27;
     public static final double DRIVE_KI = 0.0033;
     public static final double DRIVE_KD = 0.055;
 
+    // !< elevator speed constants
+    public static final double ELEVATOR_SPEED_NORMAL = 5;
+
     // !< elvator pid constants
     public static final double ELEVATOR_KP = 0.005;
     public static final double ELEVATOR_KI = 0;
+    public static final double ELEVATOR_KD = 0;
+
+    // !< elevator position constants
+    public static final int ELEVATOR_TOP = 15000;
+    public static final int ELEVATOR_BOTTOM = 0;
+    public static final int ELEVATOR_LEVEL1_BALL = 0;
+    public static final int ELEVATOR_LEVEL2_BALL = 1000;
+    public static final int ELEVATOR_LEVEL3_BALL = 2000;
+    public static final int ELEVATOR_LEVEL1_HATCH = 0;
+    public static final int ELEVATOR_LEVEL2_HATCH = 1000;
+    public static final int ELEVATOR_LEVEL3_HATCH = 2000;
 
     // !< Front Leg PID constants
     public static final double FRONT_LEG_KP = 0.0023;
@@ -47,7 +58,7 @@ public class Constants
     public static final int FRONT_LEGS_LEVEL_2 = 5000;
     public static final int BACK_LEG_LEVEL_2 = 5000;
     public static final int FRONT_LEGS_LEVEL_3 = 16500;
-    public static final int BACK_LEG_LEVEL_3 = 17000;
+    public static final int BACK_LEG_LEVEL_3 = 16500;
     public static final int FRONT_LEGS_LEVEL_0 = 0;
     public static final int BACK_LEG_LEVEL_0 = 0;
 

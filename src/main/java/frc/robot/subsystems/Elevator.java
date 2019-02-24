@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.UserDriveElevator;
+import frc.robot.commands.elevatorCommands.UserDriveElevator;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.util.*;
@@ -34,7 +34,7 @@ public class Elevator extends Subsystem
 
         elevator.setInverted(true);
 
-        loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, 0, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
+        loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
         
             @Override
             public double getAsDouble() {
@@ -74,6 +74,7 @@ public class Elevator extends Subsystem
     public void move(Joystick joystick)
     {
         double joystickY = joystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
+
         if (Math.abs(joystickY) > 0.2)
         {
             loop.setTarget(loop.getTarget() - joystickY * Constants.ELEVATOR_SPEED_NORMAL);
@@ -94,6 +95,10 @@ public class Elevator extends Subsystem
     public void setTarget(int target)
     {
         loop.setTarget(target);
+    }
+
+    public int getPosition(){
+        return elevator.getSelectedSensorPosition(0);
     }
 
     /**
