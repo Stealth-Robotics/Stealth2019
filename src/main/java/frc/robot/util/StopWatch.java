@@ -55,7 +55,13 @@ public class StopWatch
      */
 	public boolean isExpired()
 	{
-		return (now() - mStartTime) > mWaitTime;
+        long now = now();
+
+        long num = (now - mStartTime);
+
+        boolean output = num > mWaitTime;
+        
+        return output;
 	}
     
     /**
@@ -83,7 +89,7 @@ public class StopWatch
      */
     public static long now()
     {
-        return System.nanoTime() * 1000000;
+        return System.nanoTime() / 1000000;
     }
 
     /**

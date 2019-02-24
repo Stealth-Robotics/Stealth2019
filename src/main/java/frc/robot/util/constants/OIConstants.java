@@ -5,7 +5,7 @@ public class OIConstants
 {
     // !< deadzone width
     public static final double DEADZONE_MOVE = 0.07;
-    public static final double DEADZONE_TWIST = 0.2;
+    public static final double DEADZONE_TWIST = 0.15;
 
     //trigger thresholds
     public static final double TRIGGER_THRESHOLD = 0.15;
@@ -38,8 +38,8 @@ public class OIConstants
     public static final int WHEEL_FORWARD_BUTTON = 13;
     public static final int WHEEL_BACKWARD_BUTTON = 16;
 
-    public static final int BACK_LEG_UP = 15;
-    public static final int BACK_LEG_DOWN = 14;
+    public static final int BACK_LEG_UP_BUTTON = 15;
+    public static final int BACK_LEG_DOWN_BUTTON = 14;
 
     // Buttons to control tilt motor for grabber
     public static final int TILT_GRABBER_POS_1_BUTTON = 4;

@@ -38,6 +38,11 @@ public class DriveBase extends Subsystem
 
     private static PIDexecutor headingPIDloop; 
 
+    private static StopWatch timeSinceRot;
+
+    private static boolean isDriverRotating;
+    private static boolean isHeadingSet;
+
     public DriveBase()
     {
         super();
@@ -82,6 +87,8 @@ public class DriveBase extends Subsystem
         setHeading(0);
 
         speedCoef = Constants.SPEED_NORMAL; //Drive speed for UserDrive
+
+        timeSinceRot = new StopWatch();
 
         SmartDashboard.putString("DriveBase/Status", Status.Good.toString());
     }
@@ -136,7 +143,7 @@ public class DriveBase extends Subsystem
         double speed = joystick.getMagnitude() * speedCoef;
         speed = (speed > OIConstants.DEADZONE_MOVE) ? speed : 0;
         double direction = joystick.getDirectionRadians();
-        double rotation = joystick.getTwist() * speedCoef;
+        double rotation = joystick.getTwist() * speedCoef * Constants.SPEED_TURN;
         rotation = (Math.abs(rotation) > OIConstants.DEADZONE_TWIST) ? rotation : 0;
 
         //checks if IMU input necessary, and sends to appropriate function
@@ -173,17 +180,35 @@ public class DriveBase extends Subsystem
         if (withHeadingPID)
         {
             //disables PID loop if rotating robot
-            if (rotation == 0)
+            if (Math.abs(rotation) > OIConstants.DEADZONE_TWIST)
             {
-                rotation -= headingPIDloop.run();    
+                headingPIDloop.setTarget(currentHeading);
+
+                isDriverRotating = true;
             }
             else
             {
-                headingPIDloop.setTarget(currentHeading);
+                if (isDriverRotating)
+                {
+                    timeSinceRot.reset();
+                    timeSinceRot.setTime(250);
+                    isDriverRotating = false;
+                    isHeadingSet = false;
+                }
+                else if (timeSinceRot.isExpired() && !isHeadingSet)
+                {
+                    headingPIDloop.setTarget(currentHeading);
+                    isHeadingSet = true;
+                }
+                
+                if (isHeadingSet)
+                {
+                    rotation -= headingPIDloop.run();
+                }
             }
         }
 
-        System.out.println(currentHeading + " " + direction);
+        //System.out.println(currentHeading + " " + direction);
 
         //proceeds to motor calculations after corrections
         moveWithoutIMU(speed, direction, rotation);
@@ -268,6 +293,11 @@ public class DriveBase extends Subsystem
     public void setTargetHeading(double heading)
     {
         headingPIDloop.setTarget(heading);
+    }
+
+    public double getTargetHeading()
+    {
+        return headingPIDloop.getTarget();
     }
 
     /**

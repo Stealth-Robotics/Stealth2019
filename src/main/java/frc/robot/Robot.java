@@ -251,5 +251,6 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("OI/Direction", oi.driveJoystick.getDirectionDegrees());
         SmartDashboard.putNumber("OI/POVinfo", oi.mechJoystick.getPOV());
         SmartDashboard.putNumber("Telemetry/Heading", driveBase.getHeading());
+        SmartDashboard.putNumber("Telemetry/TargetHeading", driveBase.getTargetHeading());
     }
 }
