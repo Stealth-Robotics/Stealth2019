@@ -30,8 +30,7 @@ public class Grabber extends Subsystem
     private static Solenoid hatchHolder; // !< The solenoid to control the velcro pistons
     private static Solenoid pusher;
 
-    private static WPI_TalonSRX intakeL; // !< The talon for the left intake wheel
-    private static WPI_TalonSRX intakeR; // !< The talon for the right intake wheel
+    private static WPI_TalonSRX intake; // !< The talon for the intake wheels
     private static WPI_TalonSRX tilt; // !< The talon for the tilt motor
 
     private static PIDexecutor tiltController; // !< The PID loop executor to maintain position for the tilt motor
@@ -41,10 +40,7 @@ public class Grabber extends Subsystem
         hatchHolder = new Solenoid(RobotMap.PCM, RobotMap.hatchHolderChanel);
         pusher = new Solenoid(RobotMap.PCM, RobotMap.hatchPusherChanel);
 
-        intakeL = new WPI_TalonSRX(RobotMap.intakeL);
-        intakeR = new WPI_TalonSRX(RobotMap.intakeR);
-
-        intakeR.setInverted(true);
+        intake = new WPI_TalonSRX(RobotMap.intake);
 
         tilt = new WPI_TalonSRX(RobotMap.tilt);
 
@@ -103,18 +99,15 @@ public class Grabber extends Subsystem
         double triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.RUN_INTAKE_TRIGGER);
         if (triggerValue > OIConstants.TRIGGER_THRESHOLD)
         {
-            intakeL.set(triggerValue);
-            intakeR.set(triggerValue);
+            intake.set(triggerValue);
         }
         else if ((triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.REVERSE_INTAKE_TRIGGER)) > OIConstants.TRIGGER_THRESHOLD)
         {
-            intakeL.set(-triggerValue);
-            intakeR.set(-triggerValue);
+            intake.set(-triggerValue);
         }
         else
         {
-            intakeL.set(0.3);
-            intakeR.set(0.3);
+            intake.set(0.3);
         }
     }
 
@@ -126,15 +119,18 @@ public class Grabber extends Subsystem
         tilt.setSelectedSensorPosition(0, 0, 30);
     }
 
-    public boolean isBackLimitSwitchClosed(){
+    public boolean isBackLimitSwitchClosed()
+    {
         return tilt.getSensorCollection().isRevLimitSwitchClosed();
     }
 
-    public boolean isFrontLimitSwitchClosed(){
+    public boolean isFrontLimitSwitchClosed()
+    {
         return tilt.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
-    public int getTiltTarget(){
+    public int getTiltTarget()
+    {
         return (int)tiltController.getTarget();
     }
 
@@ -155,8 +151,7 @@ public class Grabber extends Subsystem
      */
     public void runIntake(double speed)
     {
-        intakeL.set(speed);
-        intakeR.set(speed);
+        intake.set(speed);
     }
 
     /**
@@ -177,5 +172,18 @@ public class Grabber extends Subsystem
     public void setPusherState(boolean isOn)
     {
         pusher.set(isOn);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "" + tilt.get() + "," +
+                tilt.getSelectedSensorPosition(0) + "," + 
+                tiltController.getTarget() + "," +
+
+                intake.get() + "," +
+
+                pusher.get() + "," +
+                hatchHolder.get();
     }
 }

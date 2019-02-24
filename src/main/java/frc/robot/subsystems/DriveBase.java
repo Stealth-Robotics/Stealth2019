@@ -321,6 +321,15 @@ public class DriveBase extends Subsystem
     @Override
     public String toString()
     {
-        
+        return "" + driveLF.get() + "," +
+                driveLR.get() + "," +
+                driveRF.get() + "," +
+                driveRR.get() + "," +
+
+                driveLF.getSelectedSensorPosition(0) + "," +
+                driveRF.getSelectedSensorPosition(0) + "," +
+
+                imu.getFusedHeading() + "," + 
+                getTargetHeading();
     }
 }

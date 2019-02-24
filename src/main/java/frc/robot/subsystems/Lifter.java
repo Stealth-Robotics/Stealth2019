@@ -338,4 +338,22 @@ public class Lifter extends Subsystem
     }
 
     //#endregion
+
+    @Override
+    public String toString()
+    {
+        return "" + legR.get() + "," +
+                legL.get() + "," +
+                legBack.get() + "," +
+
+                getFrontRPosition() + "," +
+                getFrontLPosition() + "," +
+                getBackPosition() + "," +
+
+                getFrontRTarget() + "," +
+                getFrontLTarget() + "," +
+                getBackTarget() + "," +
+
+                wheel.get();
+    }
 }

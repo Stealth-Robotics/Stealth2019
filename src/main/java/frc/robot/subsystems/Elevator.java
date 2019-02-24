@@ -119,8 +119,17 @@ public class Elevator extends Subsystem
         loop.reset();
     }
 
-    public void reset(){
+    public void reset()
+    {
         elevator.setSelectedSensorPosition(0, 0, 30);
         setTarget(0);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "" + elevator.get() + "," +
+                elevator.getSelectedSensorPosition(0) + "," +
+                loop.getTarget();
     }
 }
