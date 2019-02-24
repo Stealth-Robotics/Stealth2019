@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.constants.OIConstants;
 
-public class UserTiltDrive extends Command
+public class UserDriveTilt extends Command
 {
 
-    public UserTiltDrive()
+    public UserDriveTilt()
     {
         requires(Robot.grabber);
     }

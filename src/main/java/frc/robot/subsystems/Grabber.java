@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.grabberCommands.UserTiltDrive;
+import frc.robot.commands.grabberCommands.UserDriveTilt;
 import frc.robot.util.*;
 import frc.robot.util.constants.Constants;
 import frc.robot.util.constants.OIConstants;
@@ -73,7 +73,7 @@ public class Grabber extends Subsystem
     @Override
     public void initDefaultCommand()
     {
-        setDefaultCommand(new UserTiltDrive());
+        setDefaultCommand(new UserDriveTilt());
     }
 
     @Override
