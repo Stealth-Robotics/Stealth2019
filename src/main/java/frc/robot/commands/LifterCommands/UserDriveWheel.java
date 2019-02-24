@@ -29,14 +29,14 @@ public class UserDriveWheel extends Command
         }
         
         
-        /*if (Robot.oi.backLegDown.get())
+        if (Robot.oi.backLegDown.get())
         {
             Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() + 10);
         }
         else if (Robot.oi.backLegUp.get())
         {
             Robot.lifter.setBackTarget(Robot.lifter.getBackTarget() - 10);
-        }*/
+        }
         
     }
 
