@@ -132,8 +132,8 @@ public class OI
         wheelForwardButton = new JoystickButton(stationJoystick, OIConstants.WHEEL_FORWARD_BUTTON);
         wheelBackwardButton = new JoystickButton(stationJoystick, OIConstants.WHEEL_BACKWARD_BUTTON);
 
-        backLegUp = new JoystickButton(stationJoystick, OIConstants.BACK_LEG_UP);
-        backLegDown = new JoystickButton(stationJoystick, OIConstants.BACK_LEG_DOWN);
+        backLegUp = new JoystickButton(stationJoystick, OIConstants.BACK_LEG_UP_BUTTON);
+        backLegDown = new JoystickButton(stationJoystick, OIConstants.BACK_LEG_DOWN_BUTTON);
 
         level2Button.whenPressed(new DriveOntoHab(2));
         level3Button.whenPressed(new DriveOntoHab(3));
