@@ -43,7 +43,7 @@ public class RobotMap
     
     //ports for intake talons
     //Yellow/Black
-    public static final int intakeL = 9;
+    public static final int intake = 9;
     //Purple/Black
     public static final int intakeR = 11;
     //port for tilt motor talon

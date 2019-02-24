@@ -203,13 +203,17 @@ public class Logging extends Command
 					StartTime + "," +
 					date.getTime() + "," +
 					
-					driveBase.getDefaultCommandName() + "," +
+                    driveBase.getDefaultCommandName() + "," +
+                    driveBase.toString() + "," +
 					
-					elevator.getDefaultCommandName() + "," +
+                    elevator.getDefaultCommandName() + "," +
+                    elevator.toString() + "," +
 				
-					grabber.getDefaultCommandName() + "," +
+                    grabber.getDefaultCommandName() + "," +
+                    grabber.toString() + "," +
 					
-					lifter.getDefaultCommandName() + ","
+                    lifter.getDefaultCommandName() + "," +
+                    lifter.toString()
 					
 					+ "\n"
 					);
