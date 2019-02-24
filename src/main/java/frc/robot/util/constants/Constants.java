@@ -67,6 +67,9 @@ public class Constants
     public static final int TILT_HORIZONTAL = 100;
     public static final int TILT_DOWN = 150;
 
+    //Tilt motor speed constant
+    public static final int TILT_SPEED_NORMAL = 10;
+
     // !< Tilt motor for grabber PID constants
     public static final double TILT_KP = -0.0015;
     public static final double TILT_KI = 0;

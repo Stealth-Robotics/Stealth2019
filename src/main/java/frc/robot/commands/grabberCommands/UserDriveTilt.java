@@ -3,6 +3,7 @@ package frc.robot.commands.grabberCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.util.constants.Constants;
 import frc.robot.util.constants.OIConstants;
 
 public class UserDriveTilt extends Command
@@ -22,9 +23,9 @@ public class UserDriveTilt extends Command
         int target = Robot.grabber.getTiltTarget();
 
         double axis = Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
-        if(Math.abs(axis) > 0.2)
+        if(Math.abs(axis) > OIConstants.DEADZONE_GRABBER)
         {
-            target += axis * 10;
+            target += axis * Constants.TILT_SPEED_NORMAL;
         }
 
         Robot.grabber.setTiltPosition(target);
@@ -33,6 +34,6 @@ public class UserDriveTilt extends Command
     @Override
     protected boolean isFinished()
     {
-        return false;//Math.abs(Robot.grabber.getTiltPosition() - pos) < 50;
+        return false;
     }
 }

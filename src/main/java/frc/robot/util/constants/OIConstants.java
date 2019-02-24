@@ -6,6 +6,7 @@ public class OIConstants
     // !< deadzone width
     public static final double DEADZONE_MOVE = 0.07;
     public static final double DEADZONE_TWIST = 0.15;
+    public static final double DEADZONE_GRABBER = 0.2;
 
     //trigger thresholds
     public static final double TRIGGER_THRESHOLD = 0.15;
