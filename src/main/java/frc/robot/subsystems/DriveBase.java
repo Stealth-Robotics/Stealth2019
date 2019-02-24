@@ -205,11 +205,6 @@ public class DriveBase extends Subsystem
                 {
                     rotation -= headingPIDloop.run();
                 }
-
-                if (Robot.oi.mechJoystick.getRawButton(8))
-                {
-                    setTargetHeading(Math.PI/2 + getHeading());
-                }
             }
         }
 
