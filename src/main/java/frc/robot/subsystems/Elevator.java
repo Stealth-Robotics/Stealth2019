@@ -32,6 +32,8 @@ public class Elevator extends Subsystem
     {
         elevator = new WPI_TalonSRX(RobotMap.elevator);
 
+        elevator.setInverted(true);
+
         loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, 0, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
         
             @Override
@@ -74,7 +76,7 @@ public class Elevator extends Subsystem
         double joystickY = joystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
         if (Math.abs(joystickY) > 0.2)
         {
-            loop.setTarget(loop.getTarget() + joystickY * Constants.ELEVATOR_SPEED_NORMAL);
+            loop.setTarget(loop.getTarget() - joystickY * Constants.ELEVATOR_SPEED_NORMAL);
         }
         else
         {
