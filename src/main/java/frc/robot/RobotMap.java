@@ -41,14 +41,10 @@ public class RobotMap
     //chanel for the hatch pusher on the PCM
     public static final int hatchPusherChanel = 0;
     
-    //ports for intake talons
-    //Yellow/Black
-    public static final int intake = 9;
-    //Purple/Black
-    public static final int intakeR = 11;
-    //port for tilt motor talon
-    //Orange/Black
-    public static final int tilt = 5;
+    //port for intake talon
+    public static final int intake = 11;
+    //port for wrist motor talon
+    public static final int wrist = 9;
 
     //Common Ground and power is Grey and Orange
 

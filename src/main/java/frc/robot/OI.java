@@ -62,9 +62,9 @@ public class OI
 
     public Joystick mechJoystick;
 
-    public Button tiltGrabberPos1Button;
-    public Button tiltGrabberPos2Button;
-    public Button tiltGrabberPos3Button;
+    public Button wristPos1Button;
+    public Button wristPos2Button;
+    public Button wristPos3Button;
 
     public Button grabHatchButton;
     public Button releaseHatchButton;
@@ -102,13 +102,13 @@ public class OI
 
         mechJoystick = new Joystick(1);
 
-        tiltGrabberPos1Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_1_BUTTON);
-        tiltGrabberPos2Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_2_BUTTON);
-        tiltGrabberPos3Button = new JoystickButton(mechJoystick, OIConstants.TILT_GRABBER_POS_3_BUTTON);
+        wristPos1Button = new JoystickButton(mechJoystick, OIConstants.WRIST_POS_1_BUTTON);
+        wristPos2Button = new JoystickButton(mechJoystick, OIConstants.WRIST_POS_2_BUTTON);
+        wristPos3Button = new JoystickButton(mechJoystick, OIConstants.WRIST_POS_3_BUTTON);
 
-        tiltGrabberPos1Button.whenPressed(new SetTiltPos(Constants.TILT_VERTICAL));
-        tiltGrabberPos2Button.whenPressed(new SetTiltPos(Constants.TILT_HORIZONTAL));
-        tiltGrabberPos3Button.whenPressed(new SetTiltPos(Constants.TILT_DOWN));
+        wristPos1Button.whenPressed(new SetTiltPos(Constants.TILT_VERTICAL));
+        wristPos2Button.whenPressed(new SetTiltPos(Constants.TILT_HORIZONTAL));
+        wristPos3Button.whenPressed(new SetTiltPos(Constants.TILT_DOWN));
 
         grabHatchButton = new JoystickButton(mechJoystick, OIConstants.GRAB_HATCH_BUTTON);
         releaseHatchButton = new JoystickButton(mechJoystick, OIConstants.RELEASE_HATCH_BUTTON);

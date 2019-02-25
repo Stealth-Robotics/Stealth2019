@@ -31,9 +31,9 @@ public class Grabber extends Subsystem
     private static Solenoid pusher;
 
     private static WPI_TalonSRX intake; // !< The talon for the intake wheels
-    private static WPI_TalonSRX tilt; // !< The talon for the tilt motor
+    private static WPI_TalonSRX wrist; // !< The talon for the tilt motor
 
-    private static PIDexecutor tiltController; // !< The PID loop executor to maintain position for the tilt motor
+    private static PIDexecutor wristController; // !< The PID loop executor to maintain position for the tilt motor
 
     public Grabber()
     {
@@ -42,20 +42,20 @@ public class Grabber extends Subsystem
 
         intake = new WPI_TalonSRX(RobotMap.intake);
 
-        tilt = new WPI_TalonSRX(RobotMap.tilt);
+        wrist = new WPI_TalonSRX(RobotMap.wrist);
 
-        tilt.setInverted(true);
+        wrist.setInverted(true);
 
         //tilt.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 40);
         //tilt.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 40);
 
-        tiltController = new PIDexecutor(Constants.TILT_KP, Constants.TILT_KI, Constants.TILT_KD, tilt.getSelectedSensorPosition(0), new DoubleSupplier()
+        wristController = new PIDexecutor(Constants.TILT_KP, Constants.TILT_KI, Constants.TILT_KD, wrist.getSelectedSensorPosition(0), new DoubleSupplier()
         {
         
             @Override
             public double getAsDouble() 
             {
-                return tilt.getSelectedSensorPosition(0);
+                return wrist.getSelectedSensorPosition(0);
             }
         });
 
@@ -79,20 +79,20 @@ public class Grabber extends Subsystem
     @Override
     public void periodic()
     {
-        SmartDashboard.putNumber("Grabber/WristTarget", tiltController.getTarget());
+        SmartDashboard.putNumber("Grabber/WristTarget", wristController.getTarget());
         SmartDashboard.putNumber("Grabber/WristPosition", getTiltPosition());
-        SmartDashboard.putNumber("Grabber/WristPower", tilt.get());
+        SmartDashboard.putNumber("Grabber/WristPower", wrist.get());
         SmartDashboard.putBoolean("Grabber/BackLimitSwitch", isBackLimitSwitchClosed());
         SmartDashboard.putBoolean("Grabber/FrontLimitSwitch", isFrontLimitSwitchClosed());
     }
 
     public void run()
     {
-        /*if(isBackLimitSwitchClosed()){
-            tiltController.setTarget(getTiltPosition() - 20);
-        }*/
+        if(isBackLimitSwitchClosed()){
+            wristController.setTarget(getTiltPosition() - 20);
+        }
 
-        tilt.set(tiltController.run());
+        wrist.set(wristController.run());
 
         
 
@@ -116,22 +116,22 @@ public class Grabber extends Subsystem
      */
     public void resetEncoders()
     {
-        tilt.setSelectedSensorPosition(0, 0, 30);
+        wrist.setSelectedSensorPosition(0, 0, 30);
     }
 
     public boolean isBackLimitSwitchClosed()
     {
-        return tilt.getSensorCollection().isRevLimitSwitchClosed();
+        return wrist.getSensorCollection().isRevLimitSwitchClosed();
     }
 
     public boolean isFrontLimitSwitchClosed()
     {
-        return tilt.getSensorCollection().isFwdLimitSwitchClosed();
+        return wrist.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
     public int getTiltTarget()
     {
-        return (int)tiltController.getTarget();
+        return (int)wristController.getTarget();
     }
 
     /**
@@ -141,7 +141,7 @@ public class Grabber extends Subsystem
      */
     public void setTiltPosition(int position)
     {
-        tiltController.setTarget(position);
+        wristController.setTarget(position);
     }
 
     /**
@@ -161,7 +161,7 @@ public class Grabber extends Subsystem
      */
     public int getTiltPosition()
     {
-        return tilt.getSelectedSensorPosition(0);
+        return wrist.getSelectedSensorPosition(0);
     }
 
     public void setHolderState(boolean isOn)
@@ -177,9 +177,9 @@ public class Grabber extends Subsystem
     @Override
     public String toString()
     {
-        return "" + tilt.get() + "," +
-                tilt.getSelectedSensorPosition(0) + "," + 
-                tiltController.getTarget() + "," +
+        return "" + wrist.get() + "," +
+                wrist.getSelectedSensorPosition(0) + "," + 
+                wristController.getTarget() + "," +
 
                 intake.get() + "," +
 
