@@ -28,7 +28,10 @@ public class UserDrive extends Command
     @Override
     protected void execute() 
     {
-        Robot.driveBase.move(Robot.oi.driveJoystick, true, true); //withPID, then withHeadless
+        if(Robot.driveBase.EnableUserDrive){
+            Robot.driveBase.move(Robot.oi.driveJoystick, true, true); //withPID, then withHeadless
+        }
+        
     }
   
     // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +45,8 @@ public class UserDrive extends Command
     @Override
     protected void end()
     {
-        
+        //set motor power to 0
+        Robot.driveBase.moveWithoutIMU(0, 0, 0);
     }
   
     // Called when another command which requires one or more of the same

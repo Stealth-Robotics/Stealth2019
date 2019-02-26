@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.grabberCommands.*;
 import frc.robot.commands.lifterCommands.*;
-import frc.robot.commands.visionCommands.GoToTarget;
+import frc.robot.commands.visionCommands.*;
 
 import frc.robot.util.constants.OIConstants;
 import frc.robot.util.constants.Constants;
@@ -98,7 +98,8 @@ public class OI
 
         alignWithTargetButton = new JoystickButton(driveJoystick, OIConstants.ALIGN_WITH_TARGET_BUTTON);
 
-        alignWithTargetButton.whenPressed(new GoToTarget(0));
+        //alignWithTargetButton.whenPressed(new GoToTarget(0));
+        alignWithTargetButton.whileHeld(new LimelightVisionExample());
 
         mechJoystick = new Joystick(1);
 
