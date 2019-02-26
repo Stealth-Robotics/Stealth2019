@@ -33,6 +33,9 @@ public class LimelightVisionExample extends Command {
     // eg. requires(chassis);
 
     requires(Robot.driveBase);
+    
+    //turn the led off on init
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
   }
 
   // Called just before this Command runs the first time
