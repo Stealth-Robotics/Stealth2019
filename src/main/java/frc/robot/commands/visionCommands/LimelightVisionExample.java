@@ -7,9 +7,12 @@
 
 package frc.robot.commands.visionCommands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.networktables.*;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.util.PIDexecutor;
 
 /*
 This command is a hybrid baby of these two case studys from Limelight
@@ -27,12 +30,26 @@ public class LimelightVisionExample extends Command {
   private boolean m_LimelightHasValidTarget = false;
   private double m_LimelightSpeedCommand = 0.0;
   private double m_LimelightRotationCommand = 0.0;
+
+  private static PIDexecutor SpeedPIDloop;
   
   public LimelightVisionExample() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
 
     requires(Robot.driveBase);
+
+    // These numbers must be tuned for your Robot!  Be careful!
+    final double DRIVE_K = 0.15;                    // how hard to drive fwd toward the target
+    final double DESIRED_TARGET_AREA = 10;          // Area of the target when the robot reaches the wall
+
+    SpeedPIDloop = new PIDexecutor(DRIVE_K, 0.0, 0.5, DESIRED_TARGET_AREA, new DoubleSupplier(){
+        
+      @Override
+      public double getAsDouble() {
+          return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+      }
+    }, true);
     
     //turn the led off on init
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
@@ -46,6 +63,8 @@ public class LimelightVisionExample extends Command {
     //turn the led on (3) and make sure it is in vision processor mode (0)
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
+
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -69,16 +88,14 @@ public class LimelightVisionExample extends Command {
    */
   public void Update_Limelight_Tracking()
   {
-        // These numbers must be tuned for your Robot!  Be careful!
+
+        final double MAX_DRIVE = 0.3;                   // Simple speed limit so we don't drive too fast
         final double STEER_K = 0.03;                    // how hard to turn toward the target
-        final double DRIVE_K = 0.26;                    // how hard to drive fwd toward the target
-        final double DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
-        final double MAX_DRIVE = 0.7;                   // Simple speed limit so we don't drive too fast
 
         double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         //double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
-        double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+        //double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
 
         if (tv < 1.0)
         {
@@ -95,7 +112,7 @@ public class LimelightVisionExample extends Command {
         m_LimelightRotationCommand = steer_cmd;
 
         // try to drive forward until the target area reaches our desired area
-        double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
+        double drive_cmd = SpeedPIDloop.run();
 
         // don't let the robot drive too fast into the goal
         if (drive_cmd > MAX_DRIVE)
@@ -119,6 +136,9 @@ public class LimelightVisionExample extends Command {
     Robot.driveBase.EnableUserDrive = true;
     //turn the led off (1)
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+
+    //set the heading of the idle pid to where we are now
+    Robot.driveBase.setTargetHeading(Robot.driveBase.getHeading());
   }
 
   // Called when another command which requires one or more of the same
