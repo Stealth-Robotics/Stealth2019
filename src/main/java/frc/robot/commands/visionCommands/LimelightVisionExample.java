@@ -29,9 +29,24 @@ public class LimelightVisionExample extends Command {
   
   private boolean m_LimelightHasValidTarget = false;
   private double m_LimelightSpeedCommand = 0.0;
+  private double m_limelightStrafeCommand = 0.0;
   private double m_LimelightRotationCommand = 0.0;
 
   private static PIDexecutor SpeedPIDloop;
+  private static PIDexecutor StrafePIDloop;
+
+
+  // These numbers must be tuned for your Robot!  Be careful!
+  final double DESIRED_TARGET_AREA = 10;          // Area of the target when the robot reaches the wall
+  private static final double SPEEDkP = 0.15;
+  private static final double SPEEDkD = 0.5;
+  private final double MAX_DRIVE = 0.3;                   // Simple speed limit so we don't drive too fast
+
+  private static final double STRAFEkP = 0.05;
+  private static final double STRAFEkD = 0.5;
+  private static final double MAX_STRAFE = 0.1;
+  
+  private final double STEER_kP = 0.03;                    // how hard to turn toward the target
   
   public LimelightVisionExample() {
     // Use requires() here to declare subsystem dependencies
@@ -39,17 +54,21 @@ public class LimelightVisionExample extends Command {
 
     requires(Robot.driveBase);
 
-    // These numbers must be tuned for your Robot!  Be careful!
-    final double DRIVE_K = 0.15;                    // how hard to drive fwd toward the target
-    final double DESIRED_TARGET_AREA = 10;          // Area of the target when the robot reaches the wall
-
-    SpeedPIDloop = new PIDexecutor(DRIVE_K, 0.0, 0.5, DESIRED_TARGET_AREA, new DoubleSupplier(){
+    SpeedPIDloop = new PIDexecutor(SPEEDkP, 0.0, SPEEDkD, DESIRED_TARGET_AREA, new DoubleSupplier(){
         
       @Override
       public double getAsDouble() {
           return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
       }
     }, true);
+
+    SpeedPIDloop = new PIDexecutor(STRAFEkP, 0.0, STRAFEkD, 0.0, new DoubleSupplier(){
+        
+      @Override
+      public double getAsDouble() {
+          return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+      }
+    });
     
     //turn the led off on init
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
@@ -63,8 +82,6 @@ public class LimelightVisionExample extends Command {
     //turn the led on (3) and make sure it is in vision processor mode (0)
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(0);
-
-
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -75,10 +92,10 @@ public class LimelightVisionExample extends Command {
     //if there is a valid target then use the calculated values to drive twords it otherwise turn around aka seek for a valad target
     if (m_LimelightHasValidTarget)
     {
-      Robot.driveBase.moveWithoutIMU(m_LimelightSpeedCommand, 0, m_LimelightRotationCommand);
+      Robot.driveBase.moveWithoutIMU(m_LimelightSpeedCommand, m_limelightStrafeCommand, m_LimelightRotationCommand);
       //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
     } else {
-      Robot.driveBase.moveWithoutIMU(0, 0, 0.3);
+      Robot.driveBase.moveWithoutIMU(0, 0, -0.3);
     }
   }
 
@@ -88,10 +105,6 @@ public class LimelightVisionExample extends Command {
    */
   public void Update_Limelight_Tracking()
   {
-
-        final double MAX_DRIVE = 0.3;                   // Simple speed limit so we don't drive too fast
-        final double STEER_K = 0.03;                    // how hard to turn toward the target
-
         double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         //double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
@@ -108,7 +121,7 @@ public class LimelightVisionExample extends Command {
         m_LimelightHasValidTarget = true;
 
         // Start with proportional steering
-        double steer_cmd = tx * STEER_K;
+        double steer_cmd = tx * STEER_kP;
         m_LimelightRotationCommand = steer_cmd;
 
         // try to drive forward until the target area reaches our desired area
@@ -120,6 +133,16 @@ public class LimelightVisionExample extends Command {
           drive_cmd = MAX_DRIVE;
         }
         m_LimelightSpeedCommand = drive_cmd;
+
+        
+        double strafe_cmd = StrafePIDloop.run();
+
+        // don't let the robot drive too fast into the goal
+        if (strafe_cmd > MAX_STRAFE)
+        {
+          strafe_cmd = MAX_STRAFE;
+        }
+        m_limelightStrafeCommand = strafe_cmd;
   }
 
   // Make this return true when this Command no longer needs to run execute()
