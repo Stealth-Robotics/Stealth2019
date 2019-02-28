@@ -50,11 +50,11 @@ public class LimelightVisionExample extends Command
             @Override
             public double getAsDouble() 
             {
-                return -NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+                return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
             }
         });
 
-        SpeedPIDloop = new PIDexecutor(Constants.STRAFEkP, 0.0, Constants.STRAFEkD, 0.0, new DoubleSupplier()
+        StrafePIDloop = new PIDexecutor(Constants.STRAFEkP, 0.0, Constants.STRAFEkD, 0.0, new DoubleSupplier()
         {
             @Override
             public double getAsDouble() 
@@ -87,7 +87,7 @@ public class LimelightVisionExample extends Command
         //if there is a valid target then use the calculated values to drive twords it otherwise turn around aka seek for a valad target
         if (m_LimelightHasValidTarget)
         {
-            Robot.driveBase.moveWithoutIMU(m_LimelightSpeedCommand, m_limelightStrafeCommand, m_LimelightRotationCommand);
+            Robot.driveBase.moveWithoutIMU(m_LimelightSpeedCommand, 0, m_LimelightRotationCommand);
             //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
         }
         else 
@@ -122,7 +122,7 @@ public class LimelightVisionExample extends Command
         m_LimelightRotationCommand = steer_cmd;
 
         // try to drive forward until the target area reaches our desired area
-        double drive_cmd = SpeedPIDloop.run();
+        double drive_cmd = -SpeedPIDloop.run();
 
         // don't let the robot drive too fast into the goal
         if (drive_cmd > Constants.MAX_DRIVE)
