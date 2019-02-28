@@ -48,24 +48,29 @@ public class LimelightVisionExample extends Command {
   
   private final double STEER_kP = 0.03;                    // how hard to turn toward the target
   
-  public LimelightVisionExample() {
+  public LimelightVisionExample() 
+  {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
 
     requires(Robot.driveBase);
 
-    SpeedPIDloop = new PIDexecutor(SPEEDkP, 0.0, SPEEDkD, DESIRED_TARGET_AREA, new DoubleSupplier(){
+    SpeedPIDloop = new PIDexecutor(SPEEDkP, 0.0, SPEEDkD, DESIRED_TARGET_AREA, new DoubleSupplier()
+    {
         
       @Override
-      public double getAsDouble() {
-          return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+      public double getAsDouble() 
+      {
+          return -NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
       }
-    }, true);
+    });
 
-    SpeedPIDloop = new PIDexecutor(STRAFEkP, 0.0, STRAFEkD, 0.0, new DoubleSupplier(){
+    SpeedPIDloop = new PIDexecutor(STRAFEkP, 0.0, STRAFEkD, 0.0, new DoubleSupplier()
+    {
         
       @Override
-      public double getAsDouble() {
+      public double getAsDouble() 
+      {
           return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
       }
     });
@@ -76,7 +81,8 @@ public class LimelightVisionExample extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
     //disable userdrive
     Robot.driveBase.EnableUserDrive = false;
     //turn the led on (3) and make sure it is in vision processor mode (0)
@@ -86,7 +92,8 @@ public class LimelightVisionExample extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute() 
+  {
     Update_Limelight_Tracking();
 
     //if there is a valid target then use the calculated values to drive twords it otherwise turn around aka seek for a valad target
@@ -94,7 +101,9 @@ public class LimelightVisionExample extends Command {
     {
       Robot.driveBase.moveWithoutIMU(m_LimelightSpeedCommand, m_limelightStrafeCommand, m_LimelightRotationCommand);
       //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
-    } else {
+    }
+    else 
+    {
       Robot.driveBase.moveWithoutIMU(0, 0, -0.3);
     }
   }
@@ -147,13 +156,15 @@ public class LimelightVisionExample extends Command {
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  protected boolean isFinished() 
+  {
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() 
+  {
     //set motor power to 0 and reEnable user drive
     Robot.driveBase.moveWithoutIMU(0, 0, 0);
     Robot.driveBase.EnableUserDrive = true;
@@ -167,7 +178,8 @@ public class LimelightVisionExample extends Command {
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted()
+  {
     end();
   }
 }

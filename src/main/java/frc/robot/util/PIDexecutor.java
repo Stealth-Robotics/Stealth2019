@@ -19,8 +19,6 @@ public class PIDexecutor
 
     private DoubleSupplier curValueFunct;
 
-    private boolean invertTargetMath;
-
     // StopWatch stopWatch;
 
     /**
@@ -37,32 +35,6 @@ public class PIDexecutor
         this.KI = KI;
         this.KD = KD;
         this.target = target;
-        
-        this.invertTargetMath = false;
-
-        accumError = 0;
-        lastError = 0;
-
-        this.curValueFunct = curValueFunct;
-        
-        // stopWatch = new StopWatch();
-    }
-
-    /**
-     * Sets up variables
-     * 
-     * @param KP the proportional constant
-     * @param KI the integral constant
-     * @param KD the drrivative constant
-     * @param curValueFunct the function for finding the error
-     */
-    public PIDexecutor(double KP, double KI, double KD, double target, DoubleSupplier curValueFunct, boolean invertTargetMath)
-    {
-        this.KP = KP;
-        this.KI = KI;
-        this.KD = KD;
-        this.target = target;
-        this.invertTargetMath = invertTargetMath;
 
         accumError = 0;
         lastError = 0;
@@ -77,12 +49,7 @@ public class PIDexecutor
      */
     public double run()
     {
-        double error = 0;
-        if (invertTargetMath){
-            error = target - curValueFunct.getAsDouble();
-        }else {
-            error = curValueFunct.getAsDouble() - target;
-        }
+        double error = curValueFunct.getAsDouble() - target;
 
         accumError += error;
 
