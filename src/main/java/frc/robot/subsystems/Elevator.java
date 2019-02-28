@@ -37,8 +37,9 @@ public class Elevator extends Subsystem
         loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
         
             @Override
-            public double getAsDouble() {
-                return elevator.getSelectedSensorPosition(0);
+            public double getAsDouble() 
+            {
+                return -elevator.getSelectedSensorPosition(0);
             }
         });
 
@@ -77,7 +78,7 @@ public class Elevator extends Subsystem
 
         if (Math.abs(joystickY) > 0.2)
         {
-            loop.setTarget(loop.getTarget() - joystickY * Constants.ELEVATOR_SPEED_NORMAL);
+            loop.setTarget(loop.getTarget() + joystickY * Constants.ELEVATOR_SPEED_NORMAL);
         }
         else
         {

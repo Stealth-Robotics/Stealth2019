@@ -88,9 +88,9 @@ public class Grabber extends Subsystem
 
     public void run()
     {
-        if(isBackLimitSwitchClosed()){
-            wristController.setTarget(getTiltPosition() - 20);
-        }
+        // if(isBackLimitSwitchClosed()){
+        //     wristController.setTarget(getTiltPosition() - 20);
+        // }
 
         wrist.set(wristController.run());
 
