@@ -108,4 +108,7 @@ public class Constants
     public static final double MAX_STRAFE = 0.1;
     
     public static final double STEER_kP = 0.03;                    // how hard to turn toward the target
+    public static final double STEER_kI = 0;   
+    public static final double STEER_kD = 0;
+    public static final double STEER_TARGET_RATIO = 1.812; //horizontal bounding box over vertical bounding box
 }
