@@ -5,7 +5,6 @@ import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -45,8 +44,8 @@ public class Elevator extends Subsystem
         // });
 
         //OVERRIDE PID LOOP
-        loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
-        
+        loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier()
+        {
             @Override
             public double getAsDouble() 
             {
@@ -110,7 +109,8 @@ public class Elevator extends Subsystem
      * 
      * @return Returns the Encoder value for the elevator
      */
-    public int getPosition(){
+    public int getPosition()
+    {
         return elevator.getSelectedSensorPosition(0);
     }
 

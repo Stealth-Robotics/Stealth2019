@@ -81,7 +81,8 @@ public class PIDexecutor
      */
     public double run()
     {
-        if(overridePID){
+        if(overridePID)
+        {
             return curValueFunct.getAsDouble();
         }
         
@@ -123,5 +124,15 @@ public class PIDexecutor
     public double getTarget()
     {
         return target;
+    }
+
+    /**
+     * Allows the PIDexecutor to be disabled
+     * 
+     * @param override
+     */
+    public void override(boolean override)
+    {
+        overridePID = override;
     }
 }
