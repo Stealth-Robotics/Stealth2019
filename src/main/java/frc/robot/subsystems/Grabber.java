@@ -23,7 +23,7 @@ import frc.robot.util.constants.OIConstants;
  * 
  * <p> It involves two wheels for the intake, and a motor to tilt the intake up and down </p>
  * 
- * <p> It also contains two pnumatic cylinders, controlled by a solenoid
+ * <p> It also contains two pnumatic cylinders, controlled by a solenoid </p>
  */
 public class Grabber extends Subsystem
 {
@@ -49,17 +49,32 @@ public class Grabber extends Subsystem
         //tilt.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 40);
         //tilt.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 40);
 
+        //PID WITH ENCODER
+        // wristController = new PIDexecutor(Constants.TILT_KP, Constants.TILT_KI, Constants.TILT_KD, wrist.getSelectedSensorPosition(0), new DoubleSupplier()
+        // {
+        
+        //     @Override
+        //     public double getAsDouble() 
+        //     {
+        //         return wrist.getSelectedSensorPosition(0);
+        //     }
+        // });
+
+        //PID WITHOUT ENCODER
         wristController = new PIDexecutor(Constants.TILT_KP, Constants.TILT_KI, Constants.TILT_KD, wrist.getSelectedSensorPosition(0), new DoubleSupplier()
         {
         
             @Override
             public double getAsDouble() 
             {
-                return wrist.getSelectedSensorPosition(0);
+                double axis = Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
+                if(!(Math.abs(axis) > OIConstants.DEADZONE_GRABBER))
+                {
+                    axis = 0;
+                }
+                return axis;
             }
-        });
-
-        
+        }, true);
 
         SmartDashboard.putString("Grabber/Status", Status.Good.toString());
     }
@@ -84,17 +99,12 @@ public class Grabber extends Subsystem
         SmartDashboard.putNumber("Grabber/WristPower", wrist.get());
         SmartDashboard.putBoolean("Grabber/BackLimitSwitch", isBackLimitSwitchClosed());
         SmartDashboard.putBoolean("Grabber/FrontLimitSwitch", isFrontLimitSwitchClosed());
-    }
 
-    public void run()
-    {
         // if(isBackLimitSwitchClosed()){
         //     wristController.setTarget(getTiltPosition() - 20);
         // }
 
-        wrist.set(wristController.run());
-
-        
+        wrist.set(WristSafteyChecks(wristController.run()));
 
         double triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.RUN_INTAKE_TRIGGER);
         if (triggerValue > OIConstants.TRIGGER_THRESHOLD)
@@ -112,6 +122,23 @@ public class Grabber extends Subsystem
     }
 
     /**
+     * Checks that the limitswitches arent closed and makes the motor stop
+     * 
+     * @param input power input to check
+     * 
+     * @return The power after checkes have been made
+     */
+    public double WristSafteyChecks(double input)
+    {
+        double output = input;
+        if (isBackLimitSwitchClosed() && output <= 0) {
+            output = 0;
+        }
+
+        return output;
+    }
+
+    /**
      * Resets all encoders to zero
      */
     public void resetEncoders()
@@ -119,16 +146,31 @@ public class Grabber extends Subsystem
         wrist.setSelectedSensorPosition(0, 0, 30);
     }
 
+    /**
+     * Returns if the back limit switch is closed
+     * 
+     * @return A boolean that is true if it is closed
+     */
     public boolean isBackLimitSwitchClosed()
     {
         return wrist.getSensorCollection().isRevLimitSwitchClosed();
     }
 
+    /**
+     * Returns if the front limit switch is closed
+     * 
+     * @return a bool that is true if the switch is closed
+     */
     public boolean isFrontLimitSwitchClosed()
     {
         return wrist.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
+    /**
+     * Returns the target that the wrist is trying to get to
+     * 
+     * @return Returns the tilt target
+     */
     public int getTiltTarget()
     {
         return (int)wristController.getTarget();

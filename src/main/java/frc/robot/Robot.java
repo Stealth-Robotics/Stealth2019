@@ -195,8 +195,6 @@ public class Robot extends TimedRobot
     public void teleopPeriodic() 
     {
         Scheduler.getInstance().run();
-        lifter.runLoops();
-        grabber.run();
     }
 
     /**
@@ -219,12 +217,12 @@ public class Robot extends TimedRobot
         // SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
         // SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
 
-        // int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
-        // int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
+        int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
+        int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
 
-        // lifter.setTargets(frontTarget, frontTarget, backTarget);
+        lifter.setTargets(frontTarget, frontTarget, backTarget);
 
-        // lifter.runLoops();
+        lifter.runLoops();
 
         
         // if (Robot.oi.mechJoystick.getPOV() != -1)

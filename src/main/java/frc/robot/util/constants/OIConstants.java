@@ -29,6 +29,7 @@ public class OIConstants
 
     // vertical joystick axis for mech joystick
     public static final int ELEVATOR_JOYSTICK_Y = 1;
+    public static final double ELEVATOR_JOYSTICK_DEADZONE = 0.15;
 
     // lifter control buttons
     public static final int LEVEL_2_BUTTON = 4;

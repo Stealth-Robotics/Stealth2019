@@ -76,6 +76,8 @@ public class PIDexecutor
 
     /**
      * Run the PID executor
+     * 
+     * @return Returns the power value calculated (If OverridePID is true then just returns curValueFunct.getAsDouble())
      */
     public double run()
     {

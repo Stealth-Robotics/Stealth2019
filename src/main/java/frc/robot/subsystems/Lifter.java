@@ -43,6 +43,7 @@ public class Lifter extends Subsystem
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
         legL.setInverted(true);
+        legBack.setInverted(true);
         wheel.setInverted(true);
 
         resetEncoders();
@@ -101,7 +102,7 @@ public class Lifter extends Subsystem
     @Override
     public void periodic()
     {
-        
+        runLoops();
     }
 
     /**
@@ -164,8 +165,6 @@ public class Lifter extends Subsystem
         legBack.setSelectedSensorPosition(0, 0, 30);
     }
 
-    //#region Get positions
-
     /**
      * Gets the position of the left front leg
      * 
@@ -195,10 +194,6 @@ public class Lifter extends Subsystem
     {
         return legBack.getSelectedSensorPosition(0);
     }
-
-    //#endregion
-    
-    //#region Leg targeting functions
 
     /**
      * Sets the targets for the climb motors
@@ -268,10 +263,6 @@ public class Lifter extends Subsystem
         rightLoop.setTarget(safetyChecks(target, Constants.FRONT_LEG_MAX, Constants.FRONT_LEG_MIN));
     }
 
-    //#endregion
-
-    //#region Set wheel and leg speeds
-
     /**
      * Operates the wheel mounted on the leg
      * 
@@ -303,10 +294,6 @@ public class Lifter extends Subsystem
         legR.set(speed);
     }
 
-    //#endregion
-
-    //#region Get targets
-
     /**
      * Gets the target for the back leg
      * 
@@ -336,8 +323,6 @@ public class Lifter extends Subsystem
     {
         return (int)rightLoop.getTarget();
     }
-
-    //#endregion
 
     @Override
     public String toString()

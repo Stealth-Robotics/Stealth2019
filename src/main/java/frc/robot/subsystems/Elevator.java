@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.elevatorCommands.UserDriveElevator;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,14 +34,32 @@ public class Elevator extends Subsystem
 
         elevator.setInverted(true);
 
+        //NORMAL PID LOOP
+        // loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
+        
+        //     @Override
+        //     public double getAsDouble() 
+        //     {
+        //         return -elevator.getSelectedSensorPosition(0);
+        //     }
+        // });
+
+        //OVERRIDE PID LOOP
         loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
         
             @Override
             public double getAsDouble() 
             {
-                return -elevator.getSelectedSensorPosition(0);
+                double joystickY = Robot.oi.mechJoystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
+
+                if (!(Math.abs(joystickY) > OIConstants.ELEVATOR_JOYSTICK_DEADZONE))
+                {
+                    joystickY = 0;
+                }
+                
+                return joystickY;
             }
-        });
+        }, true);
 
         SmartDashboard.putString("Elevator/Status", Status.Good.toString());
 
@@ -51,11 +69,11 @@ public class Elevator extends Subsystem
     @Override
     public void periodic()
     {
-
         SmartDashboard.putNumber("Elevator/Target", loop.getTarget());
         SmartDashboard.putNumber("Elevator/Position", elevator.getSelectedSensorPosition(0));
         SmartDashboard.putNumber("Elevator/MotorPower", elevator.get());
-        
+
+        setSpeed(loop.run());
     }
 
     /**
@@ -68,27 +86,6 @@ public class Elevator extends Subsystem
     }
 
     /**
-     * Moves elevator using joystick
-     * 
-     * @param joystick the driving joystick
-     */
-    public void move(Joystick joystick)
-    {
-        double joystickY = joystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
-
-        if (Math.abs(joystickY) > 0.2)
-        {
-            loop.setTarget(loop.getTarget() + joystickY * Constants.ELEVATOR_SPEED_NORMAL);
-        }
-        else
-        {
-            loop.setTarget(loop.getTarget());
-        }
-        
-        setSpeed(loop.run());
-    }
-
-    /**
      * Sets the target encoder postiton for the elevator
      * 
      * @param target the target position
@@ -98,6 +95,21 @@ public class Elevator extends Subsystem
         loop.setTarget(target);
     }
 
+    /**
+     * Gets the target encoder postiton for the elevator
+     * 
+     * @return Returns the target of the PID loop
+     */
+    public int getTarget()
+    {
+        return (int)loop.getTarget();
+    }
+
+    /**
+     * Get the Encoder value for the elevator
+     * 
+     * @return Returns the Encoder value for the elevator
+     */
     public int getPosition(){
         return elevator.getSelectedSensorPosition(0);
     }
@@ -120,6 +132,9 @@ public class Elevator extends Subsystem
         loop.reset();
     }
 
+    /**
+     * Resets the encoder to 0 and the target to 0
+     */
     public void reset()
     {
         elevator.setSelectedSensorPosition(0, 0, 30);
