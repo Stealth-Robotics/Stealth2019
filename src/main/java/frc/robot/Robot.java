@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -63,6 +65,10 @@ public class Robot extends TimedRobot
         //start logging command
         loggingCommand = new Logging();
         loggingCommand.start();
+
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(320, 240);
+        camera.setFPS(30);
 
         m_chooser.setDefaultOption("Default Auto", new AutoDriveForward());
         // chooser.addOption("My Auto", new MyAutoCommand());
@@ -217,12 +223,12 @@ public class Robot extends TimedRobot
         // SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
         // SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
 
-        int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
-        int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
+        // int frontTarget = (int)SmartDashboard.getNumber("Lifter/FrontTarget", 0);
+        // int backTarget = (int)SmartDashboard.getNumber("Lifter/BackTarget", 0);
 
-        lifter.setTargets(frontTarget, frontTarget, backTarget);
+        // lifter.setTargets(frontTarget, frontTarget, backTarget);
 
-        lifter.runLoops();
+        // lifter.runLoops();
 
         
         // if (Robot.oi.mechJoystick.getPOV() != -1)

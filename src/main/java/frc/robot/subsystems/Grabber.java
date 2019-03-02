@@ -67,7 +67,7 @@ public class Grabber extends Subsystem
             @Override
             public double getAsDouble() 
             {
-                double axis = Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
+                double axis = -Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
                 if(!(Math.abs(axis) > OIConstants.DEADZONE_GRABBER))
                 {
                     axis = 0;
@@ -104,7 +104,9 @@ public class Grabber extends Subsystem
         //     wristController.setTarget(getTiltPosition() - 20);
         // }
 
-        wrist.set(WristSafteyChecks(wristController.run()));
+        //WristSafteyChecks();
+
+        wrist.set(wristController.run());
 
         double triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.RUN_INTAKE_TRIGGER);
         if (triggerValue > OIConstants.TRIGGER_THRESHOLD)

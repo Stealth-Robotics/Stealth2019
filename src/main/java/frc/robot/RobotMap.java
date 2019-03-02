@@ -44,7 +44,7 @@ public class RobotMap
     //port for intake talon
     public static final int intake = 11;
     //port for wrist motor talon
-    public static final int wrist = 9;
+    public static final int wrist = 5;
 
     //Common Ground and power is Grey and Orange
 

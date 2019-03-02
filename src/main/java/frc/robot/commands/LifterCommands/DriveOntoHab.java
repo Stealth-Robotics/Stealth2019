@@ -42,6 +42,7 @@ public class DriveOntoHab extends CommandGroup
     @Override
     protected void end()
     {
+        System.out.println("SETTING LEGS BACK TO 0");
         Robot.lifter.setFrontLTarget(Constants.FRONT_LEGS_LEVEL_0);
         Robot.lifter.setFrontRTarget(Constants.FRONT_LEGS_LEVEL_0);
         Robot.lifter.setBackTarget(Constants.BACK_LEG_LEVEL_0);

@@ -43,7 +43,7 @@ public class Lifter extends Subsystem
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
         legL.setInverted(true);
-        legBack.setInverted(true);
+        //legBack.setInverted(true);
         wheel.setInverted(true);
 
         resetEncoders();
@@ -53,7 +53,7 @@ public class Lifter extends Subsystem
             @Override
             public double getAsDouble()
             {
-                return legBack.getSelectedSensorPosition(0);
+                return -legBack.getSelectedSensorPosition(0);
             }
         });
 

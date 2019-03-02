@@ -200,6 +200,7 @@ public class DriveBase extends Subsystem
                 else if (timeSinceRot.isExpired() && !isHeadingSet)
                 {
                     headingPIDloop.setTarget(currentHeading);
+                    headingPIDloop.reset();
                     isHeadingSet = true;
                 }
                 

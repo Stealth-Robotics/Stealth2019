@@ -56,7 +56,7 @@ public class Elevator extends Subsystem
                     joystickY = 0;
                 }
                 
-                return joystickY;
+                return joystickY * 0.5;
             }
         }, true);
 
