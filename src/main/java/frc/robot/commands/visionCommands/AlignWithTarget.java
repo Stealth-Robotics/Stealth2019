@@ -103,6 +103,8 @@ public class AlignWithTarget extends Command
         if (hasValidTarget)
         {
             double netSpeed = Math.sqrt(targetLinearSpeed * targetLinearSpeed + targetStrafe * targetStrafe);
+            double netDirection = Math.atan(targetLinearSpeed / targetStrafe);
+            netDirection = (netDirection < 0) ? Math.PI + netDirection : netDirection;
             Robot.driveBase.moveWithoutIMU(netSpeed, (targetStrafe > 0) ? -Math.PI / 2 : Math.PI / 2, targetRotation);
             //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
         }
