@@ -19,6 +19,8 @@ public class PIDexecutor
 
     private DoubleSupplier curValueFunct;
 
+    private boolean overridePID;
+
     // StopWatch stopWatch;
 
     /**
@@ -36,6 +38,34 @@ public class PIDexecutor
         this.KD = KD;
         this.target = target;
 
+        overridePID = false;
+
+        accumError = 0;
+        lastError = 0;
+
+        this.curValueFunct = curValueFunct;
+        
+        // stopWatch = new StopWatch();
+    }
+
+    /**
+     * Sets up variables
+     * 
+     * @param KP the proportional constant
+     * @param KI the integral constant
+     * @param KD the drrivative constant
+     * @param curValueFunct the function for finding the error
+     * @param overridePID if true simply returns the get doubble from the curValueFunct when you call run
+     */
+    public PIDexecutor(double KP, double KI, double KD, double target, DoubleSupplier curValueFunct, boolean overridePID)
+    {
+        this.KP = KP;
+        this.KI = KI;
+        this.KD = KD;
+        this.target = target;
+
+        this.overridePID = overridePID;
+
         accumError = 0;
         lastError = 0;
 
@@ -49,6 +79,10 @@ public class PIDexecutor
      */
     public double run()
     {
+        if(overridePID){
+            return curValueFunct.getAsDouble();
+        }
+        
         double error = curValueFunct.getAsDouble() - target;
 
         accumError += error;
