@@ -68,7 +68,8 @@ public class AlignWithTarget extends Command
             @Override
             public double getAsDouble() 
             {
-                return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0) / NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+                int direction = (NetworkTableInstance.getDefault().getTable("limelight").getEntry("ts").getDouble(0) < 45) ? 1 : -1;
+                return direction * NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0) / NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
             }
         });
         
@@ -91,12 +92,13 @@ public class AlignWithTarget extends Command
     @Override
     protected void execute() 
     {
-        Update_Limelight_Tracking();
+        updateLimelightTracking();
 
         //if there is a valid target then use the calculated values to drive twords it otherwise turn around aka seek for a valad target
         if (m_LimelightHasValidTarget)
         {
-            Robot.driveBase.moveWithoutIMU(m_LimelightSpeedCommand, m_limelightStrafeCommand, m_LimelightRotationCommand);
+            double netSpeed = Math.sqrt(m_LimelightSpeedCommand * m_LimelightSpeedCommand + m_limelightStrafeCommand * m_limelightStrafeCommand);
+            Robot.driveBase.moveWithoutIMU(netSpeed, (m_limelightStrafeCommand > 0) ? -Math.PI / 2 : Math.PI / 2, m_LimelightRotationCommand);
             //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
         }
         else 
@@ -109,10 +111,10 @@ public class AlignWithTarget extends Command
      * This function implements a simple method of generating driving and steering commands
      * based on the tracking data from a limelight camera.
      */
-    public void Update_Limelight_Tracking()
+    public void updateLimelightTracking()
     {
         double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-        double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+        // double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         //double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
         //double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
 
@@ -127,8 +129,8 @@ public class AlignWithTarget extends Command
         m_LimelightHasValidTarget = true;
 
         // Start with proportional steering
-        double steer_cmd = tx * Constants.STEER_kP;
-        m_LimelightRotationCommand = steer_cmd;
+        // double steer_cmd = tx * Constants.STEER_kP;
+        // m_LimelightRotationCommand = steer_cmd;
 
         // try to drive forward until the target area reaches our desired area
         double drive_cmd = -SpeedPIDloop.run();
@@ -149,6 +151,10 @@ public class AlignWithTarget extends Command
             strafe_cmd = Constants.MAX_STRAFE;
         }
         m_limelightStrafeCommand = strafe_cmd;
+
+        double steer_cmd = SteerPIDloop.run();
+
+        m_LimelightRotationCommand = steer_cmd;
     }
 
     // Make this return true when this Command no longer needs to run execute()
