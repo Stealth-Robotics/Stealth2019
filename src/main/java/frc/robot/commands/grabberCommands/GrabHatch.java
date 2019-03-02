@@ -19,7 +19,7 @@ public class GrabHatch extends Command
     protected void initialize() 
     {
         super.initialize();
-        Robot.grabber.setHolderState(!state);
+        Robot.grabber.setHolderState(state);
     }
 
     @Override

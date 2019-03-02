@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.*;
 import frc.robot.util.constants.Constants;
 import frc.robot.RobotMap;
+import frc.robot.*;
 
 /**
  * This subsystem defines the lifter for the robot
@@ -43,7 +44,6 @@ public class Lifter extends Subsystem
         wheel = new WPI_TalonSRX(RobotMap.wheel);
 
         legL.setInverted(true);
-        //legBack.setInverted(true);
         wheel.setInverted(true);
 
         resetEncoders();
@@ -93,7 +93,6 @@ public class Lifter extends Subsystem
     @Override
     public void initDefaultCommand()
     {
-        
     }
 
     /**
@@ -102,6 +101,29 @@ public class Lifter extends Subsystem
     @Override
     public void periodic()
     {
+        if (Robot.oi.wheelForwardButton.get())
+        {
+            setWheelSpeed(1);
+        }
+        else if (Robot.oi.wheelBackwardButton.get())
+        {
+            setWheelSpeed(-1);
+        }
+        else
+        {
+            setWheelSpeed(0);
+        }
+        
+        
+        if (Robot.oi.backLegDown.get())
+        {
+            setBackTarget(getBackTarget() + 10);
+        }
+        else if (Robot.oi.backLegUp.get())
+        {
+            setBackTarget(getBackTarget() - 10);
+        }
+
         runLoops();
     }
 

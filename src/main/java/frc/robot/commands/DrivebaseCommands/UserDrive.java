@@ -28,8 +28,9 @@ public class UserDrive extends Command
     @Override
     protected void execute() 
     {
-        if(Robot.driveBase.EnableUserDrive){
-            Robot.driveBase.move(Robot.oi.driveJoystick, true, true); //withPID, then withHeadless
+        if(Robot.driveBase.EnableUserDrive)
+        {
+            Robot.driveBase.move(Robot.oi.driveJoystick, true, false); //withPID, then withHeadless
         }
         
     }

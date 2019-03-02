@@ -58,7 +58,7 @@ public class Constants
     public static final int FRONT_LEGS_LEVEL_2 = 5000;
     public static final int BACK_LEG_LEVEL_2 = 5000;
     public static final int FRONT_LEGS_LEVEL_3 = 16500;
-    public static final int BACK_LEG_LEVEL_3 = 16500;
+    public static final int BACK_LEG_LEVEL_3 = 16700;
     public static final int FRONT_LEGS_LEVEL_0 = 0;
     public static final int BACK_LEG_LEVEL_0 = 0;
 

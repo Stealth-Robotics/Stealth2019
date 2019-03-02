@@ -85,8 +85,6 @@ public class OI
     public Button backLegUp;
     public Button backLegDown;
 
-    public Button testing;
-
   
     OI()
     {
@@ -138,10 +136,6 @@ public class OI
 
         level2Button.whenPressed(new DriveOntoHab(2));
         level3Button.whenPressed(new DriveOntoHab(3));
-
-        testing = new JoystickButton(stationJoystick, 2);
-
-        testing.whenPressed(new UserDriveWheel());
 
         // overrideJoystick = new Joystick(2);
 

@@ -48,7 +48,7 @@ public class LiftAllToLevel extends Command
             backTarget = Constants.BACK_LEG_LEVEL_0;
         }
 
-        stopWatch = new StopWatch(500);
+        stopWatch = new StopWatch(1500);
     }
 
     /**
@@ -81,9 +81,10 @@ public class LiftAllToLevel extends Command
     @Override
     protected boolean isFinished() 
     {
-        return Math.abs(Robot.lifter.getFrontLPosition() - frontTarget) < 100 &&
-                    Math.abs(Robot.lifter.getFrontRPosition() - frontTarget) < 100 &&
-                    Math.abs(Robot.lifter.getBackPosition() - backTarget) < 100;
+        return Math.abs(Robot.lifter.getFrontLPosition() - frontTarget) < 200 &&
+                    Math.abs(Robot.lifter.getFrontRPosition() - frontTarget) < 200 &&
+                    Math.abs(Robot.lifter.getBackPosition() - backTarget) < 200
+                    || Robot.oi.nextStageButton.get();
     }
 
     /**

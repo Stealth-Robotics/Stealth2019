@@ -19,7 +19,7 @@ public class ReleaseHatch extends Command
     protected void initialize() 
     {
         super.initialize();
-        Robot.grabber.setPusherState(!state);
+        Robot.grabber.setPusherState(state);
     }
 
     @Override

@@ -56,8 +56,8 @@ public class LiftFrontToLevel extends Command
     @Override
     protected boolean isFinished() 
     {
-        return Math.abs(Robot.lifter.getFrontLPosition() - target) < 100 &&
-                    Math.abs(Robot.lifter.getFrontRPosition() - target) < 100;
+        return Math.abs(Robot.lifter.getFrontLPosition() - target) < 200 &&
+                    Math.abs(Robot.lifter.getFrontRPosition() - target) < 200;
     }
 
     /**
