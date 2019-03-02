@@ -43,8 +43,6 @@ public class DriveBase extends Subsystem
     private static boolean isDriverRotating;
     private static boolean isHeadingSet;
 
-    public boolean EnableUserDrive = true;
-
     public DriveBase()
     {
         super();
