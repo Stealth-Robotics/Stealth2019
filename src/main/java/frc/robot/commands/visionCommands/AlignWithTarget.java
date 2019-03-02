@@ -25,9 +25,7 @@ This command is a hybrid baby of these two case studys from Limelight
 
     if there isn't a target the robot is told to spin in circles until it finds a target or the command is terminated
 */
-//TODO: Make pid things in LimelightVisionExample use PID executor (I would do this but I would like to test some things first)
-//TODO: Comeup with a better name for LimelightVisionExample class
-public class LimelightVisionExample extends Command 
+public class AlignWithTarget extends Command 
 {
   
     private boolean m_LimelightHasValidTarget = false;
@@ -39,7 +37,7 @@ public class LimelightVisionExample extends Command
     private static PIDexecutor StrafePIDloop;
     private static PIDexecutor SteerPIDloop;
 
-    public LimelightVisionExample() 
+    public AlignWithTarget() 
     {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
