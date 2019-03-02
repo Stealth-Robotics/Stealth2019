@@ -37,7 +37,8 @@ public class LimelightVisionExample extends Command
 
     private static PIDexecutor SpeedPIDloop;
     private static PIDexecutor StrafePIDloop;
-    
+    private static PIDexecutor SteerPIDloop;
+
     public LimelightVisionExample() 
     {
         // Use requires() here to declare subsystem dependencies
@@ -60,6 +61,16 @@ public class LimelightVisionExample extends Command
             public double getAsDouble() 
             {
                 return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+            }
+        });
+
+        SteerPIDloop = new PIDexecutor(Constants.STEER_kP, Constants.STEER_kI, Constants.STEER_kD, Constants.STEER_TARGET_RATIO, new DoubleSupplier()
+        {
+        
+            @Override
+            public double getAsDouble() 
+            {
+                return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0) / NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
             }
         });
         
@@ -87,7 +98,7 @@ public class LimelightVisionExample extends Command
         //if there is a valid target then use the calculated values to drive twords it otherwise turn around aka seek for a valad target
         if (m_LimelightHasValidTarget)
         {
-            Robot.driveBase.moveWithoutIMU(m_LimelightSpeedCommand, 0, m_LimelightRotationCommand);
+            Robot.driveBase.moveWithoutIMU(m_LimelightSpeedCommand, m_limelightStrafeCommand, m_LimelightRotationCommand);
             //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
         }
         else 
