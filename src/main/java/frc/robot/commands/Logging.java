@@ -36,24 +36,23 @@ public class Logging extends Command
 
     private PigeonIMU imu;
     private DriverStation driverStation;
+
+    private Thread thread;
     
     public Logging() 
     {
         super("Logging");
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.driveBase);
-    }
-  
-    // Called just before this Command runs the first time
-    @Override
-    protected void initialize() 
-    {
-        run = true;
+        //requires(Robot.driveBase);
+        SmartDashboard.putString("Logging/Status", "Creating Logging");
 
         //create a new thread to run logging system off of
-        new Thread(() -> 
+        thread = new Thread()
         {
-            
+            @Override
+            public void run()
+            {
+            SmartDashboard.putString("Logging/Status", "Starting Up!");
 
             date = new Date();
             StartTime = date.getTime();
@@ -69,6 +68,7 @@ public class Logging extends Command
             {
                 e.printStackTrace();
                 System.out.println("Unable to create/find FileWriter");
+                SmartDashboard.putString("Logging/Status", "Unable to create/find FileWriter");
 
                 SmartDashboard.putBoolean("Logging/Initialized", false);
                 //set the command to done
@@ -80,7 +80,7 @@ public class Logging extends Command
             
             SmartDashboard.putBoolean("Logging/Initialized", true);
 
-            while (run)
+            while (true)
             {
                 //get common things so that we dont call them a million times
                 imu = Robot.driveBase.getPigeonIMU();
@@ -91,7 +91,16 @@ public class Logging extends Command
                 LogMatch();
                 LogSystems();
             }
-        }).start();
+        }};
+    }
+  
+    // Called just before this Command runs the first time
+    @Override
+    protected void initialize() 
+    {
+        //run = true;
+
+        thread.start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -105,7 +114,19 @@ public class Logging extends Command
     @Override
     protected void end()
     {
-        run = false;
+        //run = false;
+        thread.interrupt();
+        try
+        {
+            logError.close();
+            logMatch.close();
+            logSystems.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+        SmartDashboard.putString("Logging/Status", "Ending");
     }
   
     // Called when another command which requires one or more of the same
@@ -148,7 +169,8 @@ public class Logging extends Command
         catch (IOException e)
         {
 			e.printStackTrace();
-	        System.out.println("Unable to write to LogError");
+            System.out.println("Unable to write to LogError");
+            SmartDashboard.putString("Logging/ErrorLog/Status", "Unable to create/find FileWriter");
 	    }
 	}
   
@@ -178,7 +200,8 @@ public class Logging extends Command
         catch (IOException e) 
         {
 			e.printStackTrace();
-	        System.out.println("Unable to write to LogMatch");
+            System.out.println("Unable to write to LogMatch");
+            SmartDashboard.putString("Logging/MatchLog/Status", "Unable to create/find FileWriter");
 	    }
     }
     
@@ -221,7 +244,8 @@ public class Logging extends Command
         catch (IOException e) 
         {
 			e.printStackTrace();
-	        System.out.println("Unable to write to LogError");
+            System.out.println("Unable to write to LogError");
+            SmartDashboard.putString("Logging/SystemLog/Status", "Unable to create/find FileWriter");
 	    }
 	}
 }

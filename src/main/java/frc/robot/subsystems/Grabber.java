@@ -60,29 +60,29 @@ public class Grabber extends Subsystem
         //     }
         // });
 
-        //PID WITHOUT ENCODER
-        wristController = new PIDexecutor(Constants.TILT_KP, Constants.TILT_KI, Constants.TILT_KD, wrist.getSelectedSensorPosition(0), new DoubleSupplier()
-        {
-        
-            @Override
-            public double getAsDouble() 
-            {
-                double axis = -Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
-                if(!(Math.abs(axis) > OIConstants.DEADZONE_GRABBER))
-                {
-                    axis = 0;
-                }
-                return axis;
-            }
-        }, true);
+         //PID WITHOUT ENCODER
+         wristController = new PIDexecutor(Constants.TILT_KP, Constants.TILT_KI, Constants.TILT_KD, 0, new DoubleSupplier()
+         {
+
+             @Override
+             public double getAsDouble() 
+             {
+                 double axis = -Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
+                 if(!(Math.abs(axis) > OIConstants.DEADZONE_GRABBER))
+                 {
+                     axis = 0;
+                 }
+                 return axis;
+             }
+         }, true);
 
         SmartDashboard.putString("Grabber/Status", Status.Good.toString());
     }
 
     public void init()
     {
-        resetEncoders();
-        setTiltPosition(0);
+        //resetEncoders();
+        //setTiltPosition(0);
     }
 
     @Override
@@ -94,11 +94,11 @@ public class Grabber extends Subsystem
     @Override
     public void periodic()
     {
-        SmartDashboard.putNumber("Grabber/WristTarget", wristController.getTarget());
-        SmartDashboard.putNumber("Grabber/WristPosition", getTiltPosition());
-        SmartDashboard.putNumber("Grabber/WristPower", wrist.get());
-        SmartDashboard.putBoolean("Grabber/BackLimitSwitch", isBackLimitSwitchClosed());
-        SmartDashboard.putBoolean("Grabber/FrontLimitSwitch", isFrontLimitSwitchClosed());
+        //SmartDashboard.putNumber("Grabber/WristTarget", wristController.getTarget());
+        //SmartDashboard.putNumber("Grabber/WristPosition", getTiltPosition());
+        //SmartDashboard.putNumber("Grabber/WristPower", wrist.get());
+        //SmartDashboard.putBoolean("Grabber/BackLimitSwitch", isBackLimitSwitchClosed());
+        //SmartDashboard.putBoolean("Grabber/FrontLimitSwitch", isFrontLimitSwitchClosed());
 
         // if(isBackLimitSwitchClosed()){
         //     wristController.setTarget(getTiltPosition() - 20);
@@ -123,70 +123,70 @@ public class Grabber extends Subsystem
         }
     }
 
-    /**
-     * Checks that the limitswitches arent closed and makes the motor stop
-     * 
-     * @param input power input to check
-     * 
-     * @return The power after checkes have been made
-     */
-    public double WristSafteyChecks(double input)
-    {
-        double output = input;
-        if (isBackLimitSwitchClosed() && output <= 0) {
-            output = 0;
-        }
+    // /**
+    //  * Checks that the limitswitches arent closed and makes the motor stop
+    //  * 
+    //  * @param input power input to check
+    //  * 
+    //  * @return The power after checkes have been made
+    //  */
+    // public double WristSafteyChecks(double input)
+    // {
+    //     double output = input;
+    //     if (isBackLimitSwitchClosed() && output <= 0) {
+    //         output = 0;
+    //     }
 
-        return output;
-    }
+    //     return output;
+    // }
 
-    /**
-     * Resets all encoders to zero
-     */
-    public void resetEncoders()
-    {
-        wrist.setSelectedSensorPosition(0, 0, 30);
-    }
+    // /**
+    //  * Resets all encoders to zero
+    //  */
+    // public void resetEncoders()
+    // {
+    //     wrist.setSelectedSensorPosition(0, 0, 30);
+    // }
 
-    /**
-     * Returns if the back limit switch is closed
-     * 
-     * @return A boolean that is true if it is closed
-     */
-    public boolean isBackLimitSwitchClosed()
-    {
-        return wrist.getSensorCollection().isRevLimitSwitchClosed();
-    }
+    // /**
+    //  * Returns if the back limit switch is closed
+    //  * 
+    //  * @return A boolean that is true if it is closed
+    //  */
+    // public boolean isBackLimitSwitchClosed()
+    // {
+    //     return wrist.getSensorCollection().isRevLimitSwitchClosed();
+    // }
 
-    /**
-     * Returns if the front limit switch is closed
-     * 
-     * @return a bool that is true if the switch is closed
-     */
-    public boolean isFrontLimitSwitchClosed()
-    {
-        return wrist.getSensorCollection().isFwdLimitSwitchClosed();
-    }
+    // /**
+    //  * Returns if the front limit switch is closed
+    //  * 
+    //  * @return a bool that is true if the switch is closed
+    //  */
+    // public boolean isFrontLimitSwitchClosed()
+    // {
+    //     return wrist.getSensorCollection().isFwdLimitSwitchClosed();
+    // }
 
-    /**
-     * Returns the target that the wrist is trying to get to
-     * 
-     * @return Returns the tilt target
-     */
-    public int getTiltTarget()
-    {
-        return (int)wristController.getTarget();
-    }
+    // /**
+    //  * Returns the target that the wrist is trying to get to
+    //  * 
+    //  * @return Returns the tilt target
+    //  */
+    // public int getTiltTarget()
+    // {
+    //     return (int)wristController.getTarget();
+    // }
 
-    /**
-     * Sets the position of the tilt motor
-     * 
-     * @param position the position, in encoder ticks
-     */
-    public void setTiltPosition(int position)
-    {
-        wristController.setTarget(position);
-    }
+    // /**
+    //  * Sets the position of the tilt motor
+    //  * 
+    //  * @param position the position, in encoder ticks
+    //  */
+    // public void setTiltPosition(int position)
+    // {
+    //     wristController.setTarget(position);
+    // }
 
     /**
      * Allows the intake wheels to be operated
@@ -198,15 +198,15 @@ public class Grabber extends Subsystem
         intake.set(speed);
     }
 
-    /**
-     * Gets the position of the tilt motot
-     * 
-     * @return the tilt position
-     */
-    public int getTiltPosition()
-    {
-        return wrist.getSelectedSensorPosition(0);
-    }
+    // /**
+    //  * Gets the position of the tilt motot
+    //  * 
+    //  * @return the tilt position
+    //  */
+    // public int getTiltPosition()
+    // {
+    //     return wrist.getSelectedSensorPosition(0);
+    // }
 
     public void setHolderState(boolean isOn)
     {
@@ -221,9 +221,9 @@ public class Grabber extends Subsystem
     @Override
     public String toString()
     {
-        return "" + wrist.get() + "," +
-                wrist.getSelectedSensorPosition(0) + "," + 
-                wristController.getTarget() + "," +
+        return "" + //wrist.get() + "," +
+                //wrist.getSelectedSensorPosition(0) + "," + 
+                //wristController.getTarget() + "," +
 
                 intake.get() + "," +
 

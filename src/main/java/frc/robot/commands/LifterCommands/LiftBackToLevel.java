@@ -55,7 +55,7 @@ public class LiftBackToLevel extends Command
     @Override
     protected boolean isFinished() 
     {
-        return Math.abs(Robot.lifter.getBackPosition() - target) < 200;
+        return true;//Math.abs(Robot.lifter.getBackPosition() - target) < 200;
     }
 
     /**

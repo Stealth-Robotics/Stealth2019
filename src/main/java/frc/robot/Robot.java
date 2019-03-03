@@ -16,13 +16,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.Logging;
-import frc.robot.commands.drivebaseCommands.AutoDriveForward;
 
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Lifter;
 // import frc.robot.subsystems.Vision;
+import frc.robot.commands.drivebaseCommands.UserDrive;
 
 import frc.robot.util.constants.OIConstants;
 import frc.robot.util.constants.Constants;
@@ -65,12 +65,13 @@ public class Robot extends TimedRobot
         //start logging command
         loggingCommand = new Logging();
         loggingCommand.start();
+        // Scheduler.getInstance().add(loggingCommand);
 
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
         camera.setResolution(320, 240);
         camera.setFPS(30);
 
-        m_chooser.setDefaultOption("Default Auto", new AutoDriveForward());
+        m_chooser.setDefaultOption("Default Auto", new UserDrive());
         // chooser.addOption("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", m_chooser);
 
@@ -98,7 +99,7 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("Lifter/EncoderL", lifter.getFrontLPosition());
         SmartDashboard.putNumber("Lifter/EncoderR", lifter.getFrontRPosition());
         SmartDashboard.putNumber("Lifter/EncoderB", lifter.getBackPosition());
-        SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
+        //SmartDashboard.putNumber("Grabber/EncoderTilt", grabber.getTiltPosition());
     }
   
     /**
@@ -188,7 +189,7 @@ public class Robot extends TimedRobot
         lifter.setTargets(Constants.FRONT_LEGS_LEVEL_0, Constants.FRONT_LEGS_LEVEL_0, Constants.BACK_LEG_LEVEL_0);
 
         grabber.init();
-        grabber.setTiltPosition(0);
+        //grabber.setTiltPosition(0);
 
         elevator.reset();
         elevator.setTarget(0);

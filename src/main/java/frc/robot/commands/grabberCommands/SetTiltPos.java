@@ -20,7 +20,7 @@ public class SetTiltPos extends Command
     protected void initialize() 
     {
         super.initialize();
-        Robot.grabber.setTiltPosition(pos);
+        //Robot.grabber.setTiltPosition(pos);
     }
 
     @Override
@@ -39,6 +39,6 @@ public class SetTiltPos extends Command
     @Override
     protected boolean isFinished()
     {
-        return Math.abs(Robot.grabber.getTiltPosition() - pos) < 50;
+        return true;//Math.abs(Robot.grabber.getTiltPosition() - pos) < 50;
     }
 }

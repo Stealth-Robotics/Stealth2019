@@ -15,12 +15,18 @@ public class Continue extends Command
     @Override
     protected void execute() 
     {
-        
+
     }
 
     @Override
     protected boolean isFinished()
     {
         return Robot.oi.nextStageButton.get();
+    }
+
+    @Override
+    protected void end() 
+    {
+        super.end();
     }
 }

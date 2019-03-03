@@ -20,15 +20,15 @@ public class UserDriveTilt extends Command
     {
         super.execute();
 
-        int target = Robot.grabber.getTiltTarget();
+        // int target = Robot.grabber.getTiltTarget();
 
-        double axis = Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
-        if(Math.abs(axis) > OIConstants.DEADZONE_GRABBER)
-        {
-            target += axis * Constants.TILT_SPEED_NORMAL;
-        }
+        // double axis = Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
+        // if(Math.abs(axis) > OIConstants.DEADZONE_GRABBER)
+        // {
+        //     target += axis * Constants.TILT_SPEED_NORMAL;
+        // }
 
-        Robot.grabber.setTiltPosition(target);
+        // Robot.grabber.setTiltPosition(target);
     }
 
     @Override
