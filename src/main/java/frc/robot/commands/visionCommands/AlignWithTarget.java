@@ -74,7 +74,7 @@ public class AlignWithTarget extends Command
             @Override
             public double getAsDouble() 
             {
-                int direction = (limelight.getEntry("ts").getDouble(0) < 45) ? 1 : -1;
+                int direction = (limelight.getEntry("ts").getDouble(0) < -45) ? 1 : -1;
                 return direction * limelight.getEntry("tx").getDouble(0) / limelight.getEntry("ty").getDouble(0);
             }
         });
