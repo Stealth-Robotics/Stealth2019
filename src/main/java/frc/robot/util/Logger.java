@@ -56,14 +56,13 @@ public class Logger implements Runnable
             SmartDashboard.putString("Logging/Status", "Unable to create FileWriter");
 
             //stop the thread
-            Thread.currentThread().interrupt();
+            //Thread.currentThread().interrupt();
         }
         
         SmartDashboard.putString("Logging/Status", "Initialized");
         
     }
 
-    @Override
     public void run()
     {
         //get common things so that we dont call them a million times
@@ -84,7 +83,7 @@ public class Logger implements Runnable
         try 
         {
 			//System Start Time, System Time, 
-			//isBrownedOut, isSysActive,
+			//isBrownedOut, isSysActive, FPGA Revision
 			//Fault Count 3.3v, Fault Count 5v, Fault Count 6v,
 			//CAN Status,
 			//Gyro Last error, Gyro State
@@ -93,11 +92,12 @@ public class Logger implements Runnable
 					date.getTime() + "," +
 					
 					RobotController.isBrownedOut() + "," +
-					RobotController.isSysActive() + "," +
+                    RobotController.isSysActive() + "," +
+                    RobotController.getFPGARevision() + "," +
 					
 					RobotController.getFaultCount3V3() + "," +
 					RobotController.getFaultCount5V() + "," +
-					RobotController.getFaultCount6V() + "," +
+                    RobotController.getFaultCount6V() + "," +
 				
 					RobotController.getCANStatus() + "," +
 					
@@ -110,7 +110,9 @@ public class Logger implements Runnable
         catch (IOException e)
         {
 			e.printStackTrace();
-	        System.out.println("Unable to write to LogError");
+            System.out.println("Unable to write to LogError");
+            
+            SmartDashboard.putString("Logging/ERROR", "Unable To Write LogError");
 	    }
 	}
   
@@ -140,7 +142,9 @@ public class Logger implements Runnable
         catch (IOException e) 
         {
 			e.printStackTrace();
-	        System.out.println("Unable to write to LogMatch");
+            System.out.println("Unable to write to LogMatch");
+            
+            SmartDashboard.putString("Logging/ERROR", "Unable To Write LogMatch");
 	    }
     }
     
@@ -150,16 +154,15 @@ public class Logger implements Runnable
         try 
         {
 			//System Start Time, System Time, 
-			//isBrownedOut, isSysActive,
-			//Fault Count 3.3v, Fault Count 5v, Fault Count 6v,
-			//CAN Status,
-            //Gyro Last error, Gyro State
+            //Drivebase Default Command, Drivebase Log
+            //Elevator Default Command, Elevator Log
+            //Grabber Default Command, Grabber Log
+            //Lifter Default Command, Lifter Log
             
             DriveBase driveBase = Robot.driveBase;
             Elevator elevator = Robot.elevator;
             Grabber grabber = Robot.grabber;
             Lifter lifter = Robot.lifter;
-
 
 			logSystems.write(
 					StartTime + "," +
@@ -183,7 +186,9 @@ public class Logger implements Runnable
         catch (IOException e) 
         {
 			e.printStackTrace();
-	        System.out.println("Unable to write to LogError");
+            System.out.println("Unable to write to LogError");
+            
+            SmartDashboard.putString("Logging/ERROR", "Unable To Write LogSystems");
 	    }
 	}
 }

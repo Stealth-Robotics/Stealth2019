@@ -15,13 +15,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.Logging;
-
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.Lifter;
 // import frc.robot.subsystems.Vision;
+import frc.robot.util.*;
 import frc.robot.commands.drivebaseCommands.UserDrive;
 
 import frc.robot.util.constants.OIConstants;
@@ -43,7 +42,8 @@ public class Robot extends TimedRobot
     public static Lifter lifter;
     public static OI oi;
 
-    private Logging loggingCommand;
+    private Logger logging;
+    private Thread loggingThread;
   
     Command m_autonomousCommand;
     SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -62,25 +62,21 @@ public class Robot extends TimedRobot
         lifter = new Lifter();
         oi = new OI();
 
-        //start logging command
-        loggingCommand = new Logging();
-        loggingCommand.start();
-        // Scheduler.getInstance().add(loggingCommand);
+        //start logging thread
+        logging = new Logger();
+        loggingThread = new Thread(logging, "LoggingThread");
 
+        loggingThread.start();
+        
+        //init USB CAMERA
         UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
         camera.setResolution(320, 240);
         camera.setFPS(30);
 
+        //AUTO CHOOSER
         m_chooser.setDefaultOption("Default Auto", new UserDrive());
         // chooser.addOption("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", m_chooser);
-
-        // _instance = this;
-
-        //Compressor c = new Compressor(RobotMap.PCM);
-        //c.setClosedLoopControl(true);
-        
-        //c.close();
     }
   
     /**
