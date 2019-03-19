@@ -32,7 +32,11 @@ public class UserDrive extends Command
         {
             Robot.driveBase.move(Robot.oi.driveJoystick, false, false); //withPID, then withHeadless
         }
-        
+        double pov;
+        if ((pov = Robot.oi.driveJoystick.getPOV()) != -1)
+        {
+            Robot.driveBase.setHeading(pov);
+        }
     }
   
     // Make this return true when this Command no longer needs to run execute()

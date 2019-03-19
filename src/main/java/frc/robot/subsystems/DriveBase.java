@@ -295,6 +295,10 @@ public class DriveBase extends Subsystem
      */
     public void setTargetHeading(double heading)
     {
+        double normalizedHeading = getHeading();
+        int cycles = (int)(normalizedHeading / (Math.PI * 2));
+        normalizedHeading = getHeading() % (Math.PI * 2);
+        double normalizedTarget = heading % (Math.PI * 2);
         headingPIDloop.setTarget(heading);
     }
 
