@@ -2,7 +2,7 @@
 package frc.robot.commands.grabberCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 
 public class GrabHatch extends Command
@@ -26,5 +26,11 @@ public class GrabHatch extends Command
     protected boolean isFinished() 
     {
         return true;
+    }
+
+    @Override
+    protected void end()
+    {
+        Scheduler.getInstance().add(new UserDriveTilt());
     }
 }
