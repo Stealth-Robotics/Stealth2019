@@ -17,6 +17,8 @@ import frc.robot.util.constants.*;
 import java.lang.Math;
 import java.util.function.DoubleSupplier;
 
+import frc.robot.util.constants.Constants;
+
 /**
  * This subsystem defines the drivebase of the robot
  * 
@@ -293,13 +295,24 @@ public class DriveBase extends Subsystem
      * 
      * @param heading the new target heading
      */
-    public void setTargetHeading(double heading)
+    public void setTargetHeading(double targetHeading)
     {
-        double normalizedHeading = getHeading();
-        int cycles = (int)(normalizedHeading / (Math.PI * 2));
-        normalizedHeading = getHeading() % (Math.PI * 2);
-        double normalizedTarget = heading % (Math.PI * 2);
-        headingPIDloop.setTarget(heading);
+        double currentHeading = getHeading();
+        
+        double angleDiff = (currentHeading - targetHeading) % Constants.TWOPI;
+        if(angleDiff < -Math.PI)
+        {
+            angleDiff += Constants.TWOPI;
+        }
+        else if(angleDiff > Math.PI)
+        {
+            angleDiff -= Constants.TWOPI;
+        }
+
+        targetHeading = currentHeading + angleDiff;
+
+        
+        headingPIDloop.setTarget(targetHeading);
     }
 
     public double getTargetHeading()
