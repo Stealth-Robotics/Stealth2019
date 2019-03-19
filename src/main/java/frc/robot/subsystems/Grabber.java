@@ -1,8 +1,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.function.DoubleSupplier;
-
 // import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 // import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -15,7 +13,6 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.grabberCommands.UserDriveTilt;
 import frc.robot.util.*;
-import frc.robot.util.constants.Constants;
 import frc.robot.util.constants.OIConstants;
 
 /**
@@ -23,22 +20,20 @@ import frc.robot.util.constants.OIConstants;
  * 
  * <p> It involves two wheels for the intake, and a motor to tilt the intake up and down </p>
  * 
- * <p> It also contains two pnumatic cylinders, controlled by a solenoid </p>
+ * <p> It also contains a pnumatic cylinder, controlled by a solenoid </p>
  */
 public class Grabber extends Subsystem
 {
-    private static Solenoid hatchHolder; // !< The solenoid to control the velcro pistons
-    private static Solenoid pusher; //TODO REMOVE THIS THING
+    private static Solenoid hatchGrabber; // !< The solenoid to control the hatch grabber piston
 
     private static WPI_TalonSRX intake; // !< The talon for the intake wheels
     private static WPI_TalonSRX wrist; // !< The talon for the tilt motor
 
-    private static PIDexecutor wristController; // !< The PID loop executor to maintain position for the tilt motor
+    // private static PIDexecutor wristController; // !< The PID loop executor to maintain position for the tilt motor
 
     public Grabber()
     {
-        hatchHolder = new Solenoid(RobotMap.PCM, RobotMap.hatchHolderChanel);
-        pusher = new Solenoid(RobotMap.PCM, RobotMap.hatchPusherChanel);
+        hatchGrabber = new Solenoid(RobotMap.PCM, RobotMap.hatchGrabberChanel);
 
         intake = new WPI_TalonSRX(RobotMap.intake);
 
@@ -192,12 +187,7 @@ public class Grabber extends Subsystem
 
     public void setHolderState(boolean isOn)
     {
-        hatchHolder.set(isOn);
-    }
-
-    public void setPusherState(boolean isOn)
-    {
-        pusher.set(isOn);
+        hatchGrabber.set(isOn);
     }
 
     /**
@@ -219,7 +209,6 @@ public class Grabber extends Subsystem
 
                 intake.get() + "," +
 
-                pusher.get() + "," +
-                hatchHolder.get();
+                hatchGrabber.get();
     }
 }

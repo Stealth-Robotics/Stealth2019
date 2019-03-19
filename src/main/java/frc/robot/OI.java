@@ -16,7 +16,6 @@ import frc.robot.commands.lifterCommands.*;
 import frc.robot.commands.visionCommands.*;
 
 import frc.robot.util.constants.OIConstants;
-import frc.robot.util.constants.Constants;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -112,11 +111,8 @@ public class OI
         grabHatchButton = new JoystickButton(mechJoystick, OIConstants.GRAB_HATCH_BUTTON);
         releaseHatchButton = new JoystickButton(mechJoystick, OIConstants.RELEASE_HATCH_BUTTON);
 
-        grabHatchButton.whenPressed(new GrabHatch(true));
-        grabHatchButton.whenReleased(new GrabHatch(false));
-
-        releaseHatchButton.whenPressed(new ReleaseHatch(true));
-        releaseHatchButton.whenReleased(new ReleaseHatch(false));
+        grabHatchButton.whenPressed(new GrabHatch(false));
+        grabHatchButton.whenReleased(new GrabHatch(true));
 
         // runIntakeButton = new JoystickButton(mechJoystick, OIConstants.RUN_INTAKE_TRIGGER);
         // reverseIntakeButton = new JoystickButton(mechJoystick, OIConstants.REVERSE_INTAKE_TRIGGER);
