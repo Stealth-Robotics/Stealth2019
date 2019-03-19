@@ -28,7 +28,7 @@ import frc.robot.util.constants.OIConstants;
 public class Grabber extends Subsystem
 {
     private static Solenoid hatchHolder; // !< The solenoid to control the velcro pistons
-    private static Solenoid pusher;
+    private static Solenoid pusher; //TODO REMOVE THIS THING
 
     private static WPI_TalonSRX intake; // !< The talon for the intake wheels
     private static WPI_TalonSRX wrist; // !< The talon for the tilt motor
@@ -60,22 +60,6 @@ public class Grabber extends Subsystem
         //     }
         // });
 
-         //PID WITHOUT ENCODER
-         wristController = new PIDexecutor(Constants.TILT_KP, Constants.TILT_KI, Constants.TILT_KD, 0, new DoubleSupplier()
-         {
-
-             @Override
-             public double getAsDouble() 
-             {
-                 double axis = -Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
-                 if(!(Math.abs(axis) > OIConstants.DEADZONE_GRABBER))
-                 {
-                     axis = 0;
-                 }
-                 return axis;
-             }
-         }, true);
-
         SmartDashboard.putString("Grabber/Status", Status.Good.toString());
     }
 
@@ -105,8 +89,6 @@ public class Grabber extends Subsystem
         // }
 
         //WristSafteyChecks();
-
-        wrist.set(wristController.run());
 
         double triggerValue = Robot.oi.mechJoystick.getRawAxis(OIConstants.RUN_INTAKE_TRIGGER);
         if (triggerValue > OIConstants.TRIGGER_THRESHOLD)
@@ -216,6 +198,16 @@ public class Grabber extends Subsystem
     public void setPusherState(boolean isOn)
     {
         pusher.set(isOn);
+    }
+
+    /**
+     * Sets the speed for the wrist motor
+     * 
+     * @param speed
+     */
+    public void setWristSpeed(double speed)
+    {
+        wrist.set(speed);
     }
 
     @Override

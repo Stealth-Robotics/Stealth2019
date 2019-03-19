@@ -44,9 +44,9 @@ public class OIConstants
     public static final int BACK_LEG_DOWN_BUTTON = 14;
 
     // Buttons to control tilt motor for grabber
-    public static final int WRIST_POS_1_BUTTON = 4;
-    public static final int WRIST_POS_2_BUTTON = 2;
-    public static final int WRIST_POS_3_BUTTON = 1;
+    // public static final int WRIST_POS_1_BUTTON = 4;
+    // public static final int WRIST_POS_2_BUTTON = 2;
+    // public static final int WRIST_POS_3_BUTTON = 1;
 
     public static final int GRAB_HATCH_BUTTON = 5;
     public static final int RELEASE_HATCH_BUTTON = 6;
