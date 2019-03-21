@@ -78,7 +78,7 @@ public class Elevator extends Subsystem
         SmartDashboard.putNumber("Elevator/MotorPower", elevator.get());
 
         double targetSpeed = loop.run();
-        setSpeed((targetSpeed < 0 && lowerLimit.get()) ? 0 : targetSpeed);
+        setSpeed((targetSpeed < 0 && !lowerLimit.get()) ? 0 : targetSpeed);
     }
 
     /**
@@ -145,6 +145,11 @@ public class Elevator extends Subsystem
     {
         elevator.setSelectedSensorPosition(0, 0, 30);
         setTarget(0);
+    }
+
+    public boolean isLimitClosed()
+    {
+        return lowerLimit.get();
     }
 
     @Override

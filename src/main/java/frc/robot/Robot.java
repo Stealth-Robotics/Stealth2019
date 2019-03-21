@@ -115,6 +115,7 @@ public class Robot extends TimedRobot
     @Override
     public void disabledPeriodic()
     {
+        SmartDashboard.putBoolean("Elevator/LimitSwitch", elevator.isLimitClosed());
         Scheduler.getInstance().run();
     }
   
@@ -238,6 +239,7 @@ public class Robot extends TimedRobot
         // }
 
         // Lifter.legBack.set(oi.driveJoystick.getRawAxis(1));
+        
     }
 
     /**
