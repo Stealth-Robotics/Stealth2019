@@ -5,6 +5,7 @@ import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -26,6 +27,8 @@ public class Elevator extends Subsystem
     private static WPI_TalonSRX elevator; // !< The elevator motor controller
 
     private static PIDexecutor loop; // !< The PID loop executor
+
+    private static DigitalInput lowerLimit;
 
     public Elevator()
     {
@@ -60,6 +63,8 @@ public class Elevator extends Subsystem
             }
         }, true);
 
+        lowerLimit = new DigitalInput(RobotMap.elevatorLimit);
+
         SmartDashboard.putString("Elevator/Status", Status.Good.toString());
 
         reset();
@@ -72,7 +77,8 @@ public class Elevator extends Subsystem
         SmartDashboard.putNumber("Elevator/Position", elevator.getSelectedSensorPosition(0));
         SmartDashboard.putNumber("Elevator/MotorPower", elevator.get());
 
-        setSpeed(loop.run());
+        double targetSpeed = loop.run();
+        setSpeed((targetSpeed < 0 && lowerLimit.get()) ? 0 : targetSpeed);
     }
 
     /**

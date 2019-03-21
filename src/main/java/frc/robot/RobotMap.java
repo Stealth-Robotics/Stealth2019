@@ -55,5 +55,5 @@ public class RobotMap
     //talon for the pigeon IMU
     public static final int pigeonIMU = 12;
 
-    
+    public static final int elevatorLimit = 0;
 }
