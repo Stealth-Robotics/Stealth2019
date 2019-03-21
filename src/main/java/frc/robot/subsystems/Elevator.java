@@ -54,7 +54,7 @@ public class Elevator extends Subsystem
             {
                 double joystickY = Robot.oi.mechJoystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
 
-                if (!(Math.abs(joystickY) > OIConstants.ELEVATOR_JOYSTICK_DEADZONE))
+                if (Math.abs(joystickY) < OIConstants.ELEVATOR_JOYSTICK_DEADZONE)
                 {
                     joystickY = 0;
                 }
