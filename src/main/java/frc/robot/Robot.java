@@ -69,9 +69,14 @@ public class Robot extends TimedRobot
         loggingThread.start();
         
         //init USB CAMERA
-        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        UsbCamera camera = CameraServer.getInstance().startAutomaticCapture(0);
         camera.setResolution(320, 240);
-        camera.setFPS(30);
+        camera.setFPS(15);
+
+        //init USB CAMERA
+        UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+        camera1.setResolution(320, 240);
+        camera1.setFPS(10);
 
         //AUTO CHOOSER
         m_chooser.setDefaultOption("Default Auto", new UserDrive());
