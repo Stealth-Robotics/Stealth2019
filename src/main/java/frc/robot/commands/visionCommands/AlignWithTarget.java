@@ -80,7 +80,8 @@ public class AlignWithTarget extends Command
         });
         
         //turn the led off on init
-        limelight.getEntry("ledMode").setNumber(1);
+        limelight.getEntry("ledMode").setNumber(0);
+        //limelight.getEntry("camMode").setNumber(1);
     }
 
     // Called just before this Command runs the first time
@@ -105,7 +106,7 @@ public class AlignWithTarget extends Command
             double netSpeed = Math.sqrt(targetLinearSpeed * targetLinearSpeed + targetStrafe * targetStrafe);
             double netDirection = Math.atan(targetLinearSpeed / targetStrafe);
             netDirection = (netDirection < 0) ? Math.PI + netDirection : netDirection;
-            Robot.driveBase.moveWithoutIMU(netSpeed, (targetStrafe > 0) ? -Math.PI / 2 : Math.PI / 2, targetRotation);
+            Robot.driveBase.moveWithoutIMU(netSpeed, /*(targetStrafe > 0) ? -Math.PI / 2 : Math.PI / 2*/0, targetRotation);
             //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
         }
         else 
@@ -169,6 +170,7 @@ public class AlignWithTarget extends Command
         Robot.driveBase.moveWithoutIMU(0, 0, 0);
         //turn the led off (1)
         limelight.getEntry("ledMode").setNumber(1);
+        //limelight.getEntry("camMode").setNumber(1);
 
         //set the heading of the idle pid to where we are now
         Robot.driveBase.setTargetHeading(Robot.driveBase.getHeading());

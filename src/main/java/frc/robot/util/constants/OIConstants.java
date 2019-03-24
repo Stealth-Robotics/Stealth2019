@@ -19,8 +19,8 @@ public class OIConstants
     public static final int DRIVE_JOYSTICK_TWIST = 2;
     
     // !< drive speed button
-    public static final int SLOW_BUTTON = 1;
-    public static final int FAST_BUTTON = 2;
+    public static final int SLOW_BUTTON = 2;
+    public static final int FAST_BUTTON = 1;
 
     // !< reset heading button
     public static final int RESET_HEADING_BUTTON = 3;
@@ -60,4 +60,6 @@ public class OIConstants
     // button to override the lifter pid
     public static final int OVERRIDE_LIFT_PID_BUTTON = 1;
     public static final int OVERRIDE_TILT_GRABBER_PID_BUTTON = 2;
+
+    public static final int OVERRIDE_ELEVATOR_LIMIT_BUTTON = 2;
 }

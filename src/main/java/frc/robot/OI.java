@@ -84,6 +84,8 @@ public class OI
     public Button backLegUp;
     public Button backLegDown;
 
+    public Button overrideElevatorLimitSwitch;
+
   
     OI()
     {
@@ -137,6 +139,8 @@ public class OI
 
         // overrideLiftPIDButton = new JoystickButton(overrideJoystick, OIConstants.OVERRIDE_LIFT_PID_BUTTON);
         // overrideLiftPIDButton.whenPressed(new OverrideLiftPID());
+
+        overrideElevatorLimitSwitch = new JoystickButton(stationJoystick, OIConstants.OVERRIDE_ELEVATOR_LIMIT_BUTTON);
     }
 
 
