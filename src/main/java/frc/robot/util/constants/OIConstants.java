@@ -62,4 +62,5 @@ public class OIConstants
     public static final int OVERRIDE_TILT_GRABBER_PID_BUTTON = 2;
 
     public static final int OVERRIDE_ELEVATOR_LIMIT_BUTTON = 2;
+    public static final int OVERRIDE_ELEVATOR_PID = 3;
 }

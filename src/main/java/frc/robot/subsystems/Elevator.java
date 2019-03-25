@@ -37,35 +37,19 @@ public class Elevator extends Subsystem
         elevator.setInverted(true);
 
         //NORMAL PID LOOP
-        // loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
-        
-        //     @Override
-        //     public double getAsDouble() 
-        //     {
-        //         return -elevator.getSelectedSensorPosition(0);
-        //     }
-        // });
+         loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
 
-        //OVERRIDE PID LOOP
-        loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier()
-        {
-            @Override
-            public double getAsDouble() 
-            {
-                double joystickY = Robot.oi.mechJoystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
-
-                if (Math.abs(joystickY) < OIConstants.ELEVATOR_JOYSTICK_DEADZONE)
-                {
-                    joystickY = 0;
-                }
-                
-                return -joystickY;
-            }
-        }, true);
+             @Override
+             public double getAsDouble() 
+             {
+                 return -elevator.getSelectedSensorPosition(0);
+             }
+         });
 
         lowerLimit = new DigitalInput(RobotMap.elevatorLimit);
 
         SmartDashboard.putString("Elevator/Status", Status.Good.toString());
+        SmartDashboard.putBoolean("Elevator/OverridePID", false);
 
         reset();
     }
@@ -88,6 +72,30 @@ public class Elevator extends Subsystem
     public void initDefaultCommand()
     {
         setDefaultCommand(new UserDriveElevator());
+    }
+
+    /**
+     * Overrides the PID executor for the elevator to take input directly from the joystick
+     */
+    public void overridePID(){
+        //OVERRIDE PID LOOP
+        loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier()
+        {
+            @Override
+            public double getAsDouble() 
+            {
+                double joystickY = Robot.oi.mechJoystick.getRawAxis(OIConstants.ELEVATOR_JOYSTICK_Y);
+
+                if (Math.abs(joystickY) < OIConstants.ELEVATOR_JOYSTICK_DEADZONE)
+                {
+                    joystickY = 0;
+                }
+                
+                return -joystickY;
+            }
+        }, true);
+
+        SmartDashboard.putBoolean("Elevator/OverridePID", true);
     }
 
     /**

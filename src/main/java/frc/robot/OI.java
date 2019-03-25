@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
+import frc.robot.commands.elevatorCommands.OverrideElevatorPID;
 import frc.robot.commands.grabberCommands.*;
 import frc.robot.commands.lifterCommands.*;
 import frc.robot.commands.visionCommands.*;
@@ -85,6 +85,7 @@ public class OI
     public Button backLegDown;
 
     public Button overrideElevatorLimitSwitch;
+    public Button overrideElevatorPID;
 
   
     OI()
@@ -141,6 +142,9 @@ public class OI
         // overrideLiftPIDButton.whenPressed(new OverrideLiftPID());
 
         overrideElevatorLimitSwitch = new JoystickButton(stationJoystick, OIConstants.OVERRIDE_ELEVATOR_LIMIT_BUTTON);
+        overrideElevatorPID = new JoystickButton(stationJoystick, OIConstants.OVERRIDE_ELEVATOR_PID);
+
+        overrideElevatorPID.whenPressed(new OverrideElevatorPID());
     }
 
 
