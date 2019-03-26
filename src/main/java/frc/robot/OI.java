@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.elevatorCommands.OverrideElevatorPID;
+import frc.robot.commands.elevatorCommands.*;
 import frc.robot.commands.grabberCommands.*;
 import frc.robot.commands.lifterCommands.*;
 import frc.robot.commands.visionCommands.*;
@@ -129,10 +129,13 @@ public class OI
         elevatorLevelBallModifyer = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_BALL_LEVEL_MODIFYER);
 
         elevatorLevel1Button = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_LEVEL1_BUTTON);
+        elevatorLevel1Button.whenPressed(new ElevatorToLevel(1));
 
         elevatorLevel2Button = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_LEVEL2_BUTTON);
+        elevatorLevel2Button.whenPressed(new ElevatorToLevel(2));
 
         elevatorLevel3Button = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_LEVEL3_BUTTON);
+        elevatorLevel3Button.whenPressed(new ElevatorToLevel(3));
 
         stationJoystick = new Joystick(2);
 
