@@ -19,7 +19,7 @@ import frc.robot.util.constants.OIConstants;
 /**
  * This subsystem defines the elevator that lifts the Grabber subsystem
  * 
- * <p> It contains a single motor that drives it </p>
+ * <p> It contains a single motor that drives it and a limit switch on the bottom</p>
  */
 public class Elevator extends Subsystem
 {
@@ -28,7 +28,7 @@ public class Elevator extends Subsystem
 
     private static PIDexecutor loop; // !< The PID loop executor
 
-    private static DigitalInput lowerLimit;
+    private static DigitalInput lowerLimit; // !< The Lower Limit Switch
 
     public Elevator()
     {
@@ -37,7 +37,7 @@ public class Elevator extends Subsystem
         elevator.setInverted(true);
 
         //NORMAL PID LOOP
-         loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
+        loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier(){
 
              @Override
              public double getAsDouble() 
@@ -75,7 +75,7 @@ public class Elevator extends Subsystem
     }
 
     /**
-     * Overrides the PID executor for the elevator to take input directly from the joystick
+     * Overrides the default PID executor for the elevator to take input directly from the joystick
      */
     public void overridePID(){
         //OVERRIDE PID LOOP
@@ -155,6 +155,14 @@ public class Elevator extends Subsystem
         setTarget(0);
     }
 
+    /**
+     * Returns the lower limit switch state
+     * 
+     * True if closed
+     * False if open
+     * 
+     * @return the lower limit switch state
+     */
     public boolean isLimitClosed()
     {
         return lowerLimit.get();

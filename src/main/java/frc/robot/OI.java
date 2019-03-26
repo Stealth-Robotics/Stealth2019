@@ -61,6 +61,12 @@ public class OI
 
     public Joystick mechJoystick;
 
+    public Button elevatorLevel1Button;
+    public Button elevatorLevel2Button;
+    public Button elevatorLevel3Button;
+
+    public Button elevatorLevelBallModifyer;
+
     // public Button wristPos1Button;
     // public Button wristPos2Button;
     // public Button wristPos3Button;
@@ -119,6 +125,14 @@ public class OI
 
         // runIntakeButton = new JoystickButton(mechJoystick, OIConstants.RUN_INTAKE_TRIGGER);
         // reverseIntakeButton = new JoystickButton(mechJoystick, OIConstants.REVERSE_INTAKE_TRIGGER);
+
+        elevatorLevelBallModifyer = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_BALL_LEVEL_MODIFYER);
+
+        elevatorLevel1Button = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_LEVEL1_BUTTON);
+
+        elevatorLevel2Button = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_LEVEL2_BUTTON);
+
+        elevatorLevel3Button = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_LEVEL3_BUTTON);
 
         stationJoystick = new Joystick(2);
 

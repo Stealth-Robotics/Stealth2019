@@ -63,4 +63,10 @@ public class OIConstants
 
     public static final int OVERRIDE_ELEVATOR_LIMIT_BUTTON = 2;
     public static final int OVERRIDE_ELEVATOR_PID = 3;
+    
+    //TODO: Make sure that these are the correct values!
+    public static final int ELEVATOR_BALL_LEVEL_MODIFYER = 3;
+    public static final int ELEVATOR_LEVEL1_BUTTON = 1;
+    public static final int ELEVATOR_LEVEL2_BUTTON = 2;
+    public static final int ELEVATOR_LEVEL3_BUTTON = 4;
 }
