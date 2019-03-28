@@ -86,7 +86,7 @@ public class ElevatorToLevel extends Command
     @Override
     protected boolean isFinished() 
     {
-        return (Math.abs(Robot.elevator.getPosition() - target) < 100) || isFinished;
+        return  isFinished || (Math.abs(Robot.elevator.getPosition() - target) < 100);
     }
 
     /**

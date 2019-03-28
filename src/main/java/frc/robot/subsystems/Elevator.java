@@ -44,7 +44,7 @@ public class Elevator extends Subsystem
              {
                  return -elevator.getSelectedSensorPosition(0);
              }
-         });
+        });
 
         lowerLimit = new DigitalInput(RobotMap.elevatorLimit);
 
@@ -52,6 +52,9 @@ public class Elevator extends Subsystem
         SmartDashboard.putBoolean("Elevator/OverridePID", false);
 
         reset();
+
+        //TODO: Remove Override PID from Init of elevator once we are ready to test
+        overridePID();
     }
 
     @Override
