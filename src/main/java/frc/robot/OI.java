@@ -14,7 +14,6 @@ import frc.robot.commands.elevatorCommands.*;
 import frc.robot.commands.grabberCommands.*;
 import frc.robot.commands.lifterCommands.*;
 import frc.robot.commands.visionCommands.*;
-
 import frc.robot.util.constants.OIConstants;
 
 /**
@@ -65,7 +64,7 @@ public class OI
     public Button elevatorLevel2Button;
     public Button elevatorLevel3Button;
 
-    public Button elevatorLevelBallModifyer;
+    public Button elevatorLevelBallModifier;
 
     // public Button wristPos1Button;
     // public Button wristPos2Button;
@@ -126,7 +125,7 @@ public class OI
         // runIntakeButton = new JoystickButton(mechJoystick, OIConstants.RUN_INTAKE_TRIGGER);
         // reverseIntakeButton = new JoystickButton(mechJoystick, OIConstants.REVERSE_INTAKE_TRIGGER);
 
-        elevatorLevelBallModifyer = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_BALL_LEVEL_MODIFYER);
+        elevatorLevelBallModifier = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_BALL_LEVEL_MODIFYER);
 
         elevatorLevel1Button = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_LEVEL1_BUTTON);
         elevatorLevel1Button.whenPressed(new ElevatorToLevel(1));

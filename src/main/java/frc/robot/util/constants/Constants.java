@@ -113,5 +113,7 @@ public class Constants
     public static final double STEER_kD = 0;
     public static final double STEER_TARGET_RATIO = 1.812; //horizontal bounding box over vertical bounding box
 
+    public static final double CURRENT_LIMIT_LIFTER = 250; //maximum current allowed for the lifter before current limited
+
     public static final double TWOPI = Math.PI * 2;
 }

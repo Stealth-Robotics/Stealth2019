@@ -36,7 +36,8 @@ public class ElevatorToLevel extends Command
     {
         super.initialize();
 
-        if (Robot.oi.elevatorLevelBallModifyer.get()) {
+        if (Robot.oi.elevatorLevelBallModifier.get()) 
+        {
             if (level == 1)
             {
                 target = Constants.ELEVATOR_LEVEL1_BALL;
@@ -48,11 +49,15 @@ public class ElevatorToLevel extends Command
             else if (level == 3)
             {
                 target = Constants.ELEVATOR_LEVEL3_BALL;
-            } else {
+            } 
+            else 
+            {
                 isFinished = true;
                 return;
             }
-        } else {
+        }
+        else 
+        {
             if (level == 1)
             {
                 target = Constants.ELEVATOR_LEVEL1_HATCH;
@@ -64,7 +69,9 @@ public class ElevatorToLevel extends Command
             else if (level == 3)
             {
                 target = Constants.ELEVATOR_LEVEL3_HATCH;
-            } else {
+            }
+            else 
+            {
                 isFinished = true;
                 return;
             }

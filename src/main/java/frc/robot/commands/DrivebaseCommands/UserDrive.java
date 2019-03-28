@@ -35,7 +35,7 @@ public class UserDrive extends Command
         double pov;
         if ((pov = Robot.oi.driveJoystick.getPOV()) != -1)
         {
-            Robot.driveBase.setTargetHeading(pov);
+            Robot.driveBase.setTargetHeading(pov * Math.PI / 180);
         }
     }
   

@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+// import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -95,6 +96,11 @@ public class Robot extends TimedRobot
     @Override
     public void robotPeriodic() 
     {
+        // PowerDistributionPanel pdp = new PowerDistributionPanel();
+        // SmartDashboard.putNumber("Lifter/CurrentL", pdp.getCurrent(?));
+        // SmartDashboard.putNumber("Lifter/CurrentR", pdp.getCurrent(?));
+        // SmartDashboard.putNumber("Lifter/CurrentB", pdp.getCurrent(?));
+
         putOiInfo();
 
         SmartDashboard.putNumber("Lifter/EncoderL", lifter.getFrontLPosition());
