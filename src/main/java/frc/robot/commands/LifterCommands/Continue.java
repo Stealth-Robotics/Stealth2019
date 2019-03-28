@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.Robot;
 
+/**
+ * Moves robot to next stage during the climb
+ */
 public class Continue extends Command
 {
     public Continue()
@@ -18,6 +21,9 @@ public class Continue extends Command
 
     }
 
+    /**
+     * User presses button when robot is in position
+     */
     @Override
     protected boolean isFinished()
     {

@@ -14,21 +14,27 @@ import frc.robot.Robot;
 /**
  * Disables PID loop for lifter
  */
-public class OverrideLiftPID extends Command {
-  public OverrideLiftPID() {
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.lifter);
-  }
+public class OverrideLiftPID extends Command 
+{
+    public OverrideLiftPID() 
+    {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.lifter);
+    }
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-    Robot.lifter.setPIDEnabled(false);
-  }
+    /**
+     * Disables PID loop
+     */
+    @Override
+    protected void initialize() 
+    {
+        Robot.lifter.setPIDEnabled(false);
+    }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return true;
-  }
+    // Make this return true when this Command no longer needs to run execute()
+    @Override
+    protected boolean isFinished() 
+    {
+        return true;
+    }
 }

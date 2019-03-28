@@ -317,6 +317,9 @@ public class DriveBase extends Subsystem
         headingPIDloop.setTarget(targetHeading);
     }
 
+    /**
+     * Gets the target heading of the Heading PID loop
+     */
     public double getTargetHeading()
     {
         return headingPIDloop.getTarget();
@@ -340,6 +343,9 @@ public class DriveBase extends Subsystem
         return imu;
     }
 
+    /**
+     * Returns telemetry data about the subsystem
+     */
     @Override
     public String toString()
     {

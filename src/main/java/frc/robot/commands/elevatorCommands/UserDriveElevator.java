@@ -26,7 +26,9 @@ public class UserDriveElevator extends Command
         
     }
   
-    // Called repeatedly when this Command is scheduled to run
+    /**
+     * Sends joystick to move()
+     */
     @Override
     protected void execute() 
     {

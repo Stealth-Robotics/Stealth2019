@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 
+/**
+ * Controls state of hatch grabber, with true being extended and false being retracted
+ */
 public class GrabHatch extends Command
 {
     boolean state = false;
@@ -15,6 +18,9 @@ public class GrabHatch extends Command
         state = State;
     }
 
+    /**
+     * Sets state of hatch piston
+     */
     @Override
     protected void initialize() 
     {

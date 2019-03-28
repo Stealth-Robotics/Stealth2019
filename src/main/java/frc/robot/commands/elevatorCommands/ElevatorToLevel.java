@@ -6,7 +6,7 @@ import frc.robot.Robot;
 import frc.robot.util.constants.Constants;
 
 /**
- * Moves front legs only to certain level
+ * Moves elevator to certain level
  */
 public class ElevatorToLevel extends Command
 {
@@ -17,7 +17,7 @@ public class ElevatorToLevel extends Command
     private boolean isFinished;
 
     /**
-     * Lifts back legs to level
+     * Lifts elevator to level
      * 
      * @param level the level to move to
      */
@@ -29,7 +29,7 @@ public class ElevatorToLevel extends Command
     }
 
     /**
-     * Sets the back target
+     * Sets the elevator target
      */
     @Override
     protected void initialize() 
@@ -90,7 +90,7 @@ public class ElevatorToLevel extends Command
     }
 
     /**
-     * If interrupted, sets all legs to current position
+     * If interrupted, sets elevator to current position
      */
     @Override
     protected void interrupted()

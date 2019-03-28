@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.constants.OIConstants;
 
+/**
+ * Allows manual control of wrist
+ */
 public class UserDriveTilt extends Command
 {
 
@@ -13,7 +16,9 @@ public class UserDriveTilt extends Command
         requires(Robot.grabber);
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    /**
+     * Manually controls wrist motor
+     */
     @Override
     protected void execute() 
     {

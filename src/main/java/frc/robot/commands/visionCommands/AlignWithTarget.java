@@ -84,7 +84,9 @@ public class AlignWithTarget extends Command
         //limelight.getEntry("camMode").setNumber(1);
     }
 
-    // Called just before this Command runs the first time
+    /**
+     * Gets limelight, turns leds on, sets camera mode to vision processing
+     */
     @Override
     protected void initialize() 
     {
@@ -94,7 +96,9 @@ public class AlignWithTarget extends Command
         limelight.getEntry("camMode").setNumber(0);
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    /**
+     * Moves robot towards target if it has it, otherwise spins in circle
+     */
     @Override
     protected void execute() 
     {
@@ -103,9 +107,10 @@ public class AlignWithTarget extends Command
         //if there is a valid target then use the calculated values to drive towords it otherwise turn around dejectedly aka seek for a valid target
         if (hasValidTarget)
         {
-            double netSpeed = Math.sqrt(targetLinearSpeed * targetLinearSpeed + targetStrafe * targetStrafe);
-            double netDirection = Math.atan(targetLinearSpeed / targetStrafe);
+            double netSpeed = Math.sqrt(targetLinearSpeed * targetLinearSpeed + targetStrafe * targetStrafe); //finds total speed from moving forward and strafing
+            double netDirection = Math.atan(targetLinearSpeed / targetStrafe); //finds net direction from combining driving forward and strafing
             netDirection = (netDirection < 0) ? Math.PI + netDirection : netDirection;
+            
             Robot.driveBase.moveWithoutIMU(netSpeed, /*(targetStrafe > 0) ? -Math.PI / 2 : Math.PI / 2*/0, targetRotation);
             //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
         }
@@ -162,7 +167,9 @@ public class AlignWithTarget extends Command
         return false;
     }
 
-    // Called once after isFinished returns true
+    /**
+     * Stops drive base, turns leds off, fixes heading to current heading
+     */
     @Override
     protected void end() 
     {
