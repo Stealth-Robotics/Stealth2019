@@ -63,13 +63,15 @@ public class Constants
     public static final int FRONT_LEGS_LEVEL_0 = 0;
     public static final int BACK_LEG_LEVEL_0 = 0;
 
-    //tilt position constants
-    // public static final int TILT_VERTICAL = 0;
-    // public static final int TILT_HORIZONTAL = 100;
-    // public static final int TILT_DOWN = 150;
+    //Wrist position constants
+    // public static final int WRIST_VERTICAL = 0;
+    // public static final int WRIST_HORIZONTAL = 100;
+    // public static final int WRIST_DOWN = 150;
 
-    //Tilt motor speed constant
-    public static final int TILT_SPEED_NORMAL = 10;
+    //Wrist motor speed constant
+    // public static final int WRIST_SPEED_NORMAL = 10;
+
+    public static final double WRIST_SPEED = 0.1;
 
     // !< Tilt motor for grabber PID constants
     public static final double TILT_KP = -0.0015;
