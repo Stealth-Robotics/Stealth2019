@@ -132,11 +132,11 @@ public class Lifter extends Subsystem
         
         if (Robot.oi.backLegDown.get())
         {
-            setBackTarget(getBackTarget() + 20);
+            setBackTarget(getBackTarget() + 30);
         }
         else if (Robot.oi.backLegUp.get())
         {
-            setBackTarget(getBackTarget() - 20);
+            setBackTarget(getBackTarget() - 30);
         }
 
         runLoops();

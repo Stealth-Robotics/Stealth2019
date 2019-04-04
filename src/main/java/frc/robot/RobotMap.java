@@ -58,6 +58,14 @@ public class RobotMap
     public static final int elevatorLimit = 8;
 
     /*
+    PDP0 = wheelRB
     
+    PDP1 = legB
+    PDP3 = wheelRF
+    PDP10 = legWheel
+    PDP12 = wheelLF
+    PDP13 = legL
+    PDP14 = legR
+    PDP15 = wheelLB
     */
 }
