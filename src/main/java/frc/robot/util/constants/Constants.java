@@ -8,8 +8,8 @@ public class Constants
 {
     // !< driving speed constants
     public static final double SPEED_SLOW = 0.3;
-    public static final double SPEED_FAST = 1;
-    public static final double SPEED_NORMAL = 0.6;
+    public static final double SPEED_SORT_OF_SLOW = 0.6;
+    public static final double SPEED_NORMAL = 1;
     public static final double SPEED_TURN = 0.75;
 
     // !< driving pid constants

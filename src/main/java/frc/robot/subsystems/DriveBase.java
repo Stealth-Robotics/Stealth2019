@@ -133,7 +133,7 @@ public class DriveBase extends Subsystem
         }
         else if (Robot.oi.fastButton.get())
         {
-            speedCoef = Constants.SPEED_FAST;
+            speedCoef = Constants.SPEED_SORT_OF_SLOW;
         }
         else 
         {
