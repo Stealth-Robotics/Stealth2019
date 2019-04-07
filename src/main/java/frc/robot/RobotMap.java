@@ -56,6 +56,7 @@ public class RobotMap
     public static final int pigeonIMU = 12;
 
     public static final int elevatorLimit = 8;
+    public static final int elevatorLevel1Limit = 7;
 
     /*
     PDP0 = wheelRB

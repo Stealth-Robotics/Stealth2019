@@ -6,6 +6,7 @@ import java.util.function.DoubleSupplier;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -29,6 +30,7 @@ public class Elevator extends Subsystem
     private static PIDexecutor loop; // !< The PID loop executor
 
     private static DigitalInput lowerLimit; // !< The Lower Limit Switch
+    private static DigitalInput level1Limit; // !< The Level 1 Magnetic Limit Switch
 
     public Elevator()
     {
@@ -47,13 +49,14 @@ public class Elevator extends Subsystem
         });
 
         lowerLimit = new DigitalInput(RobotMap.elevatorLimit);
+        level1Limit = new DigitalInput(RobotMap.elevatorLevel1Limit);
 
         SmartDashboard.putString("Elevator/Status", Status.Good.toString());
         SmartDashboard.putBoolean("Elevator/OverridePID", false);
 
         reset();
 
-        //TODO: Remove Override PID from Init of elevator once we are ready to test
+        //TODO: Remove Override PID from Init of elevator
         overridePID();
     }
 
@@ -66,6 +69,15 @@ public class Elevator extends Subsystem
 
         double targetSpeed = loop.run();
         setSpeed((targetSpeed < 0 && lowerLimit.get() && !Robot.oi.overrideElevatorLimitSwitch.get()) ? 0 : targetSpeed);
+
+        // if the limit switch for level 1 is hit then rumble the controller
+        if (level1Limit.get()) {
+            Robot.oi.mechJoystick.setRumble(RumbleType.kLeftRumble, 0.7);
+            Robot.oi.mechJoystick.setRumble(RumbleType.kRightRumble, 0.7);
+        } else {
+            Robot.oi.mechJoystick.setRumble(RumbleType.kLeftRumble, 0);
+            Robot.oi.mechJoystick.setRumble(RumbleType.kRightRumble, 0);
+        }
     }
 
     /**
@@ -169,6 +181,19 @@ public class Elevator extends Subsystem
     public boolean isLimitClosed()
     {
         return lowerLimit.get();
+    }
+
+    /**
+     * Returns the limit switch for level 1s state
+     * 
+     * True if closed
+     * False if open
+     * 
+     * @return the level 1 limit switch switch state
+     */
+    public boolean isLevel1LimitClosed()
+    {
+        return level1Limit.get();
     }
 
     @Override
