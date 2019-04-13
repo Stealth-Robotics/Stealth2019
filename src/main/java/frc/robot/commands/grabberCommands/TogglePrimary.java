@@ -25,12 +25,20 @@ public class TogglePrimary extends Command
         Robot.grabber.togglePrimaryState();
     }
 
+    /**
+     * End immediately, nothing more needed to do
+     * 
+     * @return true
+     */
     @Override
     protected boolean isFinished() 
     {
         return true;
     }
 
+    /**
+     * Reschedules UserDriveTilt
+     */
     @Override
     protected void end()
     {

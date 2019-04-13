@@ -27,15 +27,17 @@ public class UserDriveTilt extends Command
         super.execute();
 
         double wristPower = -Robot.oi.mechJoystick.getRawAxis(OIConstants.WRIST_JOYSTICK_Y);
-        if (Math.abs(wristPower) > OIConstants.DEADZONE_GRABBER)
+
+        if (Math.abs(wristPower) > OIConstants.DEADZONE_GRABBER) //if user sending controls to wrist
         {
             if (Robot.grabber.getPrimaryState()) //if hatch grabber extended, retracts it
             {
                 Robot.grabber.togglePrimaryState();
             }
-            Robot.grabber.setWristSpeed(wristPower * Constants.WRIST_SPEED);
+
+            Robot.grabber.setWristSpeed(wristPower * Constants.WRIST_SPEED); //sends power to wrist
         }
-        else
+        else //if not being commanded, stop wrist
         {
             Robot.grabber.setWristSpeed(0);
         }

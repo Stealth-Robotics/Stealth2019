@@ -102,6 +102,8 @@ public class Grabber extends Subsystem
         }
     }
 
+    //#region limit switch / encoder based functions, commented right now
+
     // /**
     //  * Checks that the limitswitches arent closed and makes the motor stop
     //  * 
@@ -167,6 +169,8 @@ public class Grabber extends Subsystem
     //     wristController.setTarget(position);
     // }
 
+    //#endregion
+
     /**
      * Allows the intake wheels to be operated
      * 
@@ -188,7 +192,7 @@ public class Grabber extends Subsystem
     // }
 
     /**
-     * Sets the state of the secondary hatch grabber piston
+     * Sets the state of the secondary piston
      */
     public void setSecondaryState(boolean isOn)
     {
