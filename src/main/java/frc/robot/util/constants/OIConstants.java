@@ -49,7 +49,7 @@ public class OIConstants
     // public static final int WRIST_POS_3_BUTTON = 1;
 
     public static final int GRAB_HATCH_BUTTON = 5;
-    public static final int RELEASE_HATCH_BUTTON = 6;
+    public static final int TOGGLE_HATCH_ENTEND_BUTTON = 6;
 
     public static final int WRIST_JOYSTICK_Y = 5;
 

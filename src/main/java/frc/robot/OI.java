@@ -71,7 +71,7 @@ public class OI
     // public Button wristPos3Button;
 
     public Button grabHatchButton;
-    public Button releaseHatchButton;
+    public Button toggleHatchExtendButton;
 
     // public Button runIntakeButton;
     // public Button reverseIntakeButton;
@@ -117,10 +117,12 @@ public class OI
         // wristPos3Button.whenPressed(new SetTiltPos(Constants.TILT_DOWN));
 
         grabHatchButton = new JoystickButton(mechJoystick, OIConstants.GRAB_HATCH_BUTTON);
-        releaseHatchButton = new JoystickButton(mechJoystick, OIConstants.RELEASE_HATCH_BUTTON);
+        toggleHatchExtendButton = new JoystickButton(mechJoystick, OIConstants.TOGGLE_HATCH_ENTEND_BUTTON);
 
         grabHatchButton.whenPressed(new GrabHatch(false));
         grabHatchButton.whenReleased(new GrabHatch(true));
+
+        toggleHatchExtendButton.whenPressed(new TogglePrimary());
 
         // runIntakeButton = new JoystickButton(mechJoystick, OIConstants.RUN_INTAKE_TRIGGER);
         // reverseIntakeButton = new JoystickButton(mechJoystick, OIConstants.REVERSE_INTAKE_TRIGGER);

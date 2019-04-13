@@ -6,16 +6,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 
 /**
- * Controls state of hatch grabber, with true being extended and false being retracted
+ * Controls state of primary hatch grabber piston, with true being extended and false being retracted
  */
-public class GrabHatch extends Command
+public class TogglePrimary extends Command
 {
-    boolean state = false;
-
-    public GrabHatch(boolean State)
+    public TogglePrimary()
     {
         requires(Robot.grabber);
-        state = State;
     }
 
     /**
@@ -25,7 +22,7 @@ public class GrabHatch extends Command
     protected void initialize() 
     {
         super.initialize();
-        Robot.grabber.setSecondaryState(state);
+        Robot.grabber.togglePrimaryState();
     }
 
     @Override

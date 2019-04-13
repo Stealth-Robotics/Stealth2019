@@ -24,7 +24,8 @@ import frc.robot.util.constants.OIConstants;
  */
 public class Grabber extends Subsystem
 {
-    private static Solenoid hatchGrabber; // !< The solenoid to control the hatch grabber piston
+    private static Solenoid hatchGrabberPrimary; //The solenoid to control the position of the entire hatch grabber
+    private static Solenoid hatchGrabberSecondary; // !< The solenoid to control the hatch grabber piston
 
     private static WPI_TalonSRX intake; // !< The talon for the intake wheels
     private static WPI_TalonSRX wrist; // !< The talon for the tilt motor
@@ -33,7 +34,8 @@ public class Grabber extends Subsystem
 
     public Grabber()
     {
-        hatchGrabber = new Solenoid(RobotMap.PCM, RobotMap.hatchGrabberChanel);
+        hatchGrabberPrimary = new Solenoid(RobotMap.PCM, RobotMap.hatchGrabberPrimaryChannel);
+        hatchGrabberSecondary = new Solenoid(RobotMap.PCM, RobotMap.hatchGrabberSecondaryChannel);
 
         intake = new WPI_TalonSRX(RobotMap.intake);
 
@@ -185,9 +187,35 @@ public class Grabber extends Subsystem
     //     return wrist.getSelectedSensorPosition(0);
     // }
 
-    public void setHolderState(boolean isOn)
+    /**
+     * Sets the state of the secondary hatch grabber piston
+     */
+    public void setSecondaryState(boolean isOn)
     {
-        hatchGrabber.set(isOn);
+        if (hatchGrabberPrimary.get()) //checks if primary piston is out
+        {
+            hatchGrabberSecondary.set(isOn);
+        }
+    }
+
+    /**
+     * Toggles the state of the primary piston
+     */
+    public void togglePrimaryState()
+    {
+        boolean state = hatchGrabberPrimary.get();
+        hatchGrabberPrimary.set(!state);
+        hatchGrabberSecondary.set(!state); //retracts the secondary piston if primary is retracted
+    }
+
+    /**
+     * Gets state of primary piston
+     * 
+     * @return the state of the piston
+     */
+    public boolean getPrimaryState()
+    {
+        return hatchGrabberPrimary.get();
     }
 
     /**
@@ -209,6 +237,7 @@ public class Grabber extends Subsystem
 
                 intake.get() + "," +
 
-                hatchGrabber.get();
+                hatchGrabberPrimary.get() + "," +
+                hatchGrabberSecondary.get();
     }
 }
