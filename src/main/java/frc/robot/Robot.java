@@ -23,6 +23,7 @@ import frc.robot.subsystems.Lifter;
 // import frc.robot.subsystems.Vision;
 import frc.robot.util.*;
 import frc.robot.commands.drivebaseCommands.UserDrive;
+import frc.robot.commands.grabberCommands.*;
 
 import frc.robot.util.constants.OIConstants;
 import frc.robot.util.constants.Constants;
@@ -80,8 +81,9 @@ public class Robot extends TimedRobot
         camera1.setFPS(10);
 
         //AUTO CHOOSER
-        m_chooser.setDefaultOption("Default Auto", new UserDrive());
-        // chooser.addOption("My Auto", new MyAutoCommand());
+        //m_chooser.setDefaultOption("Default Auto", new UserDrive());
+        m_chooser.setDefaultOption("Start Cargo", new StartCargo());
+        m_chooser.addOption("Start Hatch", new StartHatch());
         SmartDashboard.putData("Auto mode", m_chooser);
     }
   
@@ -202,7 +204,7 @@ public class Robot extends TimedRobot
         elevator.reset();
         elevator.setTarget(0);
 
-        grabber.togglePrimaryState();
+        //grabber.togglePrimaryState();
     }
   
     /**
