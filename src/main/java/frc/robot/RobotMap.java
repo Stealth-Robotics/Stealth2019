@@ -37,9 +37,9 @@ public class RobotMap
     //CAN ID for pcm
     public static final int PCM = 16;
     //channel for the entire hatch brabber piston on the PCM
-    public static final int hatchGrabberPrimaryChannel = 1;
+    public static final int hatchGrabberPrimaryChannel = 2;
     //channel for the hatch holder on the PCM
-    public static final int hatchGrabberSecondaryChannel = 2;
+    public static final int hatchGrabberSecondaryChannel = 1;
     
     //port for intake talon
     public static final int intake = 11;

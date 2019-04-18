@@ -71,7 +71,7 @@ public class Constants
     //Wrist motor speed constant
     // public static final int WRIST_SPEED_NORMAL = 10;
 
-    public static final double WRIST_SPEED = 0.1;
+    public static final double WRIST_SPEED = 0.5;
 
     // !< Tilt motor for grabber PID constants
     public static final double TILT_KP = -0.0015;

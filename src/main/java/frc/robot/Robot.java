@@ -201,6 +201,8 @@ public class Robot extends TimedRobot
 
         elevator.reset();
         elevator.setTarget(0);
+
+        grabber.togglePrimaryState();
     }
   
     /**

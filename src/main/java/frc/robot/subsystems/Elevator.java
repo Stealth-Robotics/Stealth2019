@@ -71,13 +71,16 @@ public class Elevator extends Subsystem
         setSpeed((targetSpeed < 0 && lowerLimit.get() && !Robot.oi.overrideElevatorLimitSwitch.get()) ? 0 : targetSpeed);
 
         // if the limit switch for level 1 is hit then rumble the controller
-        if (level1Limit.get()) {
-            Robot.oi.mechJoystick.setRumble(RumbleType.kLeftRumble, 0.7);
-            Robot.oi.mechJoystick.setRumble(RumbleType.kRightRumble, 0.7);
-        } else {
-            Robot.oi.mechJoystick.setRumble(RumbleType.kLeftRumble, 0);
-            Robot.oi.mechJoystick.setRumble(RumbleType.kRightRumble, 0);
-        }
+        // if (!level1Limit.get()) //moved to UserDriveElevator
+        // {
+        //     Robot.oi.mechJoystick.setRumble(RumbleType.kLeftRumble, 0.5);
+        //     Robot.oi.mechJoystick.setRumble(RumbleType.kRightRumble, 0.5);
+        // }
+        // else
+        // {
+        //     Robot.oi.mechJoystick.setRumble(RumbleType.kLeftRumble, 0);
+        //     Robot.oi.mechJoystick.setRumble(RumbleType.kRightRumble, 0);
+        // }
     }
 
     /**
@@ -92,7 +95,8 @@ public class Elevator extends Subsystem
     /**
      * Overrides the default PID executor for the elevator to take input directly from the joystick
      */
-    public void overridePID(){
+    public void overridePID()
+    {
         //OVERRIDE PID LOOP
         loop = new PIDexecutor(Constants.ELEVATOR_KP, Constants.ELEVATOR_KI, Constants.ELEVATOR_KD, elevator.getSelectedSensorPosition(0), new DoubleSupplier()
         {
@@ -186,8 +190,8 @@ public class Elevator extends Subsystem
     /**
      * Returns the limit switch for level 1s state
      * 
-     * True if closed
-     * False if open
+     * True if open
+     * False if closed
      * 
      * @return the level 1 limit switch switch state
      */
