@@ -31,6 +31,10 @@ public class LiftBackToLevel extends Command
         {
             target = Constants.BACK_LEG_LEVEL_3;
         }
+        else if (level == -1)
+        {
+            target = Constants.BACK_LEG_LEVEL_GROUND;
+        }
         else
         {
             cancel();
@@ -55,7 +59,7 @@ public class LiftBackToLevel extends Command
     @Override
     protected boolean isFinished() 
     {
-        return true;//Math.abs(Robot.lifter.getBackPosition() - target) < 200;
+        return Math.abs(Robot.lifter.getBackPosition() - target) < 200; //true;
     }
 
     /**

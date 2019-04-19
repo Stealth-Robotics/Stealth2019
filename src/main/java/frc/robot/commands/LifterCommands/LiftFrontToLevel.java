@@ -32,6 +32,10 @@ public class LiftFrontToLevel extends Command
         {
             target = Constants.FRONT_LEGS_LEVEL_3;
         }
+        else if (level == -1)
+        {
+            target = Constants.FRONT_LEGS_LEVEL_GROUND;
+        }
         else
         {
             cancel();

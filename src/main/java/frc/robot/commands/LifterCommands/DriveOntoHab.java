@@ -18,12 +18,15 @@ public class DriveOntoHab extends CommandGroup
     public DriveOntoHab(int level)
     {
         requires(Robot.lifter);
-        // addSequential(new LiftAllToLevel(level));
+        
+        
         addSequential(new LiftFrontToLevel(level));
         addSequential(new LiftBackToLevel(level));
         addSequential(new Continue());
         addSequential(new LiftFrontToLevel(0));
         addSequential(new Continue());
+        addSequential(new LiftFrontToLevel(-1));
+        //addSequential(new Continue());
         addSequential(new LiftBackToLevel(0));
     }
 

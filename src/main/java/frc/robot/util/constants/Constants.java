@@ -56,6 +56,8 @@ public class Constants
     public static final double STABLILIZATION_KD = -0;
 
     // Lifter level constants
+    public static final int FRONT_LEGS_LEVEL_GROUND = 500;
+    public static final int BACK_LEG_LEVEL_GROUND = 500;
     public static final int FRONT_LEGS_LEVEL_2 = 7000;
     public static final int BACK_LEG_LEVEL_2 = 7250;
     public static final int FRONT_LEGS_LEVEL_3 = 16500;
