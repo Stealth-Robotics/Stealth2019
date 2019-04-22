@@ -27,7 +27,7 @@ public class DriveOntoHab extends CommandGroup
         addSequential(new Continue());
         addSequential(new LiftFrontToLevel(-1));
         //addSequential(new Continue());
-        addSequential(new LiftBackToLevel(0));
+        //addSequential(new LiftBackToLevel(0));
     }
 
     /**

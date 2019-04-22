@@ -36,6 +36,8 @@ public class Lifter extends Subsystem
     private static PIDexecutor rightLoop;
     // private static PIDexecutor stablilization;
 
+    private static boolean backLegManualControl;
+
     public Lifter()
     {
         legL = new WPI_TalonSRX(RobotMap.legL);
@@ -99,6 +101,8 @@ public class Lifter extends Subsystem
         // legBack.configContinuousCurrentLimit(0);
         // legBack.enableCurrentLimit(true);
 
+        backLegManualControl = false;
+
         SmartDashboard.putString("Lifter/Status", Status.Good.toString());
     }
 
@@ -133,10 +137,17 @@ public class Lifter extends Subsystem
         if (Robot.oi.backLegDown.get())
         {
             setBackTarget(getBackTarget() + 25);
+            backLegManualControl = true;
         }
         else if (Robot.oi.backLegUp.get())
         {
-            setBackTarget(getBackTarget() - 25);
+            setBackTarget(getBackTarget() - 35);
+            backLegManualControl = true;
+        }
+        else if (backLegManualControl)
+        {
+            setBackTarget(getBackTarget());
+            backLegManualControl = false;
         }
 
         runLoops();
