@@ -104,7 +104,8 @@ public class OI
         alignWithTargetButton = new JoystickButton(driveJoystick, OIConstants.ALIGN_WITH_TARGET_BUTTON);
 
         //alignWithTargetButton.whenPressed(new GoToTarget(0));
-        alignWithTargetButton.whileHeld(new AlignWithTarget());
+        //alignWithTargetButton.whileHeld(new AlignWithTarget());
+        alignWithTargetButton.whileHeld(new LimelightVisionExample());
 
         mechJoystick = new Joystick(1);
 

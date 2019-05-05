@@ -103,7 +103,7 @@ public class Constants
     public static final double INTAKE_SPEED = 1;
 
     //More driving to vision targets PID
-    public static final double DESIRED_TARGET_AREA = 10;          // Area of the target when the robot reaches the wall
+    public static final double DESIRED_TARGET_AREA = 20;          // Area of the target when the robot reaches the wall
     public static final double SPEEDkP = 0.15;
     public static final double SPEEDkD = 0.5;
     public static final double MAX_DRIVE = 0.3;                   // Simple speed limit so we don't drive too fast
@@ -112,7 +112,7 @@ public class Constants
     public static final double STRAFEkD = 0.5;
     public static final double MAX_STRAFE = 0.1;
     
-    public static final double STEER_kP = 0.03;                    // how hard to turn toward the target
+    public static final double STEER_kP = 0.01;                    // how hard to turn toward the target
     public static final double STEER_kI = 0;   
     public static final double STEER_kD = 0;
     public static final double STEER_TARGET_RATIO = 1.812; //horizontal bounding box over vertical bounding box
