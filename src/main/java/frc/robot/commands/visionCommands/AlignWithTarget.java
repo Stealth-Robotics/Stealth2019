@@ -32,11 +32,11 @@ public class AlignWithTarget extends Command
   
     private boolean hasValidTarget = false;
     private double targetLinearSpeed = 0.0;
-    private double targetStrafe = 0.0;
+    // private double targetStrafe = 0.0;
     private double targetRotation = 0.0;
 
     private static PIDexecutor SpeedPIDloop;
-    private static PIDexecutor StrafePIDloop;
+    // private static PIDexecutor StrafePIDloop;
     private static PIDexecutor SteerPIDloop;
 
     NetworkTable limelight;
@@ -59,14 +59,14 @@ public class AlignWithTarget extends Command
             }
         });
 
-        StrafePIDloop = new PIDexecutor(Constants.STRAFEkP, 0.0, Constants.STRAFEkD, 0.0, new DoubleSupplier()
-        {
-            @Override
-            public double getAsDouble() 
-            {
-                return limelight.getEntry("tx").getDouble(0);
-            }
-        });
+        // StrafePIDloop = new PIDexecutor(Constants.STRAFEkP, 0.0, Constants.STRAFEkD, 0.0, new DoubleSupplier()
+        // {
+        //     @Override
+        //     public double getAsDouble() 
+        //     {
+        //         return limelight.getEntry("tx").getDouble(0);
+        //     }
+        // });
 
         SteerPIDloop = new PIDexecutor(Constants.STEER_kP, Constants.STEER_kI, Constants.STEER_kD, Constants.STEER_TARGET_RATIO, new DoubleSupplier()
         {
@@ -107,11 +107,11 @@ public class AlignWithTarget extends Command
         //if there is a valid target then use the calculated values to drive towords it otherwise turn around dejectedly aka seek for a valid target
         if (hasValidTarget)
         {
-            double netSpeed = Math.sqrt(targetLinearSpeed * targetLinearSpeed + targetStrafe * targetStrafe); //finds total speed from moving forward and strafing
-            double netDirection = Math.atan(targetLinearSpeed / targetStrafe); //finds net direction from combining driving forward and strafing
-            netDirection = (netDirection < 0) ? Math.PI + netDirection : netDirection;
+            //double netSpeed = Math.sqrt(targetLinearSpeed * targetLinearSpeed + targetStrafe * targetStrafe); //finds total speed from moving forward and strafing
+            // double netDirection = Math.atan(targetLinearSpeed / targetStrafe); //finds net direction from combining driving forward and strafing
+            // netDirection = (netDirection < 0) ? Math.PI + netDirection : netDirection;
             
-            Robot.driveBase.moveWithoutIMU(netSpeed, /*(targetStrafe > 0) ? -Math.PI / 2 : Math.PI / 2*/0, targetRotation);
+            Robot.driveBase.moveWithoutIMU(targetLinearSpeed, /*netSpeed, /*(targetStrafe > 0) ? -Math.PI / 2 : Math.PI / 2*/0, targetRotation);
             //m_Drive.arcadeDrive(m_LimelightSpeedCommand,m_LimelightRotationCommand);
         }
         else 
@@ -155,7 +155,7 @@ public class AlignWithTarget extends Command
         }
         targetLinearSpeed = drive_cmd;
 
-        targetStrafe = StrafePIDloop.run();
+        // targetStrafe = StrafePIDloop.run();
 
         targetRotation = SteerPIDloop.run();
     }

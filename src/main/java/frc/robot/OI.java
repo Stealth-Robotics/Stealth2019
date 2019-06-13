@@ -105,7 +105,7 @@ public class OI
 
         //alignWithTargetButton.whenPressed(new GoToTarget(0));
         //alignWithTargetButton.whileHeld(new AlignWithTarget());
-        alignWithTargetButton.whileHeld(new LimelightVisionExample());
+        alignWithTargetButton.whileHeld(new AlignWithTarget());
 
         mechJoystick = new Joystick(1);
 
