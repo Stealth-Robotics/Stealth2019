@@ -86,20 +86,20 @@ public class Lifter extends Subsystem
         //     }
         // });
 
-        // legL.configPeakCurrentLimit(250);
-        // legL.configPeakCurrentDuration(5000);
-        // legL.configContinuousCurrentLimit(0);
-        // legL.enableCurrentLimit(true);
+        legL.configPeakCurrentLimit(250);
+        legL.configPeakCurrentDuration(5000);
+        legL.configContinuousCurrentLimit(0);
+        legL.enableCurrentLimit(true);
 
-        // legR.configPeakCurrentLimit(250);
-        // legR.configPeakCurrentDuration(5000);
-        // legR.configContinuousCurrentLimit(0);
-        // legR.enableCurrentLimit(true);
+        legR.configPeakCurrentLimit(250);
+        legR.configPeakCurrentDuration(5000);
+        legR.configContinuousCurrentLimit(0);
+        legR.enableCurrentLimit(true);
 
-        // legBack.configPeakCurrentLimit(250);
-        // legBack.configPeakCurrentDuration(5000);
-        // legBack.configContinuousCurrentLimit(0);
-        // legBack.enableCurrentLimit(true);
+        legBack.configPeakCurrentLimit(250);
+        legBack.configPeakCurrentDuration(5000);
+        legBack.configContinuousCurrentLimit(0);
+        legBack.enableCurrentLimit(true);
 
         backLegManualControl = false;
 
