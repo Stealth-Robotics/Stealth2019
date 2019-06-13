@@ -128,7 +128,7 @@ public class OI
         // runIntakeButton = new JoystickButton(mechJoystick, OIConstants.RUN_INTAKE_TRIGGER);
         // reverseIntakeButton = new JoystickButton(mechJoystick, OIConstants.REVERSE_INTAKE_TRIGGER);
 
-        elevatorLevelBallModifier = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_BALL_LEVEL_MODIFYER);
+        elevatorLevelBallModifier = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_BALL_LEVEL_MODIFIER);
 
         elevatorLevel1Button = new JoystickButton(mechJoystick, OIConstants.ELEVATOR_LEVEL1_BUTTON);
         elevatorLevel1Button.whenPressed(new ElevatorToLevel(1));
