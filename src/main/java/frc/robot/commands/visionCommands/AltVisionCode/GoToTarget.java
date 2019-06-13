@@ -1,5 +1,5 @@
 
-package frc.robot.commands.visionCommands;
+package frc.robot.commands.visionCommands.AltVisionCode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

@@ -1,5 +1,5 @@
 
-package frc.robot.commands.visionCommands;
+package frc.robot.commands.visionCommands.AltVisionCode;
 
 import java.util.function.DoubleSupplier;
 
