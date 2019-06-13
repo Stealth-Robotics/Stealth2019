@@ -208,8 +208,14 @@ public class Grabber extends Subsystem
     public void togglePrimaryState()
     {
         boolean state = hatchGrabberPrimary.get();
-        hatchGrabberPrimary.set(!state);
-        hatchGrabberSecondary.set(!state); //retracts the secondary piston if primary is retracted
+        if (state) {
+            hatchGrabberPrimary.set(false);
+            hatchGrabberSecondary.set(true); //retracts the secondary piston if primary is retracted
+        } else {
+            hatchGrabberPrimary.set(true);
+            hatchGrabberSecondary.set(false); //retracts the secondary piston if primary is retracted
+        }
+        
     }
 
     /**
